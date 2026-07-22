@@ -1,13 +1,16 @@
 # =============================================================================
-# NexHub 自动打包 + 发布工作流（v2 — 修复 CI 构建失败）
+# NexHub 自动打包 + 发布工作流（v3 — 修复 flutter-action@v3 不存在）
 # -----------------------------------------------------------------------------
 # 触发：推送 v* 标签自动发布；也支持网页手动 Run workflow 试跑。
 #
-# 修复记录（v1 → v2）：
-#   - 固定 Flutter 版本为 3.32.0（满足 sdk >=3.4.0 <4.0.0，避免 stable 拉到不兼容版）
-#   - subosito/flutter-action 升级到 v3（兼容 Node.js 24 运行环境）
-#   - 所有 Action 统一使用最新主版本号
-#   - flutter pub get / build 加了详细错误输出，方便排查
+# 修复记录：
+#   v1: 初始版（全部失败：flutter pub get exit code 1）
+#   v2: 尝试 flutter-action@v3 → **v3 不存在**，4 个 job 全部 Unable to resolve action
+#   v3（当前）：
+#     - 改回 subosito/flutter-action@v2（该 Action 最新版即为 v2，无 v3）
+#     - 固定 Flutter 版本为 3.32.0（满足 sdk >=3.4.0 <4.0.0）
+#     - 所有步骤加 --verbose / 2>&1 输出
+#     - upload-artifact 加 if-no-files-found: error
 # =============================================================================
 
 name: Build & Release NexHub
@@ -31,7 +34,7 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-      - uses: subosito/flutter-action@v3
+      - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.32.0'
           channel: 'stable'
@@ -51,7 +54,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v3
+      - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.32.0'
           channel: 'stable'
@@ -77,7 +80,7 @@ jobs:
         run: |
           sudo apt-get update -y
           sudo apt-get install -y build-essential clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev libsecret-1-dev
-      - uses: subosito/flutter-action@v3
+      - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.32.0'
           channel: 'stable'
@@ -99,7 +102,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v3
+      - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.32.0'
           channel: 'stable'
