@@ -1,23 +1,13 @@
 # =============================================================================
-# NexHub 自动打包 + 发布工作流
+# NexHub 自动打包 + 发布工作流（v2 — 修复 CI 构建失败）
 # -----------------------------------------------------------------------------
-# 用途：当你给仓库打一个版本标签（例如 v1.0.0）并推送时，GitHub 会自动：
-#   1) 编译出 安卓 APK / Windows / Linux / macOS 安装包
-#   2) 把它们上传到 GitHub Releases，别人就能直接下载安装
+# 触发：推送 v* 标签自动发布；也支持网页手动 Run workflow 试跑。
 #
-# 怎么用：
-#   1. 提交本文件到仓库（已做）
-#   2. 本地打标签并推送：  git tag v1.0.0 && git push origin v1.0.0
-#   3. 到 GitHub 仓库 → Releases 页面等待几分钟，安装包就自动出现了
-#
-# 说明：
-#   - Flutter 版本默认读取仓库里的 pubspec.lock（与你本地一致），想固定版本
-#     可把 channel 改成  flutter-version: "3.32.0"  之类的写法。
-#   - 本应用遵循「不内置源」设计：CI 构建出来的包内部不含任何源，用户需自行导入。
-#   - iOS 未包含：上架/分发 iOS 需要 Apple 开发者账号与签名密钥，配置较复杂，
-#     如需可在本地用  flutter build ios  自行打包。
-#   - macOS 包为未公证（unsigned）的 .app，在本机构建机可运行；若要分发给他人
-#     需自行配置 Apple 开发者签名与公证。
+# 修复记录（v1 → v2）：
+#   - 固定 Flutter 版本为 3.32.0（满足 sdk >=3.4.0 <4.0.0，避免 stable 拉到不兼容版）
+#   - subosito/flutter-action 升级到 v3（兼容 Node.js 24 运行环境）
+#   - 所有 Action 统一使用最新主版本号
+#   - flutter pub get / build 加了详细错误输出，方便排查
 # =============================================================================
 
 name: Build & Release NexHub
@@ -25,14 +15,13 @@ name: Build & Release NexHub
 on:
   push:
     tags:
-      - 'v*'            # 推送 v 开头的标签时自动触发发布
-  workflow_dispatch:     # 也支持在 GitHub 网页上手动点「Run workflow」试跑
+      - 'v*'
+  workflow_dispatch:
 
 permissions:
-  contents: write       # 允许创建 Release
+  contents: write
 
 jobs:
-  # ------------------------- 安卓 APK -------------------------
   android:
     name: Android APK
     runs-on: ubuntu-latest
@@ -42,37 +31,43 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-      - uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@v3
         with:
+          flutter-version: '3.32.0'
           channel: 'stable'
           cache: true
-      - run: flutter pub get
-      - run: flutter build apk --release
+      - name: 获取依赖
+        run: flutter pub get 2>&1
+      - name: 编译 APK
+        run: flutter build apk --release --verbose 2>&1
       - uses: actions/upload-artifact@v4
         with:
           name: android-apk
           path: build/app/outputs/flutter-apk/app-release.apk
+          if-no-files-found: error
 
-  # ------------------------- Windows -------------------------
   windows:
     name: Windows
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@v3
         with:
+          flutter-version: '3.32.0'
           channel: 'stable'
           cache: true
-      - run: flutter pub get
-      - run: flutter build windows --release
+      - name: 获取依赖
+        run: flutter pub get 2>&1
+      - name: 编译 Windows
+        run: flutter build windows --release --verbose 2>&1
       - name: 打包 Windows 安装文件
         run: Compress-Archive -Path "build/windows/x64/runner/Release/*" -DestinationPath "NexHub-windows-x64.zip"
       - uses: actions/upload-artifact@v4
         with:
           name: windows-build
           path: NexHub-windows-x64.zip
+          if-no-files-found: error
 
-  # ------------------------- Linux -------------------------
   linux:
     name: Linux
     runs-on: ubuntu-latest
@@ -82,31 +77,37 @@ jobs:
         run: |
           sudo apt-get update -y
           sudo apt-get install -y build-essential clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev libsecret-1-dev
-      - uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@v3
         with:
+          flutter-version: '3.32.0'
           channel: 'stable'
           cache: true
-      - run: flutter pub get
-      - run: flutter build linux --release
+      - name: 获取依赖
+        run: flutter pub get 2>&1
+      - name: 编译 Linux
+        run: flutter build linux --release --verbose 2>&1
       - name: 打包 Linux 安装文件
         run: tar -czf NexHub-linux-x64.tar.gz -C build/linux/x64/release bundle
       - uses: actions/upload-artifact@v4
         with:
           name: linux-build
           path: NexHub-linux-x64.tar.gz
+          if-no-files-found: error
 
-  # ------------------------- macOS -------------------------
   macos:
     name: macOS
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@v3
         with:
+          flutter-version: '3.32.0'
           channel: 'stable'
           cache: true
-      - run: flutter pub get
-      - run: flutter build macos --release
+      - name: 获取依赖
+        run: flutter pub get 2>&1
+      - name: 编译 macOS
+        run: flutter build macos --release --verbose 2>&1
       - name: 打包 macOS 安装文件
         run: |
           APP=$(find build/macos/Build/Products/Release -maxdepth 1 -name '*.app' | head -n1)
@@ -116,13 +117,13 @@ jobs:
         with:
           name: macos-build
           path: NexHub-macos.zip
+          if-no-files-found: error
 
-  # ------------------------- 发布到 Releases -------------------------
   release:
     name: 发布到 GitHub Releases
     needs: [android, windows, linux, macos]
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/')   # 仅打标签时发布（手动试跑只编译不上传）
+    if: startsWith(github.ref, 'refs/tags/')
     permissions:
       contents: write
     steps:
@@ -133,7 +134,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           name: NexHub ${{ github.ref_name }}
-          body_path: RELEASE_NOTES.md   # 使用仓库内的发布说明（见根目录 RELEASE_NOTES.md）
+          body_path: RELEASE_NOTES.md
           files: |
             artifacts/android-apk/app-release.apk
             artifacts/windows-build/NexHub-windows-x64.zip
