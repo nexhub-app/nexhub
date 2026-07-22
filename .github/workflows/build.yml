@@ -133,7 +133,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           name: NexHub ${{ github.ref_name }}
-          generate_release_notes: true   # 自动根据提交记录生成更新说明
+          body_path: RELEASE_NOTES.md   # 使用仓库内的发布说明（见根目录 RELEASE_NOTES.md）
           files: |
             artifacts/android-apk/app-release.apk
             artifacts/windows-build/NexHub-windows-x64.zip
