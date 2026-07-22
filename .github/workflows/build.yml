@@ -1,0 +1,141 @@
+# =============================================================================
+# NexHub 自动打包 + 发布工作流
+# -----------------------------------------------------------------------------
+# 用途：当你给仓库打一个版本标签（例如 v1.0.0）并推送时，GitHub 会自动：
+#   1) 编译出 安卓 APK / Windows / Linux / macOS 安装包
+#   2) 把它们上传到 GitHub Releases，别人就能直接下载安装
+#
+# 怎么用：
+#   1. 提交本文件到仓库（已做）
+#   2. 本地打标签并推送：  git tag v1.0.0 && git push origin v1.0.0
+#   3. 到 GitHub 仓库 → Releases 页面等待几分钟，安装包就自动出现了
+#
+# 说明：
+#   - Flutter 版本默认读取仓库里的 pubspec.lock（与你本地一致），想固定版本
+#     可把 channel 改成  flutter-version: "3.32.0"  之类的写法。
+#   - 本应用遵循「不内置源」设计：CI 构建出来的包内部不含任何源，用户需自行导入。
+#   - iOS 未包含：上架/分发 iOS 需要 Apple 开发者账号与签名密钥，配置较复杂，
+#     如需可在本地用  flutter build ios  自行打包。
+#   - macOS 包为未公证（unsigned）的 .app，在本机构建机可运行；若要分发给他人
+#     需自行配置 Apple 开发者签名与公证。
+# =============================================================================
+
+name: Build & Release NexHub
+
+on:
+  push:
+    tags:
+      - 'v*'            # 推送 v 开头的标签时自动触发发布
+  workflow_dispatch:     # 也支持在 GitHub 网页上手动点「Run workflow」试跑
+
+permissions:
+  contents: write       # 允许创建 Release
+
+jobs:
+  # ------------------------- 安卓 APK -------------------------
+  android:
+    name: Android APK
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+      - run: flutter pub get
+      - run: flutter build apk --release
+      - uses: actions/upload-artifact@v4
+        with:
+          name: android-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+
+  # ------------------------- Windows -------------------------
+  windows:
+    name: Windows
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+      - run: flutter pub get
+      - run: flutter build windows --release
+      - name: 打包 Windows 安装文件
+        run: Compress-Archive -Path "build/windows/x64/runner/Release/*" -DestinationPath "NexHub-windows-x64.zip"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-build
+          path: NexHub-windows-x64.zip
+
+  # ------------------------- Linux -------------------------
+  linux:
+    name: Linux
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: 安装 Linux 编译依赖
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y build-essential clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev libsecret-1-dev
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+      - run: flutter pub get
+      - run: flutter build linux --release
+      - name: 打包 Linux 安装文件
+        run: tar -czf NexHub-linux-x64.tar.gz -C build/linux/x64/release bundle
+      - uses: actions/upload-artifact@v4
+        with:
+          name: linux-build
+          path: NexHub-linux-x64.tar.gz
+
+  # ------------------------- macOS -------------------------
+  macos:
+    name: macOS
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+      - run: flutter pub get
+      - run: flutter build macos --release
+      - name: 打包 macOS 安装文件
+        run: |
+          APP=$(find build/macos/Build/Products/Release -maxdepth 1 -name '*.app' | head -n1)
+          echo "找到 App: $APP"
+          ditto -c -k --sequesterRsrc --keepParent "$APP" NexHub-macos.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: macos-build
+          path: NexHub-macos.zip
+
+  # ------------------------- 发布到 Releases -------------------------
+  release:
+    name: 发布到 GitHub Releases
+    needs: [android, windows, linux, macos]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')   # 仅打标签时发布（手动试跑只编译不上传）
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+      - name: 创建 Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: NexHub ${{ github.ref_name }}
+          generate_release_notes: true   # 自动根据提交记录生成更新说明
+          files: |
+            artifacts/android-apk/app-release.apk
+            artifacts/windows-build/NexHub-windows-x64.zip
+            artifacts/linux-build/NexHub-linux-x64.tar.gz
+            artifacts/macos-build/NexHub-macos.zip
