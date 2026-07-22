@@ -1,0 +1,2143 @@
+{
+  "@@locale": "zh",
+  "appTitle": "NexHub",
+
+  "navBrowse": "浏览",
+  "navNovel": "小说",
+  "navMedia": "媒体",
+  "navComic": "漫画",
+  "navSettings": "设置",
+  "homeTitle": "浏览",
+  "settingsTitle": "设置",
+  "sourceManagementTitle": "源管理",
+  "downloadSettingsTitle": "下载",
+  "downloadManagementTitle": "下载管理",
+  "aboutTitle": "关于",
+  "themeTitle": "外观",
+
+  "tabLibrary": "书架",
+  "tabOnline": "在线",
+  "tabSubscribe": "订阅",
+  "tabSources": "源管理",
+
+  "browseLocalFiles": "本地文件",
+  "browseLocalFilesSubtitle": "浏览本机小说、视频和漫画",
+  "browseNetworkFiles": "网络文件",
+  "browseNetworkFilesSubtitle": "浏览 HTTP 文件服务器",
+  "browseWebScrape": "网页爬取",
+  "browseWebScrapeSubtitle": "从网页提取小说、漫画、视频或文章",
+  "browseRss": "RSS 订阅",
+  "browseRssSubtitle": "管理和浏览 RSS 订阅源",
+
+  "subTabLocal": "本地",
+  "subTabHistory": "历史记录",
+  "subTabFavorite": "收藏",
+
+  "filter": "筛选",
+  "filterTitle": "筛选",
+  "sortBy": "排序",
+  "sortRecent": "最近",
+  "sortTitle": "标题",
+  "filterByStatus": "状态",
+  "filterByCategory": "分类",
+  "filterByProgress": "进度",
+  "allLabel": "全部",
+  "progressReading": "在看",
+  "progressNotStarted": "未看",
+  "filterReset": "重置",
+  "filterApply": "应用",
+  "play": "播放",
+  "readChapter": "阅读",
+  "episodesWithLine": "剧集 · {line}",
+  "@episodesWithLine": {
+    "description": "Episode list header with selected line",
+    "placeholders": { "line": {} }
+  },
+  "recommendations": "猜你喜欢",
+  "episodeN": "第 {n} 集",
+  "@episodeN": {
+    "description": "Episode number label",
+    "placeholders": { "n": {} }
+  },
+  "cancel": "取消",
+  "confirm": "确认",
+  "delete": "删除",
+  "save": "保存",
+  "import": "导入",
+  "export": "导出",
+  "close": "关闭",
+  "search": "搜索",
+  "retry": "重试",
+  "ok": "确定",
+  "next": "下一集",
+  "previous": "上一集",
+
+  "emptyLibrary": "书架还是空的",
+  "emptySearch": "没有找到结果",
+  "emptyDownloads": "还没有下载",
+  "emptySources": "还没有添加源",
+  "emptyBrowse": "这里什么都没有",
+  "emptyLocalNovel": "暂无本地小说",
+  "emptyLocalMedia": "暂无本地媒体",
+  "emptyLocalComic": "暂无本地漫画",
+  "emptyLocalNovelAction": "导入小说",
+  "emptyLocalMediaAction": "导入媒体",
+  "emptyLocalComicAction": "导入漫画",
+  "loading": "加载中…",
+  "noResults": "暂无结果",
+  "loadFailed": "加载失败",
+  "noMoreResults": "没有更多了",
+  "authorColon": "作者：",
+  "tagColon": "标签：",
+  "searchFailed": "搜索失败，请重试",
+  "searching": "搜索中…",
+  "updatedAt": "更新于 {time}",
+  "statusOngoing": "连载中",
+  "statusCompleted": "已完结",
+  "deprecated": "已弃用",
+  "mirrorSettings": "镜像与隐藏设置",
+  "stealthMode": "隐身模式",
+  "gridView": "网格视图",
+  "listView": "列表视图",
+  "toggleLayout": "切换视图",
+  "all": "全部",
+  "emptyCategory": "该分类暂无内容",
+  "emptyContent": "暂无内容",
+  "loadFailed": "加载失败",
+  "contentExpired": "内容已过期，请重新搜索",
+  "sourceNotFound": "内容源不可用，请更换源或重新搜索",
+  "onlineBrowse": "在线浏览",
+  "refreshList": "刷新列表",
+  "goToVerification": "去验证",
+  "openSourceWebsite": "打开源站",
+
+  "errorGeneric": "出了点问题",
+  "errorNetwork": "网络错误，请重试",
+  "errorParse": "解析内容失败",
+  "errorVerification": "需要验证，请完成验证",
+  "verificationFailed": "验证失败，请稍后重试",
+  "errorVideoExpired": "视频链接已失效，请重试",
+  "danmaku": "弹幕",
+  "danmakuSend": "发送弹幕",
+  "danmakuSendHint": "输入弹幕内容",
+
+  "themeLight": "浅色",
+  "themeDark": "深色",
+  "themeSystem": "跟随系统",
+  "useMonet": "使用动态取色（莫奈）",
+  "customColor": "自定义主题色",
+  "presetColor": "预设颜色",
+
+  "deleteConfirmTitle": "删除确认",
+  "deleteConfirmContent": "确定删除「{name}」吗？此操作不可撤销。",
+  "deleteRecordOnly": "仅删除记录",
+  "deleteRecordAndFile": "删除记录和文件",
+
+  "addSource": "添加源",
+  "importSource": "导入源",
+  "exportSource": "导出源",
+  "aboutDescription": "NexHub —— 四合一媒体聚合客户端（动漫 / 漫画 / 小说 / 影视）。",
+  "videoSourceLine": "线路",
+  "defaultLine": "默认线路",
+  "errorWebView": "需要网页验证",
+  "verifying": "验证中…",
+  "mirrorTest": "测速",
+  "sourceHealthy": "正常",
+  "resolveTimeout": "解析超时",
+  "resolveFailed": "解析失败：{message}",
+  "@resolveFailed": {
+    "description": "Source resolve failure message",
+    "placeholders": { "message": {} }
+  },
+  "categories": "分类",
+
+  "chapterN": "第 {n} 话",
+  "@chapterN": {
+    "description": "Chapter number label for manga",
+    "placeholders": { "n": {} }
+  },
+  "pageIndicator": "第 {cur} / {total} 页",
+  "@pageIndicator": {
+    "description": "Reader page indicator",
+    "placeholders": { "cur": {}, "total": {} }
+  },
+  "readerDoublePageIndicator": "{first}-{last} / {total}",
+  "@readerDoublePageIndicator": {
+    "description": "Reader double-page spread indicator",
+    "placeholders": { "first": {}, "last": {}, "total": {} }
+  },
+  "prevChapter": "上一章",
+  "nextChapter": "下一章",
+  "readerSettings": "阅读设置",
+  "readerMode": "阅读模式",
+  "readerBackground": "背景",
+  "readerOrientation": "屏幕方向",
+  "readerTapZone": "点击区域",
+  "readerZoom": "双击缩放",
+  "noImages": "本章暂无可读图片",
+  "preloading": "预加载下一章…",
+  "readerModeSingleLTR": "单页（左→右）",
+  "readerModeSingleRTL": "单页（右→左）",
+  "readerModeSingleVertical": "单页（竖向）",
+  "readerModeWebtoon": "长条滚动",
+  "readerModeWebtoonWithGap": "长条（带间距）",
+  "readerOrientationDefault": "默认",
+  "readerOrientationSystem": "跟随系统",
+  "readerOrientationPortrait": "竖屏",
+  "readerOrientationLandscape": "横屏",
+  "readerOrientationLockPortrait": "锁定竖屏",
+  "readerOrientationLockLandscape": "锁定横屏",
+  "readerOrientationReversePortrait": "反向竖屏",
+  "readerBgBlack": "黑色",
+  "readerBgGray": "灰色",
+  "readerBgDarkGray": "深灰",
+  "readerBgWhite": "白色",
+  "readerBgEyeCare": "护眼绿",
+  "readerBgParchment": "羊皮纸",
+  "readerBgWarmLinen": "暖黄",
+  "readerBgLightBrown": "浅褐",
+  "readerBgBeanGreen": "豆沙绿",
+  "readerBgMint": "淡青",
+  "readerBgApricot": "暖杏",
+  "readerBgGrayBlue": "浅灰蓝",
+  "readerBgAuto": "自动",
+  "readerTapLeftRight": "左右",
+  "readerTapLShape": "L 形",
+  "readerTapKindle": "Kindle",
+  "readerTapBothSides": "两侧",
+  "readerTapOff": "关闭",
+  "readerTapInvert": "点击反色",
+  "readerTapInvertNone": "不反转",
+  "readerTapInvertLeftRight": "左右反转",
+  "readerTapInvertUpDown": "上下反转",
+  "readerTapInvertAll": "全反转",
+  "readerSideMargin": "左右留白",
+  "readerFlashEnabled": "翻页闪光",
+  "readerFlashTime": "闪光时长",
+  "readerFlashInterval": "闪光延迟",
+  "readerFlashColor": "闪光颜色",
+  "readerFlashBlack": "黑",
+  "readerFlashWhite": "白",
+  "readerFlashBlackWhite": "黑→白",
+  "readerTapPreviewHint": "点击区域预览（实时）",
+  "tapPreviewPrev": "上一页",
+  "tapPreviewNext": "下一页",
+  "tapPreviewToggle": "切换",
+  "tapZonePreview": "预览点按区域",
+  "tapZonePrev": "上一页",
+  "tapZoneNext": "下一页",
+  "tapZoneToggle": "切换界面",
+  "filterInverted": "反色",
+  "favorite": "收藏",
+  "moreActions": "更多操作",
+
+  "demoNormal": "默认视图",
+  "demoEmpty": "显示空状态",
+  "demoError": "显示错误状态",
+
+  "noContent": "本章暂无内容",
+  "novelFontSize": "字号",
+  "novelLineHeight": "行距",
+  "novelParagraphSpacing": "段距",
+  "novelMargin": "边距",
+  "novelPageAnimation": "翻页动画",
+  "novelTextShadow": "文字阴影",
+  "novelAnimNone": "无动画",
+  "novelAnimSlide": "滑动",
+  "novelAnimScroll": "滚动",
+  "novelAnimFade": "淡入",
+  "novelAnimCover": "覆盖",
+  "novelAnimSimulation": "仿真",
+  "novelHfNone": "无",
+  "novelHfTime": "时间",
+  "novelHfBattery": "电量",
+  "novelHfChapterTitle": "章节标题",
+  "novelHfBookName": "书名",
+  "novelHfPageNumber": "页码",
+  "novelHfProgressPercent": "进度百分比",
+  "novelChapterN": "第 {n} 章",
+  "@novelChapterN": {
+    "description": "Novel chapter number label",
+    "placeholders": { "n": {} }
+  },
+
+  "download": "下载",
+  "downloads": "下载",
+  "downloadListTitle": "下载列表",
+  "downloadedContent": "已下载",
+  "downloadSettings": "下载设置",
+  "emptyDownloadList": "暂无下载任务",
+  "emptyDownloaded": "暂无已下载内容",
+  "clearAll": "清除全部",
+  "clearAllConfirm": "确定清除全部下载记录吗？已下载的文件不会被删除。",
+  "clearHistory": "清除历史",
+  "clearHistoryConfirm": "确定清除本模块的全部浏览历史吗？此操作不可恢复。",
+  "historyCleared": "历史已清除",
+  "batchPause": "批量暂停",
+  "batchResume": "批量继续",
+  "deleteSelected": "批量删除",
+  "deleteSelectedConfirm": "确定删除选中的 {count} 项下载记录吗？",
+  "pause": "暂停",
+  "selectAll": "全选",
+  "select": "选择",
+  "deleteConfirm": "确定删除选中的下载吗？",
+  "statusPending": "等待中",
+  "statusDownloading": "下载中",
+  "statusPaused": "已暂停",
+  "statusFailed": "失败",
+  "statusWaitingForWifi": "等待 WiFi",
+  "statusCompleted": "已完成",
+  "statusCancelled": "已取消",
+  "downloadWifiOnly": "仅 WiFi 下载",
+  "downloadWifiOnlyHint": "仅在连接到 WiFi 时启动下载",
+  "comicDownloadFormat": "漫画下载格式",
+  "novelDownloadFormat": "小说下载格式",
+  "formatCbz": "CBZ 压缩包",
+  "formatCbzSubtitle": "所有图片打包为单个 .cbz 文件",
+  "formatFolder": "散图文件夹",
+  "formatFolderSubtitle": "每章一个文件夹，散图存放",
+  "formatEpub": "EPUB 电子书",
+  "formatEpubSubtitle": "标准电子书格式，支持目录",
+  "formatTxt": "TXT 纯文本",
+  "formatTxtSubtitle": "纯文本格式，兼容性最广",
+
+  "emptyHistory": "暂无浏览记录",
+  "emptyFavorites": "暂无收藏",
+  "emptyRssFeeds": "暂无订阅源",
+  "emptyRssItems": "暂无文章",
+  "addRssFeed": "添加订阅源",
+  "rssFeedTitle": "标题",
+  "rssFeedTitleHint": "自定义标题（可选）",
+  "opening": "正在打开",
+
+  "verificationRequired": "需要验证",
+  "verificationHint": "此内容需要完成网页验证后才能访问。请点击下方按钮在浏览器中完成验证，然后返回重试。",
+  "openInBrowser": "在外部浏览器打开",
+  "verificationDone": "已完成验证，重试",
+  "webViewNotAvailable": "当前平台不支持内嵌浏览器，请使用外部浏览器完成验证。",
+  "extractFromPage": "用此页抽取",
+  "@extractFromPage": {
+    "description": "Button: run jsExtractor inside the embedded WebView to extract the real URL"
+  },
+  "extractHint": "在页面中完成验证后，点击「用此页抽取」自动提取内容地址；失败时回退到浏览器手动验证。",
+  "@extractHint": {
+    "description": "Hint shown above the extract button in the embedded WebView verification screen"
+  },
+  "extracting": "抽取中…",
+  "@extracting": {
+    "description": "Loading text while jsExtractor is being evaluated inside the WebView"
+  },
+  "extractSuccess": "抽取成功",
+  "@extractSuccess": {
+    "description": "Toast when jsExtractor returns a valid URL"
+  },
+  "extractNoResult": "未抽取到内容，请重试或手动验证",
+  "@extractNoResult": {
+    "description": "Error shown when jsExtractor returns nothing usable"
+  },
+  "extractFailed": "抽取失败",
+  "@extractFailed": {
+    "description": "Error prefix when jsExtractor evaluation throws"
+  },
+  "captureFromPage": "抓取本页渲染内容",
+  "@captureFromPage": {
+    "description": "Button: capture the JS-rendered HTML of the embedded WebView and parse it with the source selectors"
+  },
+  "captureHint": "页面渲染完成后，点击「抓取本页渲染内容」即可用既有选择器解析列表/详情，无需手动编写脚本。",
+  "@captureHint": {
+    "description": "Hint shown above the capture button in the render-after-extract WebView screen"
+  },
+  "capturing": "抓取中…",
+  "@capturing": {
+    "description": "Loading text while the rendered HTML is being captured from the WebView"
+  },
+  "snifferTitle": "视频嗅探",
+  "@snifferTitle": {
+    "description": "Title of the video sniffer screen"
+  },
+  "snifferAddressHint": "打开视频页面以嗅探",
+  "@snifferAddressHint": {
+    "description": "Placeholder of the address bar in the video sniffer"
+  },
+  "snifferHint": "打开视频页面后，动态加载的 m3u8/mp4 串流会自动在下方列出。",
+  "@snifferHint": {
+    "description": "Hint shown in the video sniffer results area"
+  },
+  "snifferNoResult": "尚未嗅探到视频串流",
+  "@snifferNoResult": {
+    "description": "Empty state of the video sniffer results list"
+  },
+  "snifferCopy": "复制",
+  "@snifferCopy": {
+    "description": "Copy a sniffed video URL"
+  },
+  "snifferPlay": "播放",
+  "@snifferPlay": {
+    "description": "Play a sniffed video URL with the built-in player"
+  },
+  "snifferClear": "清空列表",
+  "@snifferClear": {
+    "description": "Clear the sniffed video URL list"
+  },
+  "share": "分享",
+  "shareCopied": "已复制到剪贴板",
+  "browserTitle": "浏览器",
+  "browserAddressHint": "输入网址或搜索",
+  "browserBack": "后退",
+  "browserForward": "前进",
+  "browserRefresh": "刷新",
+  "browserCopyLink": "复制链接",
+  "browserShare": "分享",
+  "browserLinkCopied": "链接已复制",
+  "browserUseAsVerification": "用此页完成验证",
+  "@browserUseAsVerification": {
+    "description": "Menu item: sync current page cookies to HttpFetcher as verification fallback"
+  },
+  "browserOpenSniffer": "视频嗅探模式",
+  "@browserOpenSniffer": {
+    "description": "Menu item: open the video sniffer to intercept dynamically loaded streams"
+  },
+  "browserUseAsVerificationDone": "已用此页 Cookie 完成验证",
+  "@browserUseAsVerificationDone": {
+    "description": "Snackbar shown after cookies are synced from the built-in browser"
+  },
+  "browserNotAvailable": "当前平台不支持内置浏览器，请使用外部浏览器。",
+  "@browserNotAvailable": {
+    "description": "Shown when InAppWebView is unavailable (e.g. on Web)"
+  },
+  "openInternalBrowser": "打开内置浏览器",
+  "@openInternalBrowser": {
+    "description": "Button: open the in-app HttpBrowserScreen for verification"
+  },
+  "downloadStarted": "下载已开始",
+  "downloadEpisodes": "选集下载",
+  "episodeRange": "选集范围",
+  "addToDownload": "加入下载",
+  "deselectAll": "全不选",
+  "selectedCount": "已选 {selected}/{total}",
+  "@selectedCount": {
+    "description": "Selected episode count",
+    "placeholders": { "selected": {}, "total": {} }
+  },
+  "rangeStart": "起始集",
+  "rangeEnd": "结束集",
+  "applyRange": "应用",
+  "alreadyDownloaded": "已下载",
+  "favoriteAdded": "已收藏",
+  "favoriteRemoved": "已取消收藏",
+  "aboutApp": "关于应用",
+  "appVersion": "版本",
+  "clearCache": "清除缓存",
+  "cacheCleared": "缓存已清除",
+  "privacySettings": "隐私设置",
+  "stealthSettings": "隐身设置",
+
+  "browseLocalTitle": "本地文件",
+  "browseLocalEmpty": "未找到可读的本地文件",
+  "browseLocalScan": "扫描文件",
+  "browseLocalFileTypeAll": "全部",
+  "browseLocalFileTypeNovel": "小说",
+  "browseLocalFileTypeComic": "漫画",
+  "browseLocalFileTypeVideo": "视频",
+  "browseLocalSelectFolder": "选择文件夹",
+  "browseNetworkTitle": "网络文件",
+  "browseNetworkUrlHint": "输入 HTTP 文件服务器地址",
+  "browseNetworkConnect": "连接",
+  "browseNetworkEmpty": "未找到文件",
+  "browseNetworkHistory": "历史地址",
+  "browseNetworkParentDir": "上级目录",
+  "browseNetworkFileSize": "大小",
+  "scrapeModeGeneral": "通用",
+  "scrapeModeNovel": "小说",
+  "scrapeModeComic": "漫画",
+  "scrapeModeVideo": "视频",
+  "scrapeModeArticle": "文章",
+  "scrapeUrlHint": "输入要爬取的网页 URL",
+  "scrapeStart": "开始爬取",
+  "scrapeResultTitle": "页面标题",
+  "scrapeResultLinks": "所有链接",
+  "scrapeResultText": "正文内容",
+  "scrapeResultImages": "图片列表",
+  "scrapeResultVideos": "视频列表",
+  "scrapeOpenInReader": "在阅读器中打开",
+  "scrapeOpenInPlayer": "在播放器中打开",
+  "scrapeNoResults": "未提取到内容",
+  "scrapeSelectorHint": "CSS 选择器（可选）",
+  "scrapeAdvanced": "高级选项",
+  "rssFeedUrl": "订阅地址",
+  "rssFeedUrlHint": "https://example.com/feed.xml",
+  "rssFeedDescription": "描述",
+  "rssFeedModule": "绑定模块",
+  "rssFeedModuleNone": "全局（浏览页）",
+  "rssFeedTestConnection": "测试连接",
+  "rssFeedTesting": "测试中…",
+  "rssFeedTestSuccess": "连接成功",
+  "rssFeedTestFailed": "连接失败",
+  "rssFeedPreview": "预览",
+  "rssFeedSaved": "订阅源已保存",
+  "articleDetailAuthor": "作者",
+  "articleDetailPublishedAt": "发布时间",
+  "articleDetailReadFull": "阅读全文",
+  "articleDetailSource": "来源",
+  "articleDetailEmpty": "文章无内容",
+  "articleReadingSettings": "阅读设置",
+  "articleFontSize": "字号",
+  "articleLineHeight": "行距",
+  "articleNightMode": "夜间模式",
+  "mirrorListTitle": "镜像列表",
+  "mirrorTesting": "测速中…",
+  "mirrorTestResultMs": "{ms} ms",
+  "@mirrorTestResultMs": {
+    "description": "镜像测速结果（毫秒）",
+    "placeholders": { "ms": {} }
+  },
+  "mirrorTestFailed": "失败",
+  "mirrorCurrent": "当前",
+  "mirrorSwitched": "镜像已切换",
+  "mirrorStealthLocked": "隐身模式已强制开启",
+  "mirrorNoMirrors": "此源无镜像配置",
+  "collectApiImportTitle": "采集 API 导入",
+  "collectApiUrlHint": "https://example.com/api.php/provide/vod/",
+  "collectApiDetect": "识别",
+  "collectApiDetecting": "识别中…",
+  "collectApiDetectSuccess": "识别成功",
+  "collectApiDetectFailed": "识别失败",
+  "collectApiSiteName": "站点名称",
+  "collectApiCategories": "分类",
+  "collectApiPreview": "内容预览",
+  "collectApiSourceName": "源名称",
+  "collectApiSourceId": "源 ID",
+  "collectApiSave": "保存源",
+  "collectApiSaved": "源已保存",
+  "collectApiInvalidUrl": "无效的 URL",
+  "sourceImportFromUrl": "从 URL 导入",
+  "sourceImportFromFile": "从文件导入",
+  "sourceImportFromJson": "手动输入 JSON",
+  "sourceImportUrlHint": "源 JSON 的 URL",
+  "sourceImportFilePicker": "选择 JSON 文件",
+  "sourceImportJsonHint": "粘贴源 JSON 配置",
+  "sourceImportValidate": "校验",
+  "sourceImportValid": "校验通过",
+  "sourceImportInvalid": "校验失败",
+  "sourceImportErrors": "错误信息",
+  "sourceImportCollectApiDetected": "检测到 MacCMS 采集 API",
+  "sourceImportCollectApiRedirect": "使用采集 API 导入",
+  "sourceImportSaved": "源已导入",
+  "contentImportTitle": "导入内容",
+  "contentImportSelectFile": "选择文件",
+  "contentImportSupportedFormats": "支持的格式",
+  "contentImportHistory": "导入历史",
+  "contentImportEmpty": "暂无导入记录",
+  "contentImportOpened": "已打开",
+  "contentImportNovelFormats": ".txt, .epub",
+  "contentImportComicFormats": ".cbz, 图片文件夹",
+  "contentImportMediaFormats": ".mp4, .mkv, .avi",
+  "downloadedGroupChapters": "章节列表",
+  "downloadedGroupFormat": "格式",
+  "downloadedGroupOpen": "打开",
+  "downloadedGroupFileMissing": "文件不存在",
+  "downloadedGroupDeleteConfirm": "确定删除此下载项吗？",
+
+  "browsePageTitle": "浏览",
+  "rssSubscribeTitle": "RSS 订阅",
+  "emptyRssSubscribe": "还没有 RSS 订阅",
+  "addSubscription": "添加订阅",
+  "subscribeAddressLabel": "订阅地址",
+  "rsshubRoutesTitle": "RSSHub 路由",
+  "rsshubRouteRecommend": "RSSHub 路由推荐",
+  "rsshubRouteHint": "点击路由自动填入 RSSHub 实例地址",
+
+  "novelLibraryName": "小说库",
+  "mediaLibraryName": "媒体库",
+  "comicLibraryName": "漫画库",
+  "emptySubscribe": "暂无订阅源",
+
+  "sourceListTab": "源列表",
+  "networkImportTab": "网络导入",
+  "localImportTab": "本地导入",
+  "sourceListEmpty": "暂无源",
+  "networkImportHint": "粘贴源地址（.json/.txt）",
+  "networkImportPasteHint": "粘贴地址并点击获取",
+  "localImportTitle": "从本地文件导入",
+  "localImportFormats": "支持 .json、.txt、.xml",
+  "selectFile": "选择文件",
+  "selectFolder": "选择文件夹",
+  "noLocalSource": "未找到源文件",
+  "localImportHint": "选择单个文件或文件夹，扫描其中的源文件（.json/.txt/.xml）",
+  "importPreviewTitle": "找到 {count} 个文件",
+  "@importPreviewTitle": {
+    "description": "导入预览标题，显示扫描到的文件数",
+    "placeholders": { "count": {} }
+  },
+  "confirmImport": "确认导入",
+  "@confirmImport": {
+    "description": "确认导入选中源按钮"
+  },
+  "importSelectedCount": "已选 {count} 项",
+  "@importSelectedCount": {
+    "description": "显示已选中的导入项数量",
+    "placeholders": { "count": {} }
+  },
+  "importTypeOnly": "仅导入【{type}】类型源",
+  "@importTypeOnly": {
+    "description": "在专属类型源页导入时，预览界面的提示横幅",
+    "placeholders": { "type": {} }
+  },
+  "importTypeFiltered": "已跳过 {count} 个其他类型源",
+  "@importTypeFiltered": {
+    "description": "预览提示横幅后缀，显示跳过多少个其他类型源",
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "importNoMatchingType": "所选内容中无【{type}】类型源（已跳过 {count} 个其他类型）",
+  "@importNoMatchingType": {
+    "description": "专属类型导入时未找到匹配类型源的提示",
+    "placeholders": {
+      "type": {},
+      "count": { "type": "int" }
+    }
+  },
+  "sourceImportResult": "成功导入 {success}/{total} 个源",
+  "@sourceImportResult": {
+    "description": "批量导入后提示成功/总数",
+    "placeholders": {
+      "success": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+
+  "settingsGroupDownload": "下载管理",
+  "settingsGroupTools": "工具",
+  "settingsGroupPlugins": "插件",
+  "settingsGroupData": "数据",
+  "settingsGroupPlayback": "播放与阅读",
+  "settingsGroupContentSources": "内容源",
+  "settingsGroupSubscriptions": "订阅与通知",
+  "settingsGroupDownloadsData": "下载与数据",
+  "webScrapeSetting": "网页爬取",
+  "webScrapeSettingSameAsBrowse": "与浏览页网页爬取一样",
+  "subscriptionManagement": "订阅管理",
+  "subscriptionManagementDesc": "分类型统一管理，可以设置 RSS 订阅",
+  "rsshubInstance": "RSSHub Instance",
+  "rsshubInstanceDesc": "自部署 RSSHub 地址",
+  "rsshubSettingsTitle": "RSSHub 设置",
+  "rssNotifications": "RSS 更新通知",
+  "rssNotificationsDesc": "检测订阅源新条目",
+  "rssNotificationsTitle": "RSS 更新通知",
+  "rssNotificationEnabled": "启用更新检测",
+  "rssNotificationEnabledSubtitle": "前台定期轮询已订阅源",
+  "rssUpdateInterval": "检测间隔",
+  "interval15m": "15 分钟",
+  "interval30m": "30 分钟",
+  "interval1h": "1 小时",
+  "interval2h": "2 小时",
+  "interval4h": "4 小时",
+  "rssCheckNow": "立即检测",
+  "rssTotalNewCount": "当前未读：{count}",
+  "@rssTotalNewCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "rssCheckDone": "检测完成",
+  "rssNotificationHint": "仅应用在前台时轮询；检测到新条目会在订阅源卡片显示未读数。",
+  "currentInstance": "当前实例",
+  "presetInstances": "预置实例",
+  "presetInstanceOfficial": "官方",
+  "customInstance": "自定义实例",
+  "restoreDefault": "恢复默认",
+  "rsshubTestAll": "一键测速",
+  "rsshubTestingAll": "正在测速全部实例…",
+  "rsshubTestAllDone": "已测速 {count} 个实例",
+  "saveCustomInstance": "保存自定义",
+  "instanceTestFail": "测试失败",
+  "instanceTestSuccess": "连接成功",
+  "rsshubTroubleshoot": "故障排除",
+  "rsshubTroubleshootHint": "如果遇到问题：\n• 确保地址可访问且无防火墙限制\n• 尝试更换预置实例\n• 自建 RSSHub 用户请检查服务是否正常运行",
+  "danmakuSettings": "弹弹play 弹幕",
+  "danmakuSettingsDesc": "弹幕配置",
+  "danmakuConfigTitle": "弹弹play 弹幕配置",
+  "unconfigured": "未配置",
+  "configured": "已配置",
+  "appIdLabel": "AppId",
+  "appIdHint": "请输入 AppId",
+  "appSecretLabel": "AppSecret",
+  "appSecretHint": "请输入 AppSecret",
+  "saveDanmaku": "保存",
+  "danmakuDesc": "在 https://daplay.danmaku.net 获取您的配置 AppId 和 AppSecret。配置后可在播放器中看到弹弹play弹幕。",
+  "pluginManagement": "管理插件",
+  "dataImportExport": "导入/导出",
+  "dataImportExportTitle": "导入/导出",
+  "importData": "导入数据",
+  "importDataDesc": "导入订阅、插件和进度",
+  "exportData": "导出数据",
+  "exportDataDesc": "导出所有数据到文件",
+  "exportSubscription": "导出订阅",
+  "exportSubscriptionDesc": "仅导出 RSS 订阅",
+  "exportPlugins": "导出插件",
+  "exportPluginsDesc": "导出插件配置",
+  "selectExportFolder": "选择导出文件夹",
+  "exportFolderCustom": "可以自定义导出文件夹",
+  "downloadListTab": "下载列表",
+  "downloadedListTab": "已下载内容",
+  "maxConcurrentDownloads": "最大同时下载数",
+  "maxConcurrentDownloadsDesc": "同时进行的下载数量",
+  "downloadPath": "下载路径",
+  "downloadPathDesc": "D:/Downloads",
+  "downloaderType": "下载器",
+  "downloaderInternal": "内置下载器",
+  "downloaderExternal": "外置下载器",
+  "threadCount": "线程数",
+  "threadCountDesc": "下载线程数量",
+  "comicFormatSetting": "漫画格式",
+  "novelFormatSetting": "小说格式",
+  "downloadTabsAll": "全部",
+  "downloadTabsNovel": "小说",
+  "downloadTabsMedia": "媒体",
+  "downloadTabsComic": "漫画",
+  "downloadedTabsAll": "全部",
+  "downloadedTabsNovel": "小说",
+  "downloadedTabsMedia": "媒体",
+  "downloadedTabsComic": "漫画",
+  "downloadedTabsArchived": "已删除下载",
+  "noDownloads": "暂无下载",
+
+  "downloadPause": "暂停",
+  "downloadResume": "继续",
+  "sourceCategoryNovel": "小说",
+  "sourceCategoryMedia": "媒体",
+  "sourceCategoryComic": "漫画",
+  "sourceCategoryEmpty": "暂无{category}源",
+  "@sourceCategoryEmpty": {
+    "description": "Empty state message for a source category tab",
+    "placeholders": { "category": {} }
+  },
+  "rsshubLatencyMs": "{ms}ms",
+  "@rsshubLatencyMs": {
+    "description": "RSSHub instance latency in milliseconds",
+    "placeholders": { "ms": {} }
+  },
+  "rsshubLatencyFailed": "失败",
+  "downloaderSelectTitle": "下载器选择",
+  "comicFormatSelectTitle": "漫画格式",
+  "comicFormatJpg": "单页 JPG",
+  "comicFormatPng": "单页 PNG",
+  "comicFormatCbz": "CBZ 打包",
+  "novelFormatSelectTitle": "小说格式",
+  "novelFormatTxt": "TXT",
+  "novelFormatEpub": "EPUB",
+
+  "rsshubRouteBilibiliBangumi": "B站番剧",
+  "rsshubRouteBilibiliBangumiPath": "/bilibili/bangumi/media/:mediaid",
+  "rsshubRouteBilibiliMangaUpdate": "B站漫画更新",
+  "rsshubRouteBilibiliMangaUpdatePath": "/bilibili/manga/update/:comicid",
+  "rsshubRouteBilibiliUserVideo": "B站UP主投稿",
+  "rsshubRouteBilibiliUserVideoPath": "/bilibili/user/video/:uid",
+  "rsshubRouteBilibiliRanking": "B站排行榜",
+  "rsshubRouteBilibiliRankingPath": "/bilibili/partion/ranking/:tid/:days?",
+  "rsshubRouteYoutubeChannel": "YouTube频道",
+  "rsshubRouteYoutubeChannelPath": "/youtube/channel/:id",
+  "rsshubRouteTwitterUser": "Twitter 用户",
+  "rsshubRouteLinovelib": "轻小说文库",
+  "rsshubRouteSfacg": "SF轻小说",
+
+  "importMediaTitle": "导入媒体",
+  "importMediaFormatsHint": "支持 mp4、mkv、avi、mov 等常见视频格式",
+  "importMediaPickFile": "选择视频文件",
+  "importMediaPickFolder": "选择视频目录",
+  "importNovelTitle": "导入小说",
+  "importNovelFormatsHint": "支持 .txt 和 .epub 格式",
+  "importNovelPickFile": "选择文件",
+  "importNovelPickFolder": "选择目录",
+  "importComicTitle": "导入漫画",
+  "importComicFormatsHint": "支持 cbz、cbr、cbt 等常见漫画压缩格式",
+  "importComicPickFile": "选择漫画文件",
+  "importComicPickFolder": "选择漫画目录",
+
+  "novelBrightness": "亮度",
+
+  "playerLock": "锁定",
+  "playerUnlock": "解锁",
+  "playerAutoPlayNext": "自动连播",
+  "playerDecodeMode": "解码模式",
+  "playerDecodeAuto": "自动",
+  "playerDecodeSw": "软件解码",
+  "playerDecodeHw": "硬件解码",
+  "playerDecodeHwPlus": "硬件解码+",
+  "playerAudioChannel": "音频通道",
+  "playerAudioStereo": "立体声",
+  "playerAudioMono": "单声道",
+  "playerAudioAutoProtect": "自动保护",
+  "playerAudioReverseStereo": "翻转立体声",
+  "playerAspectRatio": "画面比例",
+  "playerAspectDefault": "默认",
+  "playerAspectFill": "填充",
+  "playerAspect43": "4:3",
+  "playerAspect169": "16:9",
+  "playerPlaybackSpeed": "播放速度",
+  "playerSubtitle": "字幕",
+  "playerSubtitleSettings": "字幕设置",
+  "playerSubtitleDelay": "字幕延迟(ms)",
+  "playerFontSize": "字体大小",
+  "playerSubtitleOutline": "字幕边框",
+  "playerTimer": "定时关闭",
+  "playerPlayInfo": "播放信息",
+  "playerExternalPlay": "外部播放",
+  "playerVideoExpired": "视频链接已失效，请重试",
+  "playerStallDetected": "播放卡顿，正在重连…",
+  "playerRetry": "重试",
+  "playerNextEpisode": "下一集",
+  "playerPreviousEpisode": "上一集",
+  "playerShare": "分享",
+
+  "danmakuFilterKeywords": "关键词过滤",
+  "danmakuTimeOffset": "时间偏移(秒)",
+  "danmakuArea": "显示区域",
+  "danmakuDuration": "持续时间(秒)",
+  "danmakuLineHeight": "行高",
+  "danmakuHideTop": "隐藏顶部",
+  "danmakuHideBottom": "隐藏底部",
+  "danmakuHideScroll": "隐藏滚动",
+  "danmakuFollowSpeed": "跟随倍速",
+  "danmakuAddKeyword": "添加关键词",
+  "danmakuKeywordHint": "输入关键词或正则表达式",
+  "danmakuSearch": "搜索弹幕",
+  "danmakuSearchHint": "输入动漫名称搜索",
+  "danmakuMatchEpisode": "匹配剧集",
+  "danmakuNoResult": "无搜索结果",
+  "danmakuLoadFailed": "弹幕加载失败",
+  "danmakuLoaded": "弹幕已加载",
+  "danmakuCacheHit": "弹幕已缓存",
+
+  "danmakuSourceTitle": "弹幕源",
+  "@danmakuSourceTitle": {
+    "description": "Danmaku source selection sheet title"
+  },
+  "danmakuSourceHint": "选择弹幕来源",
+  "@danmakuSourceHint": {
+    "description": "Subtitle hint on the danmaku source sheet"
+  },
+  "danmakuSourceDandanplay": "弹弹play",
+  "@danmakuSourceDandanplay": {
+    "description": "dandanplay danmaku source option"
+  },
+  "danmakuSourceBilibili": "bilibili",
+  "@danmakuSourceBilibili": {
+    "description": "bilibili danmaku source option"
+  },
+  "danmakuSourceOff": "关闭",
+  "@danmakuSourceOff": {
+    "description": "Disable danmaku source option"
+  },
+  "danmakuSourceDandanplayDesc": "自动按番剧名匹配",
+  "@danmakuSourceDandanplayDesc": {
+    "description": "dandanplay source description"
+  },
+  "danmakuSourceBilibiliDesc": "按视频 av/BV 号匹配",
+  "@danmakuSourceBilibiliDesc": {
+    "description": "bilibili source description"
+  },
+  "danmakuSourceOffDesc": "不加载弹幕",
+  "@danmakuSourceOffDesc": {
+    "description": "Disabled danmaku source description"
+  },
+
+  "danmakuDisplaySettingsTitle": "弹幕显示设置",
+  "@danmakuDisplaySettingsTitle": {
+    "description": "Danmaku display settings entry title"
+  },
+  "danmakuDisplaySettingsDesc": "字体大小、不透明度、时间偏移等",
+  "@danmakuDisplaySettingsDesc": {
+    "description": "Danmaku display settings entry description"
+  },
+  "danmakuFontSize": "字体大小",
+  "@danmakuFontSize": {
+    "description": "Danmaku font size"
+  },
+  "danmakuOpacity": "不透明度",
+  "@danmakuOpacity": {
+    "description": "Danmaku opacity"
+  },
+  "playerSettingsTitle": "播放器设置",
+  "@playerSettingsTitle": {
+    "description": "Player settings title"
+  },
+  "playerSettingsDesc": "解码模式、画面比例、播放速度等",
+  "@playerSettingsDesc": {
+    "description": "Player settings description"
+  },
+  "playerDefaultDecodeMode": "默认解码模式",
+  "@playerDefaultDecodeMode": {
+    "description": "Default decode mode"
+  },
+  "playerDefaultAudioChannel": "默认音频通道",
+  "@playerDefaultAudioChannel": {
+    "description": "Default audio channel"
+  },
+  "playerDefaultAspectRatio": "默认画面比例",
+  "@playerDefaultAspectRatio": {
+    "description": "Default aspect ratio"
+  },
+  "playerDefaultSpeed": "默认播放速度",
+  "@playerDefaultSpeed": {
+    "description": "Default playback speed"
+  },
+  "playerDefaultAutoPlay": "默认自动连播",
+  "@playerDefaultAutoPlay": {
+    "description": "Default auto-play next"
+  },
+  "playerSubtitleFontSize": "字幕字体大小",
+  "@playerSubtitleFontSize": {
+    "description": "Subtitle font size"
+  },
+  "subtitleTitle": "字幕",
+  "@subtitleTitle": {
+    "description": "Subtitle panel title"
+  },
+  "subtitleOffset": "偏移",
+  "@subtitleOffset": {
+    "description": "Subtitle offset slider label"
+  },
+  "subtitleShow": "显示字幕",
+  "@subtitleShow": {
+    "description": "Subtitle visibility switch label"
+  },
+  "subtitleNone": "无字幕",
+  "@subtitleNone": {
+    "description": "Option to disable subtitles"
+  },
+  "subtitleNoTracks": "无可用字幕轨道",
+  "@subtitleNoTracks": {
+    "description": "Shown when no subtitle tracks are available"
+  },
+  "subtitleStyleTitle": "字幕样式",
+  "subtitleFontSize": "字号",
+  "subtitleScale": "缩放",
+  "subtitleBorderSize": "边框宽度",
+  "subtitleShadowOffset": "阴影偏移",
+  "subtitleTextColor": "文字颜色",
+  "subtitleBorderColorLabel": "边框颜色",
+  "subtitleShadowColorLabel": "阴影颜色",
+  "subtitlePosition": "位置",
+  "subtitleAssOverride": "覆盖 ASS/SSA 样式",
+  "subtitleTrackN": "轨道 {n}",
+  "@subtitleTrackN": {
+    "description": "Fallback subtitle track label using its id",
+    "placeholders": { "n": {} }
+  },
+  "novelReaderSettingsTitle": "小说阅读器设置",
+  "@novelReaderSettingsTitle": {
+    "description": "Novel reader default settings title"
+  },
+  "novelReaderSettingsDesc": "字号、行距、段距、边距、背景等",
+  "@novelReaderSettingsDesc": {
+    "description": "Novel reader default settings description"
+  },
+  "comicReaderSettingsTitle": "漫画阅读器设置",
+  "@comicReaderSettingsTitle": {
+    "description": "Comic reader default settings title"
+  },
+  "comicReaderSettingsDesc": "方向、点击区、滤镜、缩放手势等",
+  "@comicReaderSettingsDesc": {
+    "description": "Comic reader default settings description"
+  },
+  "novelTypographyGroup": "小说排版",
+  "@novelTypographyGroup": {
+    "description": "Novel default: typography"
+  },
+  "novelParagraphSpacing": "段距",
+  "@novelParagraphSpacing": {
+    "description": "Novel paragraph spacing"
+  },
+  "novelMargin": "边距",
+  "@novelMargin": {
+    "description": "Novel margin"
+  },
+  "novelShadow": "文字阴影",
+  "@novelShadow": {
+    "description": "Novel text shadow"
+  },
+  "novelBackgroundPreset": "背景预设",
+  "@novelBackgroundPreset": {
+    "description": "Novel background preset"
+  },
+  "novelPageAnimation": "翻页动画",
+  "@novelPageAnimation": {
+    "description": "Novel page turn animation"
+  },
+  "novelTapZoneInvert": "点击区反转",
+  "@novelTapZoneInvert": {
+    "description": "Novel tap zone invert"
+  },
+  "comicFilterGroup": "图片滤镜",
+  "@comicFilterGroup": {
+    "description": "Comic default: image filter"
+  },
+  "comicFilterBrightness": "亮度",
+  "@comicFilterBrightness": {
+    "description": "Comic filter brightness"
+  },
+  "comicFilterContrast": "对比度",
+  "@comicFilterContrast": {
+    "description": "Comic filter contrast"
+  },
+  "comicFilterColorTemp": "色温",
+  "@comicFilterColorTemp": {
+    "description": "Comic filter color temperature"
+  },
+  "comicFilterInverted": "反色滤镜",
+  "@comicFilterInverted": {
+    "description": "Comic image invert filter"
+  },
+  "comicTapZoneInvert": "点击区反转",
+  "@comicTapZoneInvert": {
+    "description": "Comic tap zone invert"
+  },
+  "readerGeneralGroup": "通用阅读偏好",
+  "@readerGeneralGroup": {
+    "description": "Reader settings: general reading preferences"
+  },
+  "novelTypographyGroup": "小说排版",
+  "@novelTypographyGroup": {
+    "description": "Novel default: typography"
+  },
+  "novelParagraphSpacing": "段距",
+  "@novelParagraphSpacing": {
+    "description": "Novel paragraph spacing"
+  },
+  "novelMargin": "边距",
+  "@novelMargin": {
+    "description": "Novel margin"
+  },
+  "novelShadow": "文字阴影",
+  "@novelShadow": {
+    "description": "Novel text shadow"
+  },
+  "novelBackgroundPreset": "背景预设",
+  "@novelBackgroundPreset": {
+    "description": "Novel background preset"
+  },
+  "novelPageAnimation": "翻页动画",
+  "@novelPageAnimation": {
+    "description": "Novel page turn animation"
+  },
+  "novelTapZoneInvert": "点击区反转",
+  "@novelTapZoneInvert": {
+    "description": "Novel tap zone invert"
+  },
+  "comicFilterGroup": "图片滤镜",
+  "@comicFilterGroup": {
+    "description": "Comic default: image filter"
+  },
+  "comicFilterBrightness": "亮度",
+  "@comicFilterBrightness": {
+    "description": "Comic filter brightness"
+  },
+  "comicFilterContrast": "对比度",
+  "@comicFilterContrast": {
+    "description": "Comic filter contrast"
+  },
+  "comicFilterColorTemp": "色温",
+  "@comicFilterColorTemp": {
+    "description": "Comic filter color temperature"
+  },
+  "comicFilterInverted": "反色滤镜",
+  "@comicFilterInverted": {
+    "description": "Comic image invert filter"
+  },
+  "comicTapZoneInvert": "点击区反转",
+  "@comicTapZoneInvert": {
+    "description": "Comic tap zone invert"
+  },
+  "novelZoomGroup": "缩放与排版",
+  "@novelZoomGroup": {
+    "description": "Novel defaults: zoom and typography"
+  },
+  "comicZoomGroup": "缩放与手势",
+  "@comicZoomGroup": {
+    "description": "Comic defaults: zoom and gesture"
+  },
+  "readerDefaultMode": "默认阅读模式",
+  "@readerDefaultMode": {
+    "description": "Default reading mode"
+  },
+  "readerDefaultBackground": "默认背景色",
+  "@readerDefaultBackground": {
+    "description": "Default reader background"
+  },
+  "readerBackgroundWhite": "白色",
+  "@readerBackgroundWhite": {
+    "description": "White background"
+  },
+  "readerBackgroundBeige": "米色",
+  "@readerBackgroundBeige": {
+    "description": "Beige background"
+  },
+  "readerBackgroundDark": "深色",
+  "@readerBackgroundDark": {
+    "description": "Dark background"
+  },
+  "readerDefaultOrientation": "默认方向",
+  "@readerDefaultOrientation": {
+    "description": "Default reader orientation"
+  },
+  "readerOrientationHorizontal": "水平",
+  "@readerOrientationHorizontal": {
+    "description": "Horizontal orientation"
+  },
+  "readerOrientationVertical": "垂直",
+  "@readerOrientationVertical": {
+    "description": "Vertical orientation"
+  },
+  "readerDoubleTapZoom": "双击缩放",
+  "@readerDoubleTapZoom": {
+    "description": "Double tap zoom"
+  },
+  "readerOrientationLock": "方向锁定",
+  "@readerOrientationLock": {
+    "description": "Orientation lock"
+  },
+  "layoutSettings": "布局设置",
+  "@layoutSettings": {
+    "description": "Layout settings"
+  },
+  "layoutSettingsDesc": "书架网格/列表、密度",
+  "@layoutSettingsDesc": {
+    "description": "Layout settings description"
+  },
+  "bookshelfLayoutMode": "书架布局模式",
+  "@bookshelfLayoutMode": {
+    "description": "Bookshelf layout mode"
+  },
+  "bookshelfLayoutGrid": "网格",
+  "@bookshelfLayoutGrid": {
+    "description": "Grid layout"
+  },
+  "bookshelfLayoutList": "列表",
+  "@bookshelfLayoutList": {
+    "description": "List layout"
+  },
+  "bookshelfLayoutDensity": "网格密度",
+  "@bookshelfLayoutDensity": {
+    "description": "Grid density"
+  },
+  "bookshelfDensityCompact": "紧凑",
+  "@bookshelfDensityCompact": {
+    "description": "Compact density"
+  },
+  "bookshelfDensityStandard": "标准",
+  "@bookshelfDensityStandard": {
+    "description": "Standard density"
+  },
+  "bookshelfDensityComfortable": "舒适",
+  "@bookshelfDensityComfortable": {
+    "description": "Comfortable density"
+  },
+  "sourceHide": "隐藏",
+  "@sourceHide": {
+    "description": "Hide source"
+  },
+  "sourceShowHidden": "显示隐藏源",
+  "@sourceShowHidden": {
+    "description": "Show hidden sources"
+  },
+  "sourceEdit": "编辑源",
+  "sourceDelete": "删除源",
+  "sourceMigrate": "迁移源",
+  "sourceEditBuiltinNotAllowed": "内置源不可编辑",
+  "sourceEditSaved": "源已更新",
+  "sourceEditFailed": "源更新失败",
+  "sourceDeleteBuiltinNotAllowed": "内置源不可删除",
+  "sourceDeleted": "源已删除",
+  "sourceDeleteFailed": "源删除失败",
+  "sourceDeprecatedHint": "此源已弃用，请使用替代源。",
+  "sourceNameLabel": "源名称",
+  "sourceUrlLabel": "源地址",
+  "back": "返回",
+  "sourceType": "类型",
+  "sourceTypeAnime": "动漫",
+  "sourceTypeManga": "漫画",
+  "sourceTypeNovel": "小说",
+  "playerTimerOff": "关闭定时",
+  "playerTimerMinutes": "{minutes} 分钟",
+  "@playerTimerMinutes": {
+    "description": "Sleep timer duration in minutes",
+    "placeholders": { "minutes": { "type": "int" } }
+  },
+  "playerTimerCustom": "自定义",
+  "playerTimerCanceled": "已取消定时关闭",
+  "playerTimerFired": "定时关闭已触发，播放已暂停",
+
+  "noDescription": "暂无简介",
+
+  "aboutAppTitle": "关于",
+  "openSourceLicenses": "开源协议",
+  "thirdPartyLibraries": "第三方库",
+  "projectRepository": "项目仓库",
+  "checkUpdate": "检查更新",
+  "updateChecking": "正在检查更新…",
+  "updateLatest": "已是最新版本",
+  "updateAvailable": "发现新版本 {version}",
+  "updateAvailableHint": "是否前往发布页下载？",
+  "updateGoToDownload": "前往下载",
+  "updateCheckFailed": "检查更新失败，请稍后重试",
+
+  "settingsGroupLanguage": "语言",
+  "languageTitle": "界面语言",
+  "languageFollowSystem": "跟随系统",
+  "languageChinese": "简体中文",
+  "languageEnglish": "English",
+
+  "chapterList": "章节目录",
+  "currentChapter": "当前章",
+
+  "searchByAuthor": "按作者搜索",
+  "noRecommendation": "暂无推荐",
+
+  "restore": "恢复",
+  "archive": "归档",
+  "archivedEmpty": "没有已归档的内容",
+  "archivedHint": "归档后文件保留在磁盘，可随时恢复",
+  "deletePermanently": "彻底删除",
+  "restoreSuccess": "已恢复",
+  "statusArchived": "已归档",
+
+  "searchHistoryTitle": "搜索历史",
+  "clearSearchHistory": "清空历史",
+  "clearSearchHistoryConfirm": "确定清空所有搜索历史？",
+  "noSearchHistory": "暂无搜索历史",
+  "hotSearch": "热门搜索",
+  "noHotSearch": "暂无热词",
+
+  "importDataParsing": "正在解析…",
+  "importDataSuccess": "导入成功",
+  "importDataFailed": "导入失败",
+  "importDataInvalidFormat": "文件格式无效",
+  "importDataSummary": "已导入 {plugins} 个插件 / {favorites} 个收藏 / {history} 条历史",
+  "@importDataSummary": {
+    "placeholders": {
+      "plugins": { "type": "int" },
+      "favorites": { "type": "int" },
+      "history": { "type": "int" }
+    }
+  },
+  "confirmImport": "确认导入",
+
+  "exportFolderDefault": "默认路径（文档）",
+  "exportDataSuccess": "导出成功",
+  "exportDataFailed": "导出失败",
+  "exportDataInProgress": "正在导出…",
+  "exportDataFileSaved": "已保存到 {path}",
+  "@exportDataFileSaved": {
+    "placeholders": {
+      "path": { "type": "String" }
+    }
+  },
+  "exportNothingToExport": "无数据可导出",
+
+  "notImplemented": "功能暂未实现",
+
+  "cast": "投屏",
+  "castNotSupportedYet": "投屏功能即将推出",
+  "cloudSync": "云同步",
+  "cloudSyncNotSupportedYet": "即将推出",
+
+  "cloudSyncNotConfigured": "未配置，点击设置",
+  "cloudSyncFeatureWebdav": "WebDAV 备份",
+  "cloudSyncFeatureSync": "多端同步收藏与进度",
+
+  "enableRecommendedSources": "启用推荐源",
+  "enableRecommendedSourcesHint": "一键开启所有可用的推荐源",
+  "recommendedSourcesEnabled": "已启用 {count} 个推荐源",
+  "@recommendedSourcesEnabled": {
+    "description": "Toast after enabling recommended sources",
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "castToDevice": "投屏到设备",
+  "castingTo": "正在投屏到 {device}",
+  "@castingTo": {
+    "description": "Casting to a device name",
+    "placeholders": { "device": {} }
+  },
+  "castNoDevices": "未找到投屏设备",
+  "castNotSupportedOnDevice": "当前设备不支持投屏",
+  "castDisconnect": "断开投屏",
+  "pip": "画中画",
+  "pipNotSupportedOnDevice": "当前设备不支持画中画",
+  "screenshot": "截图",
+  "screenshotSaved": "截图已保存",
+  "screenshotFailed": "截图失败",
+  "screenshotPathSetting": "截图保存路径",
+  "screenshotPathDefault": "默认路径（Documents/screenshots）",
+
+  "imageLoadFailed": "图片加载失败",
+
+  "seriesTitle": "系列",
+  "@seriesTitle": {
+    "description": "Series entry button label and series detail screen title"
+  },
+  "seasonsTitle": "季",
+  "@seasonsTitle": {
+    "description": "Seasons section title"
+  },
+  "episodeCount": "{count} 集",
+  "@episodeCount": {
+    "description": "Episode count badge on season card",
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "seasonCount": "{count} 季",
+  "@seasonCount": {
+    "description": "Season count label",
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "imageFilter": "图片滤镜",
+  "brightness": "亮度",
+  "contrast": "对比度",
+  "colorTemperature": "色温",
+  "saturation": "饱和度",
+  "hue": "色相",
+  "resetFilter": "重置滤镜",
+  "saveImage": "保存图片",
+  "shareImage": "分享图片",
+  "imageSavedTo": "图片已保存到 {path}",
+  "@imageSavedTo": {
+    "description": "Toast after saving a reader image",
+    "placeholders": { "path": { "type": "String" } }
+  },
+  "imageSaveFailed": "图片保存失败",
+  "imagePathCopied": "图片路径已复制到剪贴板",
+
+  "chineseConverter": "繁简转换",
+  "noConvert": "不转换",
+  "traditionalToSimplified": "繁转简",
+  "simplifiedToTraditional": "简转繁",
+  "autoPageInterval": "自动翻页间隔",
+  "autoPageOff": "关闭",
+  "pauseAutoPage": "暂停自动翻页",
+  "resumeAutoPage": "恢复自动翻页",
+  "customFont": "自定义字体",
+  "fontSystem": "系统",
+  "fontSerif": "衬线",
+  "fontMonospace": "等宽",
+  "addBookmark": "添加书签",
+  "bookmarkList": "书签列表",
+  "bookmarkAdded": "书签已添加",
+  "deleteBookmark": "删除书签",
+  "noBookmarks": "暂无书签",
+  "bookmarkNoteHint": "备注（可选）",
+  "novelChapterProgress": "第 {current} 章 / 共 {total} 章",
+  "@novelChapterProgress": {
+    "placeholders": {
+      "current": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "novelLetterSpacing": "字距",
+  "novelFontStyle": "字体样式",
+  "fontBold": "加粗",
+  "fontItalic": "斜体",
+  "fontUnderline": "下划线",
+  "novelTextColor": "正文颜色",
+  "novelTextColorFollowBg": "跟随背景自动配色",
+  "novelShadowColor": "阴影颜色",
+  "novelShadowColorAuto": "自动（正文色半透明）",
+
+  "novelSectionText": "文字",
+  "novelSectionTitle": "章节标题",
+  "novelSectionColor": "颜色与背景",
+  "novelSectionPage": "翻页与交互",
+  "novelSectionMisc": "其他",
+  "novelShowChapterTitle": "正文显示章节标题",
+  "novelTitleFontScale": "标题字号倍数",
+  "novelTitleBold": "标题加粗",
+  "novelTitleColor": "标题颜色",
+  "novelTitleColorAuto": "跟随强调色",
+
+  "importShuyuan": "导入书源",
+  "shuyuanImportTitle": "导入书源",
+  "shuyuanImportHint": "支持书源规则（@css/@xpath/@json/@js + ## 正则）",
+  "shuyuanImportFromUrl": "URL",
+  "shuyuanImportFromFile": "文件",
+  "shuyuanImportFromJson": "JSON",
+  "shuyuanImportUrlHint": "书源 JSON 的 URL",
+  "shuyuanImportJsonHint": "粘贴书源 JSON 配置",
+  "shuyuanImportFilePicker": "选择书源文件",
+  "shuyuanImportParse": "解析",
+  "shuyuanImportParsing": "解析中…",
+  "shuyuanImportParseFailed": "解析失败，未识别到有效书源",
+  "shuyuanImportPreview": "预览（{count}）",
+  "@shuyuanImportPreview": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "shuyuanImportSaveAll": "全部导入",
+  "shuyuanImportEmpty": "暂无解析结果",
+  "shuyuanImportValid": "有效",
+  "shuyuanImportInvalid": "无效",
+  "shuyuanImportSuccess": "已导入 {count} 个书源",
+  "@shuyuanImportSuccess": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "shuyuanImportSelected": "导入选中 {count} 项",
+  "@shuyuanImportSelected": {
+    "description": "Bottom button label showing count of selected sources to import",
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "shuyuanImportFailed": "导入失败",
+  "shareFailed": "分享失败",
+  "openInBrowserFailed": "无法打开浏览器",
+  "updatedAtLabel": "更新时间：",
+  "searchChapter": "搜索章节",
+  "noChaptersFound": "未找到匹配章节",
+  "sortAscending": "升序",
+  "sortDescending": "降序",
+  "downloadSingleChapter": "下载单章",
+  "chapterBookmark": "章节书签",
+  "chapterRead": "已读标记",
+  "continueReading": "继续阅读",
+  "startFromBeginning": "从头开始",
+  "openInAppBrowser": "应用内浏览",
+  "refreshMetadata": "刷新信息",
+  "removeFromFavorites": "从收藏移除",
+  "coverViewer": "封面",
+  "downloadPreset1": "下载最新1集",
+  "downloadPreset5": "下载最新5集",
+  "downloadPreset10": "下载最新10集",
+  "downloadUnread": "下载未读",
+  "downloadFavorited": "下载已收藏",
+  "tagLabel": "标签",
+  "sourceLabel": "来源",
+
+  "reloadChapter": "重载本章",
+  "clearReadingProgress": "清除阅读进度",
+  "readingProgressCleared": "阅读进度已清除",
+  "novelMenuBookmarkList": "书签列表",
+  "novelMenuConfigureToolbar": "配置底部工具栏",
+  "novelTtsBackground": "后台朗读",
+  "novelSectionFont": "字体样式",
+  "searchInBook": "书内搜索",
+  "wholeBook": "全书",
+  "noSearchResults": "无搜索结果",
+  "customBgColor": "自定义背景色",
+  "tapZoneInvert": "点击反转",
+  "tapInvertNone": "不反转",
+  "tapInvertLeftRight": "左右反转",
+  "tapInvertAll": "全反转",
+  "startReading": "开始朗读",
+  "stopReading": "停止朗读",
+  "noteList": "笔记列表",
+  "noNotes": "暂无笔记",
+
+  "add": "添加",
+  "testConnection": "测试连接",
+  "noCustomInstances": "暂无自定义实例",
+
+  "searchByDirector": "按导演搜索",
+  "searchByActor": "按演员搜索",
+  "searchByTag": "按标签搜索",
+  "searchAggregate": "聚合全部源",
+  "searchSingle": "单源",
+  "searchSelectSource": "选择一个源",
+  "searchByWork": "按作品名搜索",
+  "searchFieldAuthor": "作者",
+  "searchFieldDirector": "导演",
+  "searchFieldActor": "主演",
+  "searchFieldWork": "作品",
+
+  "rsshubRouteQidian": "起点",
+  "rsshubRouteJjwxc": "晋江文学城",
+  "rsshubRouteDoubanBooks": "豆瓣图书",
+  "rsshubRouteDmzj": "动漫之家",
+  "rsshubRouteJmcomic": "禁漫天堂",
+
+  "browseNetworkSelectedCount": "已选 {count} 项",
+  "@browseNetworkSelectedCount": {
+    "description": "AppBar title in multi-select mode showing selected count",
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "browseNetworkOpenSelected": "打开",
+  "browseNetworkDownloadSelected": "下载",
+  "browseNetworkDownloadStarted": "开始下载 {count} 个文件",
+  "@browseNetworkDownloadStarted": {
+    "description": "Snackbar shown when batch download starts",
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "browseNetworkDownloadDone": "已下载 {count} 项",
+  "@browseNetworkDownloadDone": {
+    "description": "Snackbar shown when batch download completes",
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "browseNetworkDownloadFailed": "下载失败",
+  "browseNetworkDownloadPathMissing": "下载路径不可用",
+
+  "unknown": "未知",
+
+  "rssFeedListTitle": "RSS 订阅",
+  "rssTestAllSpeed": "一键测速",
+  "rssSpeedFailed": "测速失败",
+  "rssSpeedMs": "{ms}ms",
+  "@rssSpeedMs": {
+    "description": "RSS feed speed test result in milliseconds",
+    "placeholders": { "ms": { "type": "int" } }
+  },
+
+  "unrecognizedFile": "未识别的文件：{fileName}",
+  "@unrecognizedFile": {
+    "description": "Snackbar shown when a picked file extension is not recognized",
+    "placeholders": { "fileName": { "type": "String" } }
+  },
+  "importFailed": "导入失败：{reason}",
+  "@importFailed": {
+    "description": "Snackbar shown when an import/pick operation throws",
+    "placeholders": { "reason": { "type": "String" } }
+  },
+  "folderScanFailed": "文件夹扫描失败，请检查权限或路径",
+  "@folderScanFailed": {
+    "description": "Snackbar shown when recursive folder scan throws FileSystemException"
+  },
+  "emptyFolder": "文件夹为空或无可用文件",
+  "@emptyFolder": {
+    "description": "Snackbar shown when a picked folder has no recognizable files"
+  },
+  "storagePermissionDenied": "存储权限被拒绝，无法选择文件",
+  "@storagePermissionDenied": {
+    "description": "Snackbar shown when runtime storage/media permission is denied"
+  },
+  "pickFileNoPath": "无法获取所选文件路径（可能是系统限制），请尝试其他文件",
+  "@pickFileNoPath": {
+    "description": "Snackbar shown when a picked file has a null path (e.g. Android SAF edge case)"
+  },
+  "folderPickUnsupportedSaf": "当前系统不支持选择文件夹导入（Android SAF 限制），请改用「选择文件」逐个添加",
+  "@folderPickUnsupportedSaf": {
+    "description": "Snackbar shown when folder picker returns an Android SAF content URI that dart:io cannot list"
+  },
+  "setAsShelfCover": "设为书架封面",
+  "@setAsShelfCover": {
+    "description": "Popup menu item to set current comic cover as shelf cover"
+  },
+  "openDownloadManager": "打开下载管理",
+  "@openDownloadManager": {
+    "description": "Popup menu item to open download manager screen"
+  },
+  "details": "详情",
+  "@details": {
+    "description": "Popup menu item to show content details"
+  },
+  "coverUpdated": "封面已更新",
+  "@coverUpdated": {
+    "description": "Snackbar shown when shelf cover is successfully updated"
+  },
+  "coverUpdateFailed": "封面更新失败：未找到收藏条目",
+  "@coverUpdateFailed": {
+    "description": "Snackbar shown when shelf cover update fails (favorite entry not found)"
+  },
+  "authorLabel": "作者",
+  "@authorLabel": {
+    "description": "Label for author field in details sheet"
+  },
+  "statusLabel": "状态",
+  "@statusLabel": {
+    "description": "Label for status field in details sheet"
+  },
+  "setAsCover": "设为封面",
+  "@setAsCover": {
+    "description": "Long-press menu item to set image as cover"
+  },
+  "mediaInfo": "媒体信息",
+  "@mediaInfo": {
+    "description": "Player more menu item to show media info"
+  },
+  "playExternal": "外部播放",
+  "@playExternal": {
+    "description": "Player more menu item to play in external player"
+  },
+  "loadExternalSubtitle": "导入外部字幕",
+  "@loadExternalSubtitle": {
+    "description": "Subtitle panel item to load external subtitle file"
+  },
+  "loadExternalSubtitleFailed": "外部字幕加载失败",
+  "@loadExternalSubtitleFailed": {
+    "description": "Snackbar shown when external subtitle loading fails"
+  },
+  "danmakuCustomUrl": "自定义 URL",
+  "@danmakuCustomUrl": {
+    "description": "Danmaku source sheet option for custom URL source"
+  },
+  "danmakuCustomUrlHint": "输入弹幕源 URL",
+  "@danmakuCustomUrlHint": {
+    "description": "Hint text for custom danmaku URL input field"
+  },
+  "danmakuCustomUrlDesc": "从自定义 URL 加载弹幕",
+  "@danmakuCustomUrlDesc": {
+    "description": "Description for custom URL danmaku source option"
+  },
+  "onlineTabHome": "首页",
+  "@onlineTabHome": {
+    "description": "Tab label for online content home tab"
+  },
+  "onlineTabSchedule": "周期表",
+  "@onlineTabSchedule": {
+    "description": "Tab label for weekly schedule tab"
+  },
+  "onlineTabRanking": "排行",
+  "@onlineTabRanking": {
+    "description": "Tab label for ranking tab"
+  },
+  "filterYear": "年份",
+  "@filterYear": {
+    "description": "Filter sheet field label for year"
+  },
+  "filterRegion": "地区",
+  "@filterRegion": {
+    "description": "Filter sheet field label for region"
+  },
+  "filterSort": "排序",
+  "@filterSort": {
+    "description": "Filter sheet field label for sort order"
+  },
+  "filterCategory": "分类",
+  "@filterCategory": {
+    "description": "Dynamic filter group label for source categories"
+  },
+  "filterTag": "标签",
+  "@filterTag": {
+    "description": "Dynamic filter group label for source tags"
+  },
+  "sortHottest": "最热",
+  "@sortHottest": {
+    "description": "Sort option label for hottest items"
+  },
+  "sortRating": "评分",
+  "@sortRating": {
+    "description": "Sort option label for highest rated items"
+  },
+  "viewAll": "查看全部",
+  "@viewAll": {
+    "description": "Button label to view all items in a home section"
+  },
+  "latestUpdates": "最新更新",
+  "@latestUpdates": {
+    "description": "Home section title for latest updated items"
+  },
+  "hotRecommendations": "热门推荐",
+  "@hotRecommendations": {
+    "description": "Home section title for hot recommended items"
+  },
+  "weekdayMon": "周一",
+  "@weekdayMon": {
+    "description": "Weekday label Monday"
+  },
+  "weekdayTue": "周二",
+  "@weekdayTue": {
+    "description": "Weekday label Tuesday"
+  },
+  "weekdayWed": "周三",
+  "@weekdayWed": {
+    "description": "Weekday label Wednesday"
+  },
+  "weekdayThu": "周四",
+  "@weekdayThu": {
+    "description": "Weekday label Thursday"
+  },
+  "weekdayFri": "周五",
+  "@weekdayFri": {
+    "description": "Weekday label Friday"
+  },
+  "weekdaySat": "周六",
+  "@weekdaySat": {
+    "description": "Weekday label Saturday"
+  },
+  "weekdaySun": "周日",
+  "@weekdaySun": {
+    "description": "Weekday label Sunday"
+  },
+  "regionChina": "中国大陆",
+  "@regionChina": {
+    "description": "Region filter option: mainland China"
+  },
+  "regionHongKong": "中国香港",
+  "@regionHongKong": {
+    "description": "Region filter option: Hong Kong, China"
+  },
+  "regionTaiwan": "中国台湾",
+  "@regionTaiwan": {
+    "description": "Region filter option: Taiwan, China"
+  },
+  "regionJapan": "日本",
+  "@regionJapan": {
+    "description": "Region filter option: Japan"
+  },
+  "regionKorea": "韩国",
+  "@regionKorea": {
+    "description": "Region filter option: Korea"
+  },
+  "regionUSA": "美国",
+  "@regionUSA": {
+    "description": "Region filter option: USA"
+  },
+  "regionOther": "其他",
+  "@regionOther": {
+    "description": "Region filter option: other regions"
+  },
+  "unsupportedRarFormat": "暂不支持 RAR 格式漫画",
+  "@unsupportedRarFormat": {
+    "description": "Shown when a .cbr/.rar comic archive cannot be extracted"
+  },
+  "unsupportedEpubFormat": "暂不支持 EPUB 格式，请使用专用阅读器",
+  "@unsupportedEpubFormat": {
+    "description": "Shown when an .epub file is opened in the text viewer"
+  },
+  "unsupportedFormat": "暂不支持该格式",
+  "@unsupportedFormat": {
+    "description": "Generic unsupported format message for .umd/.mobi/.fb2/.azw3 etc."
+  },
+  "localFileLabel": "本地文件",
+  "@localFileLabel": {
+    "description": "Label shown as chapter placeholder when reading a local file in specialized readers"
+  },
+  "localFileLoadFailed": "本地文件读取失败",
+  "@localFileLoadFailed": {
+    "description": "Error message shown when a local file fails to load in specialized readers"
+  },
+
+  "playerDefaultOrientation": "锁定方向",
+  "playerOrientationAuto": "自动跟随",
+  "playerOrientationPortrait": "竖屏",
+  "playerOrientationLandscape": "横屏",
+  "playerGestureSeekMultiplier": "拖动进度倍率",
+  "playerSeekHalf": "0.5x",
+  "playerSeekNormal": "1x",
+  "playerSeekDouble": "2x",
+  "playerDoubleTapPlayPause": "双击播放/暂停",
+  "playerLongPressSpeedUp": "长按 2x 倍速",
+  "playerSubtitleBottomMargin": "字幕底部边距",
+  "playerDefaultVolume": "默认音量",
+  "playerCoreGroup": "播放核心",
+  "@playerCoreGroup": {
+    "description": "Player settings group: core playback"
+  },
+  "playerSubtitleGroup": "字幕",
+  "@playerSubtitleGroup": {
+    "description": "Player settings group: subtitle"
+  },
+  "playerGestureGroup": "手势与控制",
+  "@playerGestureGroup": {
+    "description": "Player settings group: gesture and control"
+  },
+
+  "novelDefaultGroupTitle": "小说默认",
+  "novelDefaultPageTurnAnimation": "翻页动画",
+  "novelDefaultFontSize": "字号",
+  "novelDefaultLineHeight": "行距",
+  "novelDefaultBackground": "背景色",
+  "novelDefaultTtsRate": "朗读语速",
+  "novelDefaultChineseConversion": "简繁转换",
+  "novelBgWhite": "白色",
+  "novelBgCream": "米黄",
+  "novelBgDarkGray": "深灰",
+  "novelBgBlack": "黑色",
+
+  "comicDefaultGroupTitle": "漫画默认",
+  "comicDefaultReadingDirection": "阅读方向",
+  "comicDefaultTapZoneLayout": "点击区域",
+  "comicDefaultInvertFilter": "反色滤镜",
+  "comicDefaultInitialZoom": "初始缩放",
+  "comicDefaultDoubleTapZoom": "双击缩放",
+  "comicDefaultScrollWheel": "滚轮方向",
+  "comicTapLayout1": "布局 1",
+  "comicTapLayout2": "布局 2",
+  "comicTapLayout3": "布局 3",
+  "comicTapLayout4": "布局 4",
+  "comicTapLayout5": "布局 5",
+  "comicZoomFitWidth": "适应宽度",
+  "comicZoomFitHeight": "适应高度",
+  "comicZoomOriginal": "原始尺寸",
+  "comicZoom2x": "2x",
+  "comicZoom3x": "3x",
+  "comicWheelNatural": "自然",
+  "comicWheelInverted": "反向",
+  "comicDirLtr": "左→右",
+  "comicDirRtl": "右→左",
+  "comicDirVertical": "上下",
+  "comicDirWebtoon": "瀑布流",
+  "comicDirWebtoonGap": "瀑布流（带间距）",
+
+  "danmakuDisplayFontSize": "字体大小",
+  "danmakuDisplayOpacity": "透明度",
+  "danmakuDisplayScrollSpeed": "滚动速度",
+  "danmakuDisplayArea": "显示区域",
+  "danmakuDisplayMaxOnScreen": "同屏上限",
+  "danmakuDisplayShowTop": "顶部显示",
+  "danmakuDisplayShowBottom": "底部显示",
+  "danmakuDisplayShowFull": "全屏显示",
+  "danmakuDisplayBlockedKeywords": "屏蔽关键词",
+  "danmakuDisplayBlockedKeywordsHint": "每行一个关键词",
+  "danmakuSizeSmall": "小",
+  "danmakuSizeMedium": "中",
+  "danmakuSizeLarge": "大",
+  "danmakuSpeedSlow": "慢",
+  "danmakuSpeedMedium": "中",
+  "danmakuSpeedFast": "快",
+  "danmakuAreaQuarter": "1/4",
+  "danmakuAreaHalf": "半屏",
+  "danmakuAreaFull": "全屏",
+  "danmakuMaxTen": "10",
+  "danmakuMaxTwenty": "20",
+  "danmakuMaxFifty": "50",
+  "danmakuMaxHundred": "100",
+  "danmakuDisplayGroupFilter": "过滤与屏蔽",
+  "@danmakuDisplayGroupFilter": {
+    "description": "Danmaku display group: filter and block"
+  },
+  "danmakuDisplayGroupAppearance": "外观",
+  "@danmakuDisplayGroupAppearance": {
+    "description": "Danmaku display group: appearance"
+  },
+  "danmakuDisplayGroupDisplayRange": "显示范围",
+  "@danmakuDisplayGroupDisplayRange": {
+    "description": "Danmaku display group: display range"
+  },
+  "danmakuDisplayGroupSpeed": "速度",
+  "@danmakuDisplayGroupSpeed": {
+    "description": "Danmaku display group: speed"
+  },
+
+  "layoutTypeLabel": "布局类型",
+  "layoutGridLarge": "大网格",
+  "layoutGridMedium": "中网格",
+  "layoutGridSmall": "小网格",
+  "layoutListComfortable": "舒适列表",
+  "layoutListCompact": "紧凑列表",
+  "layoutGridColumns": "网格列数",
+  "layoutGridSpacing": "网格间距",
+  "layoutCoverRadius": "封面圆角",
+  "layoutTitleFontSize": "标题字号",
+  "layoutShowTitle": "显示标题",
+  "layoutTitleMaxLines": "标题行数",
+  "layoutShowAuthor": "显示作者",
+  "layoutShowProgress": "显示进度",
+  "layoutOpenSettings": "打开布局设置",
+  "bookshelfLayoutGroup": "书架布局",
+  "@bookshelfLayoutGroup": {
+    "description": "Layout settings group: bookshelf layout"
+  },
+  "layoutTypeGroup": "全局布局类型",
+  "@layoutTypeGroup": {
+    "description": "Layout settings group: layout type"
+  },
+  "layoutGridCoverGroup": "网格与封面",
+  "@layoutGridCoverGroup": {
+    "description": "Layout settings group: grid and cover"
+  },
+  "layoutDisplayGroup": "显示选项",
+  "@layoutDisplayGroup": {
+    "description": "Layout settings group: display options"
+  },
+  "layoutModeLabel": "布局模式",
+  "layoutListStyle": "列表风格",
+
+  "downloadStatusInProgress": "进行中",
+
+  "cloudSyncWebdavUrl": "WebDAV 地址",
+  "cloudSyncWebdavUsername": "用户名",
+  "cloudSyncWebdavPassword": "密码",
+  "cloudSyncTestConnection": "测试连接",
+  "cloudSyncConnectionSuccess": "连接成功（{ms}ms）",
+  "cloudSyncConnectionFailed": "连接失败",
+  "cloudSyncAutoSync": "自动同步",
+  "cloudSyncSyncFrequencyManual": "手动",
+  "cloudSyncSyncFrequencyDaily": "每日",
+  "cloudSyncSyncFrequencyWeekly": "每周",
+  "cloudSyncSyncNow": "立即同步",
+  "cloudSyncLastSyncTime": "上次同步：{time}",
+  "cloudSyncNeverSynced": "尚未同步",
+  "cloudSyncSyncSuccess": "同步成功",
+  "cloudSyncSyncFailed": "同步失败",
+  "cloudSyncSaveConfig": "保存配置",
+  "@cloudSyncConnectionSuccess": {
+    "placeholders": {
+      "ms": { "type": "int" }
+    }
+  },
+  "@cloudSyncLastSyncTime": {
+    "placeholders": {
+      "time": { "type": "String" }
+    }
+  },
+
+  "readingProgress": "阅读进度",
+  "watchingProgress": "观看进度",
+  "totalChapters": "总章节",
+  "totalEpisodes": "总集数",
+  "chaptersRead": "已读",
+  "episodesWatched": "已看",
+  "progressLabel": "进度",
+  "lastReadAt": "上次阅读",
+  "lastWatchedAt": "上次观看",
+  "anime": "番剧",
+  "episodeList": "选集",
+  "chapterListWithCount": "章节目录（{count}）",
+  "@chapterListWithCount": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "episodeListWithCount": "选集（{count}）",
+  "@episodeListWithCount": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "lastReadInfo": "上次阅读：{time} · {chapter}",
+  "@lastReadInfo": {
+    "placeholders": {
+      "time": { "type": "String" },
+      "chapter": { "type": "String" }
+    }
+  },
+  "lastWatchedInfo": "上次观看：{time} · {episode}",
+  "@lastWatchedInfo": {
+    "placeholders": {
+      "time": { "type": "String" },
+      "episode": { "type": "String" }
+    }
+  },
+  "notStartedYet": "尚未开始",
+  "timeJustNow": "刚刚",
+  "timeMinutesAgo": "{n} 分钟前",
+  "@timeMinutesAgo": {
+    "placeholders": { "n": { "type": "int" } }
+  },
+  "timeHoursAgo": "{n} 小时前",
+  "@timeHoursAgo": {
+    "placeholders": { "n": { "type": "int" } }
+  },
+  "timeDaysAgo": "{n} 天前",
+  "@timeDaysAgo": {
+    "placeholders": { "n": { "type": "int" } }
+  },
+
+  "expand": "展开",
+  "collapse": "收起",
+  "sortSectionTitle": "排序",
+  "displayTitle": "显示选项",
+  "sortByIndex": "按{unitWord}顺序",
+  "@sortByIndex": {
+    "placeholders": { "unitWord": {} }
+  },
+  "sortByName": "按{unitWord}名",
+  "@sortByName": {
+    "placeholders": { "unitWord": {} }
+  },
+  "sortBySource": "按来源",
+  "sortByUploadDate": "按更新时间",
+  "sortAscendingLabel": "升序",
+  "sortDescendingLabel": "降序",
+  "filterUnread": "仅未读",
+  "filterDownloaded": "已下载",
+  "filterBookmarked": "已书签",
+  "displaySourceTitle": "来源标题",
+  "displayNumber": "{unitWord}序号",
+  "@displayNumber": {
+    "placeholders": { "unitWord": {} }
+  },
+  "resetButton": "重置",
+  "doneButton": "完成",
+  "wordCount": "字数",
+  "updatedTo": "更新至 {n}",
+  "@updatedTo": {
+    "placeholders": { "n": {} }
+  },
+  "unitWordChapter": "章",
+  "unitWordComicChapter": "话",
+  "unitWordEpisode": "集",
+  "readerSettingsTitle": "阅读器设置",
+  "readerSettingsDesc": "阅读模式、背景、方向等",
+  "prevPage": "上一页",
+  "nextPage": "下一页",
+  "nightMode": "夜间模式",
+  "toolToc": "目录",
+  "toolPrevChapter": "上一章",
+  "toolNextChapter": "下一章",
+  "toolNightMode": "夜间",
+  "toolAutoPage": "自动翻页",
+  "toolSettings": "设置",
+  "toolBookmark": "书签",
+  "toolBookmarkList": "书签列表",
+  "toolSearch": "书内搜索",
+  "toolTts": "朗读",
+  "configureBottomToolbar": "配置底部工具栏",
+  "bottomToolbarConfigTitle": "底部工具栏",
+  "slotsShown": "已显示",
+  "slotsHidden": "已隐藏（点 + 添加）",
+  "novelCacheBook": "缓存本书",
+  "novelResetBookPrefs": "恢复本书默认",
+  "novelResetBookDone": "已恢复本书默认设置",
+  "readerCropEdge": "裁边",
+  "readerRotatePage": "旋转页面",
+  "readerKeepScreenOn": "屏幕常亮",
+  "readerProgressBarOnRight": "进度条在右侧",
+  "readerShowPageNumber": "显示页码",
+  "readerSplitDoublePage": "双页拆分",
+  "readerSplitDoublePageHint": "已开启双页拆分，已切换到横排单页模式",
+  "readerInitialZoom": "初始缩放",
+  "readerZoomFitWidth": "适配宽度",
+  "readerZoomFitHeight": "适配高度",
+  "readerZoomOriginal": "原始大小",
+  "readerFullscreen": "全屏",
+  "readerLongPressMenu": "长按菜单",
+  "readerGrayscale": "灰度",
+  "readerPreventShrink": "防止缩小",
+  "readerChapterTransition": "章节过渡",
+  "comicDefaultFullscreen": "全屏",
+  "comicDefaultLongPressMenu": "长按菜单",
+  "comicDefaultGrayscale": "灰度",
+  "comicDefaultPreventShrink": "防止缩小",
+  "comicDefaultChapterTransition": "章节过渡",
+  "copyImage": "复制图片",
+  "copyImageSuccess": "图片已复制到剪贴板",
+  "copyImageFailed": "图片复制失败",
+  "chapterTransitionCard": "章节：{title}",
+  "@chapterTransitionCard": {
+    "description": "章节切换时的过渡标题卡",
+    "placeholders": { "title": {} }
+  },
+  "readerProgress": "进度",
+  "regexSearch": "正则",
+  "locateCurrent": "定位当前",
+  "scrollToTop": "置顶",
+  "scrollToBottom": "置底",
+  "bookmarkedHint": "已加书签",
+
+  "playerFullscreen": "全屏",
+  "playerExitFullscreen": "退出全屏",
+  "playerScreenshot": "截图",
+  "playerBrightness": "亮度",
+  "playerVolume": "音量",
+  "playerSuperRes": "超分辨率",
+  "playerLine": "播放线路",
+  "playerSelectLine": "选择线路",
+  "playerEpisodes": "选集",
+  "playerPip": "画中画",
+  "playerCast": "投屏",
+  "playerMore": "更多",
+  "seekForward10": "快进 10 秒",
+  "seekBackward10": "快退 10 秒",
+
+  "novelTitleAlignLeft": "左对齐",
+  "novelTitleAlignCenter": "居中",
+  "novelTitleAlignRight": "右对齐",
+  "novelTitleAlignHidden": "隐藏",
+
+  "novelSectionTts": "朗读（TTS）",
+  "ttsRate": "朗读语速",
+  "ttsSleepTimer": "睡眠定时",
+  "ttsSleepOff": "关闭",
+  "ttsSleepCustom": "自定义",
+  "ttsSleepCustomMinutes": "自定义分钟数",
+  "ttsSleepRemaining": "剩余 {min} 分 {sec} 秒",
+  "@ttsSleepRemaining": {
+    "description": "TTS sleep timer remaining time",
+    "placeholders": {
+      "min": { "type": "int" },
+      "sec": { "type": "int" }
+    }
+  },
+  "ttsPrevSentence": "上一句",
+  "ttsPauseOrResume": "暂停 / 继续",
+  "ttsExit": "退出朗读",
+  "ttsNextSentence": "下一句",
+  "minuteUnit": "{minutes} 分钟",
+  "@minuteUnit": {
+    "description": "Minute count suffix for sleep timer options",
+    "placeholders": { "minutes": { "type": "int" } }
+  },
+
+  "novelFontFileGroup": "字体文件与强调色",
+  "novelChooseFontFile": "正文字体文件",
+  "novelTitleFontFile": "标题字体文件",
+  "novelSettingsSearch": "搜索设置",
+  "novelSettingsCommon": "常用",
+  "novelSettingsNoResult": "无匹配的设置项",
+  "novelFontFileCurrent": "已选：{name}",
+  "@novelFontFileCurrent": {
+    "description": "Current custom font file name",
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "novelClearFontFile": "清除字体文件",
+  "novelEmphasisColor": "强调色",
+  "novelEmphasisColorAuto": "自动（标题色）",
+
+  "novelSectionShadowUnderline": "阴影与下划线",
+  "novelShadowBlur": "阴影模糊半径",
+  "novelShadowOffsetX": "阴影水平偏移",
+  "novelShadowOffsetY": "阴影垂直偏移",
+  "novelUnderlineColor": "下划线颜色",
+  "novelUnderlineColorAuto": "自动（正文色）",
+  "novelUnderlineDashed": "虚线下划线",
+  "novelUnderlineThickness": "下划线粗细",
+  "novelUnderlineDashLength": "虚线实线段长",
+  "novelUnderlineDashGap": "虚线间隙长度",
+
+  "novelTitlePosition": "标题显示位置",
+  "novelTitleSegmentMode": "标题分段模式",
+  "novelTitleSubScale": "次行字号缩放",
+  "novelTitleSegmentSpacing": "标题与次行间距",
+  "novelTitleSubLineSpacing": "次行行距",
+  "novelTitleTopMargin": "标题上边距",
+  "novelTitleBottomMargin": "标题下边距",
+
+  "novelSectionHeaderFooter": "页眉与页脚",
+  "novelHeaderLeft": "页眉左",
+  "novelHeaderCenter": "页眉中",
+  "novelHeaderRight": "页眉右",
+  "novelFooterLeft": "页脚左",
+  "novelFooterCenter": "页脚中",
+  "novelFooterRight": "页脚右",
+  "novelHeaderFooterColor": "页眉页脚颜色",
+  "novelHeaderFooterMargin": "页眉页脚边距",
+
+  "novelHfPageAndProgress": "页码及进度",
+  "novelHfTimeAndBattery": "时间及电量",
+
+  "layoutDetailGroup": "布局细节",
+  "layoutProgressDisplay": "进度显示方式",
+  "progressBar": "进度条",
+  "progressText": "百分比",
+  "editRoute": "修改路由",
+  "routeTitle": "标题",
+  "routeUrl": "地址",
+  "routeSaved": "路由已保存",
+  "requiredHint": "此项为必填",
+  "localImportPickFile": "选择本地文件",
+  "sourceName": "名称",
+  "sourceBaseUrl": "基础地址",
+  "sourceCannotEdit": "内置源不可编辑",
+  "sourceCannotDelete": "内置源不可删除",
+  "comicVisualZoomGroup": "画面与缩放",
+  "comicPageProgressGroup": "页面与进度",
+  "generalSettingsGroup": "通用",
+  "launchScreenTitle": "启动界面",
+  "dateFormatTitle": "日期格式",
+  "dateFormatDefault": "默认（yyyy/mm/dd）",
+  "dateFormatMmDdYy": "mm/dd/yy",
+  "dateFormatDdMmYy": "dd/mm/yy",
+  "dateFormatYyyyMmDd": "yyyy-mm-dd",
+  "dateFormatDdMmmYyyy": "dd mmm yyyy",
+  "dateFormatMmmDd": "mmm dd",
+  "dateFormatYyyy": "yyyy",
+  "comicSettingsOverview": "当前设置概览",
+  "comicResetConfirm": "确定要将所有漫画阅读设置恢复为默认吗？此操作不可恢复。",
+  "on": "开",
+  "off": "关",
+  "readerGroupPageTap": "翻页与点击",
+  "readerGroupViewFilter": "画面与滤镜",
+  "readerGroupProgress": "进度与显示",
+  "readerGroupFlash": "闪屏效果",
+  "readerCommonSettings": "常用设置",
+  "readerSearchSettings": "搜索设置…"
+}

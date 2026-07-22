@@ -1,0 +1,99 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+
+# Generated local config (contains machine-specific paths)
+**/generated_plugin_registrant.*
+**/generated_plugins.cmake
+**/GeneratedPluginRegistrant.*
+**/Generated.xcconfig
+**/flutter_export_environment.sh
+android/local.properties
+linux/flutter/ephemeral/
+macos/Flutter/ephemeral/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# WorkBuddy local data
+.workbuddy/
+
+# Bundled Flutter SDK (extracted from flutter.zip, ~1GB — do not commit)
+sdk/
+
+# Installer build output
+/installer/
+
+# ===== 共创模式：内置源不入库 =====
+# 应用不内置/打包任何预备源；源由用户自行导入或在社区共享。
+# 这些源 JSON 仅保留在开发者本地，绝不进入公开仓库。
+plugins/builtin/*.json
+reference/
+
+# ===== 开发/探针/AI 工具产生的临时产物（不入库）=====
+.probe_tmp/
+.qoder/
+.trae/
+bz_author.html
+bz_detail.html
+goda_detail.html
+goda_detail2.html
+docs/anime_sources_probe_report.md
+
+# ===== 根目录开发/探针/临时脚本（不入库）=====
+net_check.*
+probe_*.txt
+probe_*.cmd
+probe_*.ps1
+probe_*.bat
+run_*.cmd
+run_*.ps1
+run_*.bat
+tmp_*.mjs
+
+# ===== 内部开发文档 / AI 提示词 / 重开发计划（不入库，仅保留架构基线说明）=====
+# 这些文件是私有开发过程产物（含旧项目 PlexHub 引用与重开发提示词），不进入公开仓库。
+PlexHub_AI重开发提示词.md
+docs/*
+!docs/ARCHITECTURE_BASELINE.md
+tools/scan_golden_sources.py
+tools/scan_golden_sources2.py

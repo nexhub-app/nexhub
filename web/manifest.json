@@ -1,0 +1,32 @@
+{
+    "name": "nexhub",
+    "short_name": "nexhub",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#5B9BD5",
+    "theme_color": "#5B9BD5",
+    "icons": [
+        {
+            "src": "icons/Icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-maskable-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "icons/Icon-maskable-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ]
+}

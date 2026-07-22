@@ -1,0 +1,2106 @@
+{
+  "@@locale": "en",
+  "appTitle": "NexHub",
+  "@appTitle": { "description": "Application title" },
+
+  "navBrowse": "Browse",
+  "navNovel": "Novel",
+  "navMedia": "Media",
+  "navComic": "Comic",
+  "navSettings": "Settings",
+  "homeTitle": "Browse",
+  "settingsTitle": "Settings",
+  "sourceManagementTitle": "Source Management",
+  "downloadSettingsTitle": "Download",
+  "downloadManagementTitle": "Download Management",
+  "aboutTitle": "About",
+  "themeTitle": "Appearance",
+
+  "tabLibrary": "Library",
+  "tabOnline": "Online",
+  "tabSubscribe": "Subscribe",
+  "tabSources": "Sources",
+
+  "browseLocalFiles": "Local Files",
+  "browseLocalFilesSubtitle": "Browse local novels, videos and comics",
+  "browseNetworkFiles": "Network Files",
+  "browseNetworkFilesSubtitle": "Browse HTTP file servers",
+  "browseWebScrape": "Web Scrape",
+  "browseWebScrapeSubtitle": "Extract novels, comics, videos or articles from the web",
+  "browseRss": "RSS Subscriptions",
+  "browseRssSubtitle": "Manage and browse RSS feeds",
+
+  "subTabLocal": "Local",
+  "subTabHistory": "History",
+  "subTabFavorite": "Favorites",
+
+  "filter": "Filter",
+  "filterTitle": "Filter",
+  "sortBy": "Sort by",
+  "sortRecent": "Recent",
+  "sortTitle": "Title",
+  "filterByStatus": "Status",
+  "filterByCategory": "Category",
+  "filterByProgress": "Progress",
+  "allLabel": "All",
+  "progressReading": "Reading",
+  "progressNotStarted": "Not started",
+  "filterReset": "Reset",
+  "filterApply": "Apply",
+  "play": "Play",
+  "readChapter": "Read",
+  "episodesWithLine": "Episodes · {line}",
+  "@episodesWithLine": {
+    "description": "Episode list header with selected line",
+    "placeholders": { "line": {} }
+  },
+  "recommendations": "You may also like",
+  "episodeN": "Episode {n}",
+  "@episodeN": {
+    "description": "Episode number label",
+    "placeholders": { "n": {} }
+  },
+  "cancel": "Cancel",
+  "confirm": "Confirm",
+  "delete": "Delete",
+  "save": "Save",
+  "import": "Import",
+  "export": "Export",
+  "close": "Close",
+  "search": "Search",
+  "retry": "Retry",
+  "ok": "OK",
+  "next": "Next",
+  "previous": "Previous",
+
+  "emptyLibrary": "Your library is empty",
+  "emptySearch": "No results found",
+  "emptyDownloads": "No downloads yet",
+  "emptySources": "No sources added",
+  "emptyBrowse": "Nothing here",
+  "emptyLocalNovel": "No local novels",
+  "emptyLocalMedia": "No local media",
+  "emptyLocalComic": "No local comics",
+  "emptyLocalNovelAction": "Import novel",
+  "emptyLocalMediaAction": "Import media",
+  "emptyLocalComicAction": "Import comic",
+  "loading": "Loading…",
+  "noResults": "No results",
+  "loadFailed": "Failed to load",
+  "noMoreResults": "No more results",
+  "authorColon": "Author: ",
+  "tagColon": "Tag: ",
+  "searchFailed": "Search failed, please retry",
+  "searching": "Searching…",
+  "updatedAt": "Updated {time}",
+  "@updatedAt": {
+    "description": "Last updated time label",
+    "placeholders": { "time": {} }
+  },
+  "statusOngoing": "Ongoing",
+  "statusCompleted": "Completed",
+  "deprecated": "Deprecated",
+  "mirrorSettings": "Mirror & stealth settings",
+  "stealthMode": "Stealth mode",
+  "gridView": "Grid view",
+  "listView": "List view",
+  "toggleLayout": "Toggle layout",
+  "all": "All",
+  "emptyCategory": "No content in this category",
+  "emptyContent": "No content yet",
+  "loadFailed": "Failed to load",
+  "contentExpired": "Content expired, please search again",
+  "sourceNotFound": "Source unavailable, please switch source or search again",
+  "onlineBrowse": "Online Browse",
+  "refreshList": "Refresh list",
+  "goToVerification": "Verify now",
+  "openSourceWebsite": "Open source site",
+
+  "errorGeneric": "Something went wrong",
+  "errorNetwork": "Network error, please try again",
+  "errorParse": "Failed to parse content",
+  "errorVerification": "Verification required, please complete the challenge",
+  "verificationFailed": "Verification failed, please retry later",
+  "errorVideoExpired": "Video link expired, please retry",
+  "danmaku": "Danmaku",
+  "danmakuSend": "Send danmaku",
+  "danmakuSendHint": "Enter danmaku text",
+
+  "themeLight": "Light",
+  "themeDark": "Dark",
+  "themeSystem": "System",
+  "useMonet": "Use dynamic color (Monet)",
+  "customColor": "Custom theme color",
+  "presetColor": "Preset colors",
+
+  "deleteConfirmTitle": "Delete confirmation",
+  "deleteConfirmContent": "Delete \"{name}\"? This cannot be undone.",
+  "@deleteConfirmContent": {
+    "description": "Delete confirmation dialog content",
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "deleteRecordOnly": "Delete record only",
+  "deleteRecordAndFile": "Delete record and files",
+
+  "addSource": "Add source",
+  "importSource": "Import source",
+  "exportSource": "Export source",
+  "aboutDescription": "NexHub — a four-in-one media aggregator (anime / manga / novel / film).",
+  "videoSourceLine": "Line",
+  "defaultLine": "Default",
+  "errorWebView": "WebView verification required",
+  "verifying": "Verifying…",
+  "mirrorTest": "Speed test",
+  "sourceHealthy": "Healthy",
+  "resolveTimeout": "Resolve timeout",
+  "resolveFailed": "Resolve failed: {message}",
+  "@resolveFailed": {
+    "description": "Source resolve failure message",
+    "placeholders": { "message": {} }
+  },
+  "categories": "Categories",
+
+  "chapterN": "Ch. {n}",
+  "@chapterN": {
+    "description": "Chapter number label for manga",
+    "placeholders": { "n": {} }
+  },
+  "pageIndicator": "Page {cur} / {total}",
+  "@pageIndicator": {
+    "description": "Reader page indicator",
+    "placeholders": { "cur": {}, "total": {} }
+  },
+  "readerDoublePageIndicator": "{first}-{last} / {total}",
+  "@readerDoublePageIndicator": {
+    "description": "Reader double-page spread indicator",
+    "placeholders": { "first": {}, "last": {}, "total": {} }
+  },
+  "prevChapter": "Prev chapter",
+  "nextChapter": "Next chapter",
+  "readerSettings": "Reader settings",
+  "readerMode": "Reading mode",
+  "readerBackground": "Background",
+  "readerOrientation": "Orientation",
+  "readerTapZone": "Tap zones",
+  "readerZoom": "Double-tap zoom",
+  "noImages": "No readable images in this chapter",
+  "preloading": "Preloading next chapter…",
+  "readerModeSingleLTR": "Single page (L→R)",
+  "readerModeSingleRTL": "Single page (R→L)",
+  "readerModeSingleVertical": "Single page (vertical)",
+  "readerModeWebtoon": "Webtoon",
+  "readerModeWebtoonWithGap": "Webtoon (with gap)",
+  "readerOrientationDefault": "Default",
+  "readerOrientationSystem": "Follow system",
+  "readerOrientationPortrait": "Portrait",
+  "readerOrientationLandscape": "Landscape",
+  "readerOrientationLockPortrait": "Lock portrait",
+  "readerOrientationLockLandscape": "Lock landscape",
+  "readerOrientationReversePortrait": "Reverse portrait",
+  "readerBgBlack": "Black",
+  "readerBgGray": "Gray",
+  "readerBgDarkGray": "Dark gray",
+  "readerBgEyeCare": "Eye care",
+  "readerBgParchment": "Parchment",
+  "readerBgWarmLinen": "Warm linen",
+  "readerBgLightBrown": "Light brown",
+  "readerBgBeanGreen": "Bean green",
+  "readerBgMint": "Mint",
+  "readerBgApricot": "Apricot",
+  "readerBgGrayBlue": "Gray blue",
+  "readerBgWhite": "White",
+  "readerBgAuto": "Auto",
+  "readerTapLeftRight": "Left/Right",
+  "readerTapLShape": "L-shape",
+  "readerTapKindle": "Kindle",
+  "readerTapBothSides": "Both sides",
+  "readerTapOff": "Off",
+  "readerTapInvert": "Tap invert",
+  "readerTapInvertNone": "None",
+  "readerTapInvertLeftRight": "Left/Right",
+  "readerTapInvertUpDown": "Up/Down",
+  "readerTapInvertAll": "All",
+  "readerSideMargin": "Side margin",
+  "readerFlashEnabled": "Page-turn flash",
+  "readerFlashTime": "Flash duration",
+  "readerFlashInterval": "Flash delay",
+  "readerFlashColor": "Flash color",
+  "readerFlashBlack": "Black",
+  "readerFlashWhite": "White",
+  "readerFlashBlackWhite": "Black→White",
+  "readerTapPreviewHint": "Tap zone preview (live)",
+  "tapPreviewPrev": "Prev page",
+  "tapPreviewNext": "Next page",
+  "tapPreviewToggle": "Toggle",
+  "filterInverted": "Invert",
+  "favorite": "Favorite",
+  "moreActions": "More",
+
+  "demoNormal": "Default view",
+  "demoEmpty": "Show empty state",
+  "demoError": "Show error state",
+
+  "noContent": "No content in this chapter",
+  "novelFontSize": "Font size",
+  "novelLineHeight": "Line height",
+  "novelParagraphSpacing": "Paragraph spacing",
+  "novelMargin": "Margin",
+  "novelPageAnimation": "Page animation",
+  "novelTextShadow": "Text shadow",
+  "novelAnimNone": "None",
+  "novelAnimSlide": "Slide",
+  "novelAnimScroll": "Scroll",
+  "novelAnimFade": "Fade",
+  "novelAnimCover": "Cover",
+  "novelAnimSimulation": "Simulation",
+  "novelHfNone": "None",
+  "novelHfTime": "Time",
+  "novelHfBattery": "Battery",
+  "novelHfChapterTitle": "Chapter title",
+  "novelHfBookName": "Book name",
+  "novelHfPageNumber": "Page number",
+  "novelHfProgressPercent": "Progress %",
+  "novelChapterN": "Chapter {n}",
+  "@novelChapterN": {
+    "description": "Novel chapter number label",
+    "placeholders": { "n": {} }
+  },
+
+  "download": "Download",
+  "downloads": "Downloads",
+  "downloadListTitle": "Downloads",
+  "downloadedContent": "Downloaded",
+  "downloadSettings": "Download Settings",
+  "emptyDownloadList": "No active downloads",
+  "emptyDownloaded": "No downloaded content",
+  "clearAll": "Clear All",
+  "clearAllConfirm": "Clear all download records? Downloaded files will not be deleted.",
+  "clearHistory": "Clear History",
+  "clearHistoryConfirm": "Clear all browsing history for this module? This cannot be undone.",
+  "historyCleared": "History cleared",
+  "batchPause": "Batch Pause",
+  "batchResume": "Batch Resume",
+  "deleteSelected": "Delete Selected",
+  "deleteSelectedConfirm": "Delete the {count} selected download records?",
+  "pause": "Pause",
+  "selectAll": "Select All",
+  "select": "Select",
+  "deleteConfirm": "Delete selected downloads?",
+  "statusPending": "Pending",
+  "statusDownloading": "Downloading",
+  "statusPaused": "Paused",
+  "statusFailed": "Failed",
+  "statusWaitingForWifi": "Waiting for Wi-Fi",
+  "statusCompleted": "Completed",
+  "statusCancelled": "Cancelled",
+  "downloadWifiOnly": "Wi-Fi only downloads",
+  "downloadWifiOnlyHint": "Start downloads only when connected to Wi-Fi",
+  "comicDownloadFormat": "Comic Download Format",
+  "novelDownloadFormat": "Novel Download Format",
+  "formatCbz": "CBZ Archive",
+  "formatCbzSubtitle": "All images packed into a single .cbz file",
+  "formatFolder": "Image Folder",
+  "formatFolderSubtitle": "One folder per chapter with loose images",
+  "formatEpub": "EPUB eBook",
+  "formatEpubSubtitle": "Standard eBook format with table of contents",
+  "formatTxt": "TXT Plain Text",
+  "formatTxtSubtitle": "Plain text format, widest compatibility",
+
+  "emptyHistory": "No browsing history",
+  "emptyFavorites": "No favorites yet",
+  "emptyRssFeeds": "No RSS feeds",
+  "emptyRssItems": "No articles",
+  "addRssFeed": "Add RSS Feed",
+  "rssFeedTitle": "Title",
+  "rssFeedTitleHint": "Custom title (optional)",
+  "opening": "Opening",
+
+  "verificationRequired": "Verification Required",
+  "verificationHint": "This content requires web verification. Tap the button below to complete verification in your browser, then return and retry.",
+  "openInBrowser": "Open in external browser",
+  "verificationDone": "Verification Done, Retry",
+  "webViewNotAvailable": "In-app browser is not available on this platform. Please use an external browser to complete verification.",
+  "extractFromPage": "Extract from this page",
+  "@extractFromPage": {
+    "description": "Button: run jsExtractor inside the embedded WebView to extract the real URL"
+  },
+  "extractHint": "After completing verification on the page, tap \"Extract from this page\" to auto-extract the content URL. Falls back to manual browser verification on failure.",
+  "@extractHint": {
+    "description": "Hint shown above the extract button in the embedded WebView verification screen"
+  },
+  "extracting": "Extracting…",
+  "@extracting": {
+    "description": "Loading text while jsExtractor is being evaluated inside the WebView"
+  },
+  "extractSuccess": "Extraction succeeded",
+  "@extractSuccess": {
+    "description": "Toast when jsExtractor returns a valid URL"
+  },
+  "extractNoResult": "Nothing extracted, please retry or verify manually",
+  "@extractNoResult": {
+    "description": "Error shown when jsExtractor returns nothing usable"
+  },
+  "extractFailed": "Extraction failed",
+  "@extractFailed": {
+    "description": "Error prefix when jsExtractor evaluation throws"
+  },
+  "captureFromPage": "Capture rendered page",
+  "@captureFromPage": {
+    "description": "Button: capture the JS-rendered HTML of the embedded WebView and parse it with the source selectors"
+  },
+  "captureHint": "Once the page finishes rendering, tap \"Capture rendered page\" to parse the list/detail with the existing selectors. No manual script needed.",
+  "@captureHint": {
+    "description": "Hint shown above the capture button in the render-after-extract WebView screen"
+  },
+  "capturing": "Capturing…",
+  "@capturing": {
+    "description": "Loading text while the rendered HTML is being captured from the WebView"
+  },
+  "snifferTitle": "Video Sniffer",
+  "@snifferTitle": {
+    "description": "Title of the video sniffer screen"
+  },
+  "snifferAddressHint": "Open a video page to sniff",
+  "@snifferAddressHint": {
+    "description": "Placeholder of the address bar in the video sniffer"
+  },
+  "snifferHint": "Open a video page; dynamically loaded m3u8/mp4 streams are auto-detected below.",
+  "@snifferHint": {
+    "description": "Hint shown in the video sniffer results area"
+  },
+  "snifferNoResult": "No video stream detected yet",
+  "@snifferNoResult": {
+    "description": "Empty state of the video sniffer results list"
+  },
+  "snifferCopy": "Copy",
+  "@snifferCopy": {
+    "description": "Copy a sniffed video URL"
+  },
+  "snifferPlay": "Play",
+  "@snifferPlay": {
+    "description": "Play a sniffed video URL with the built-in player"
+  },
+  "snifferClear": "Clear list",
+  "@snifferClear": {
+    "description": "Clear the sniffed video URL list"
+  },
+  "share": "Share",
+  "shareCopied": "Copied to clipboard",
+  "browserTitle": "Browser",
+  "browserAddressHint": "Enter URL or search",
+  "browserBack": "Back",
+  "browserForward": "Forward",
+  "browserRefresh": "Refresh",
+  "browserCopyLink": "Copy link",
+  "browserShare": "Share",
+  "browserLinkCopied": "Link copied",
+  "browserUseAsVerification": "Use this page for verification",
+  "@browserUseAsVerification": {
+    "description": "Menu item: sync current page cookies to HttpFetcher as verification fallback"
+  },
+  "browserOpenSniffer": "Video sniffer mode",
+  "@browserOpenSniffer": {
+    "description": "Menu item: open the video sniffer to intercept dynamically loaded streams"
+  },
+  "browserUseAsVerificationDone": "Verification completed using this page's cookies",
+  "@browserUseAsVerificationDone": {
+    "description": "Snackbar shown after cookies are synced from the built-in browser"
+  },
+  "browserNotAvailable": "The built-in browser is not available on this platform. Please use an external browser.",
+  "@browserNotAvailable": {
+    "description": "Shown when InAppWebView is unavailable (e.g. on Web)"
+  },
+  "openInternalBrowser": "Open built-in browser",
+  "@openInternalBrowser": {
+    "description": "Button: open the in-app HttpBrowserScreen for verification"
+  },
+  "downloadStarted": "Download started",
+  "downloadEpisodes": "Download Episodes",
+  "episodeRange": "Episode Range",
+  "addToDownload": "Add to Download",
+  "deselectAll": "Deselect All",
+  "selectedCount": "Selected {selected}/{total}",
+  "@selectedCount": {
+    "description": "Selected episode count",
+    "placeholders": { "selected": {}, "total": {} }
+  },
+  "rangeStart": "Start",
+  "rangeEnd": "End",
+  "applyRange": "Apply",
+  "alreadyDownloaded": "Already downloaded",
+  "favoriteAdded": "Added to favorites",
+  "favoriteRemoved": "Removed from favorites",
+  "aboutApp": "About App",
+  "appVersion": "Version",
+  "clearCache": "Clear Cache",
+  "cacheCleared": "Cache cleared",
+  "privacySettings": "Privacy Settings",
+  "stealthSettings": "Stealth Settings",
+
+  "browseLocalTitle": "Local Files",
+  "browseLocalEmpty": "No readable local files found",
+  "browseLocalScan": "Scan Files",
+  "browseLocalFileTypeAll": "All",
+  "browseLocalFileTypeNovel": "Novel",
+  "browseLocalFileTypeComic": "Comic",
+  "browseLocalFileTypeVideo": "Video",
+  "browseLocalSelectFolder": "Select Folder",
+  "browseNetworkTitle": "Network Files",
+  "browseNetworkUrlHint": "Enter HTTP file server address",
+  "browseNetworkConnect": "Connect",
+  "browseNetworkEmpty": "No files found",
+  "browseNetworkHistory": "History",
+  "browseNetworkParentDir": "Parent directory",
+  "browseNetworkFileSize": "Size",
+  "scrapeModeGeneral": "General",
+  "scrapeModeNovel": "Novel",
+  "scrapeModeComic": "Comic",
+  "scrapeModeVideo": "Video",
+  "scrapeModeArticle": "Article",
+  "scrapeUrlHint": "Enter URL to scrape",
+  "scrapeStart": "Start Scraping",
+  "scrapeResultTitle": "Page Title",
+  "scrapeResultLinks": "All Links",
+  "scrapeResultText": "Body Text",
+  "scrapeResultImages": "Images",
+  "scrapeResultVideos": "Videos",
+  "scrapeOpenInReader": "Open in Reader",
+  "scrapeOpenInPlayer": "Open in Player",
+  "scrapeNoResults": "No content extracted",
+  "scrapeSelectorHint": "CSS selector (optional)",
+  "scrapeAdvanced": "Advanced",
+  "rssFeedUrl": "Feed URL",
+  "rssFeedUrlHint": "https://example.com/feed.xml",
+  "rssFeedDescription": "Description",
+  "rssFeedModule": "Module",
+  "rssFeedModuleNone": "Global (Browse)",
+  "rssFeedTestConnection": "Test Connection",
+  "rssFeedTesting": "Testing…",
+  "rssFeedTestSuccess": "Connection successful",
+  "rssFeedTestFailed": "Connection failed",
+  "rssFeedPreview": "Preview",
+  "rssFeedSaved": "Feed saved",
+  "articleDetailAuthor": "Author",
+  "articleDetailPublishedAt": "Published",
+  "articleDetailReadFull": "Read Full Article",
+  "articleDetailSource": "Source",
+  "articleDetailEmpty": "Article has no content",
+  "articleReadingSettings": "Reading Settings",
+  "articleFontSize": "Font Size",
+  "articleLineHeight": "Line Height",
+  "articleNightMode": "Night Mode",
+  "mirrorListTitle": "Mirror List",
+  "mirrorTesting": "Testing…",
+  "mirrorTestResultMs": "{ms} ms",
+  "@mirrorTestResultMs": {
+    "description": "Mirror speed test result (ms)",
+    "placeholders": { "ms": {} }
+  },
+  "mirrorTestFailed": "Failed",
+  "mirrorCurrent": "Current",
+  "mirrorSwitched": "Mirror switched",
+  "mirrorStealthLocked": "Stealth mode is locked on",
+  "mirrorNoMirrors": "No mirrors configured",
+  "collectApiImportTitle": "Collect API Import",
+  "collectApiUrlHint": "https://example.com/api.php/provide/vod/",
+  "collectApiDetect": "Detect",
+  "collectApiDetecting": "Detecting…",
+  "collectApiDetectSuccess": "Detection successful",
+  "collectApiDetectFailed": "Detection failed",
+  "collectApiSiteName": "Site Name",
+  "collectApiCategories": "Categories",
+  "collectApiPreview": "Content Preview",
+  "collectApiSourceName": "Source Name",
+  "collectApiSourceId": "Source ID",
+  "collectApiSave": "Save Source",
+  "collectApiSaved": "Source saved",
+  "collectApiInvalidUrl": "Invalid URL",
+  "sourceImportFromUrl": "Import from URL",
+  "sourceImportFromFile": "Import from File",
+  "sourceImportFromJson": "Enter JSON Manually",
+  "sourceImportUrlHint": "URL of source JSON",
+  "sourceImportFilePicker": "Select JSON File",
+  "sourceImportJsonHint": "Paste source JSON config",
+  "sourceImportValidate": "Validate",
+  "sourceImportValid": "Validation passed",
+  "sourceImportInvalid": "Validation failed",
+  "sourceImportErrors": "Errors",
+  "sourceImportCollectApiDetected": "MacCMS Collect API detected",
+  "sourceImportCollectApiRedirect": "Use Collect API Import",
+  "sourceImportSaved": "Source imported",
+  "contentImportTitle": "Import Content",
+  "contentImportSelectFile": "Select File",
+  "contentImportSupportedFormats": "Supported Formats",
+  "contentImportHistory": "Import History",
+  "contentImportEmpty": "No imports yet",
+  "contentImportOpened": "Opened",
+  "contentImportNovelFormats": ".txt, .epub",
+  "contentImportComicFormats": ".cbz, image folder",
+  "contentImportMediaFormats": ".mp4, .mkv, .avi",
+  "downloadedGroupChapters": "Chapters",
+  "downloadedGroupFormat": "Format",
+  "downloadedGroupOpen": "Open",
+  "downloadedGroupFileMissing": "File not found",
+  "downloadedGroupDeleteConfirm": "Delete this download?",
+
+  "browsePageTitle": "Browse",
+  "rssSubscribeTitle": "RSS Subscriptions",
+  "emptyRssSubscribe": "No RSS subscriptions yet",
+  "addSubscription": "Add Subscription",
+  "subscribeAddressLabel": "Subscribe URL",
+  "rsshubRoutesTitle": "RSSHub Routes",
+  "rsshubRouteRecommend": "RSSHub Route Recommendations",
+  "rsshubRouteHint": "Tap a route to auto-fill with RSSHub instance URL",
+
+  "novelLibraryName": "Novel Library",
+  "mediaLibraryName": "Media Library",
+  "comicLibraryName": "Comic Library",
+  "emptySubscribe": "No subscriptions",
+
+  "sourceListTab": "Source List",
+  "networkImportTab": "Network Import",
+  "localImportTab": "Local Import",
+  "sourceListEmpty": "No sources",
+  "networkImportHint": "Paste source URL (.json/.txt)",
+  "networkImportPasteHint": "Paste URL and tap to fetch",
+  "localImportTitle": "Import from Local File",
+  "localImportFormats": "Supports .json, .txt, .xml",
+  "selectFile": "Select File",
+  "selectFolder": "Select Folder",
+  "noLocalSource": "No source files found",
+  "localImportHint": "Pick a single file or a folder to scan for source files (.json/.txt/.xml)",
+  "importPreviewTitle": "{count} files found",
+  "@importPreviewTitle": {
+    "description": "Import preview title showing number of scanned files",
+    "placeholders": { "count": {} }
+  },
+  "confirmImport": "Confirm Import",
+  "@confirmImport": {
+    "description": "Button to confirm importing selected sources"
+  },
+  "importSelectedCount": "{count} selected",
+  "@importSelectedCount": {
+    "description": "Label showing count of selected items for import",
+    "placeholders": { "count": {} }
+  },
+  "importTypeOnly": "Only {type} sources will be imported",
+  "@importTypeOnly": {
+    "description": "Banner in local import preview when importing on a type-specific source page",
+    "placeholders": { "type": {} }
+  },
+  "importTypeFiltered": "{count} other-type source(s) skipped",
+  "@importTypeFiltered": {
+    "description": "Suffix in local import preview banner showing how many other-type sources were skipped",
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "importNoMatchingType": "No {type} sources found in the selection ({count} other-type source(s) skipped)",
+  "@importNoMatchingType": {
+    "description": "Snackbar when a type-specific import found no matching-type sources",
+    "placeholders": {
+      "type": {},
+      "count": { "type": "int" }
+    }
+  },
+  "sourceImportResult": "Imported {success}/{total} sources",
+  "@sourceImportResult": {
+    "description": "Snackbar after batch import showing success/total count",
+    "placeholders": {
+      "success": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+
+  "settingsGroupDownload": "Download Management",
+  "settingsGroupTools": "Tools",
+  "settingsGroupPlugins": "Plugins",
+  "settingsGroupData": "Data",
+  "settingsGroupPlayback": "Playback & Reading",
+  "settingsGroupContentSources": "Content Sources",
+  "settingsGroupSubscriptions": "Subscriptions & Notifications",
+  "settingsGroupDownloadsData": "Downloads & Data",
+  "webScrapeSetting": "Web Scraping",
+  "webScrapeSettingSameAsBrowse": "Same as browse page web scraping",
+  "subscriptionManagement": "Subscription Management",
+  "subscriptionManagementDesc": "Unified management by type, manage RSS subscriptions",
+  "rsshubInstance": "RSSHub Instance",
+  "rsshubInstanceDesc": "Self-hosted RSSHub address",
+  "rsshubSettingsTitle": "RSSHub Settings",
+  "rssNotifications": "RSS update notifications",
+  "rssNotificationsDesc": "Detect new items in subscriptions",
+  "rssNotificationsTitle": "RSS Update Notifications",
+  "rssNotificationEnabled": "Enable update detection",
+  "rssNotificationEnabledSubtitle": "Poll subscriptions periodically while in foreground",
+  "rssUpdateInterval": "Check interval",
+  "interval15m": "15 minutes",
+  "interval30m": "30 minutes",
+  "interval1h": "1 hour",
+  "interval2h": "2 hours",
+  "interval4h": "4 hours",
+  "rssCheckNow": "Check now",
+  "rssTotalNewCount": "Unread: {count}",
+  "@rssTotalNewCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "rssCheckDone": "Check complete",
+  "rssNotificationHint": "Polls only while the app is in foreground; new items show an unread count badge on the feed card.",
+  "currentInstance": "Current Instance",
+  "presetInstances": "Preset Instances",
+  "presetInstanceOfficial": "Official",
+  "customInstance": "Custom Instance",
+  "restoreDefault": "Restore Default",
+  "rsshubTestAll": "Test all",
+  "rsshubTestingAll": "Testing all instances…",
+  "rsshubTestAllDone": "Tested {count} instances",
+  "saveCustomInstance": "Save Custom",
+  "instanceTestFail": "Test failed",
+  "instanceTestSuccess": "Connection successful",
+  "rsshubTroubleshoot": "Troubleshooting",
+  "rsshubTroubleshootHint": "If you encounter issues:\n• Ensure the address is accessible and not blocked by firewall\n• Try switching to a different preset instance\n• Self-hosted users please check if service is running normally",
+  "danmakuSettings": "DanDanPlay Danmaku",
+  "danmakuSettingsDesc": "Danmaku configuration",
+  "danmakuConfigTitle": "DanDanPlay Danmaku Config",
+  "unconfigured": "Unconfigured",
+  "configured": "Configured",
+  "appIdLabel": "AppId",
+  "appIdHint": "Enter AppId",
+  "appSecretLabel": "AppSecret",
+  "appSecretHint": "Enter AppSecret",
+  "saveDanmaku": "Save",
+  "danmakuDesc": "Get your AppId and AppSecret from https://daplay.danmaku.net. After configuration, danmaku will appear in the player.",
+  "pluginManagement": "Manage Plugins",
+  "dataImportExport": "Import/Export",
+  "dataImportExportTitle": "Import/Export",
+  "importData": "Import Data",
+  "importDataDesc": "Import subscriptions, plugins and progress",
+  "exportData": "Export Data",
+  "exportDataDesc": "Export all data to file",
+  "exportSubscription": "Export Subscriptions",
+  "exportSubscriptionDesc": "Export only RSS subscriptions",
+  "exportPlugins": "Export Plugins",
+  "exportPluginsDesc": "Export plugin configurations",
+  "selectExportFolder": "Select Export Folder",
+  "exportFolderCustom": "Custom export folder supported",
+  "downloadListTab": "Download List",
+  "downloadedListTab": "Downloaded",
+  "maxConcurrentDownloads": "Max Concurrent Downloads",
+  "maxConcurrentDownloadsDesc": "Number of simultaneous downloads",
+  "downloadPath": "Download Path",
+  "downloadPathDesc": "D:/Downloads",
+  "downloaderType": "Downloader",
+  "downloaderInternal": "Built-in Downloader",
+  "downloaderExternal": "External Downloader",
+  "threadCount": "Thread Count",
+  "threadCountDesc": "Number of download threads",
+  "comicFormatSetting": "Comic Format",
+  "novelFormatSetting": "Novel Format",
+  "downloadTabsAll": "All",
+  "downloadTabsNovel": "Novel",
+  "downloadTabsMedia": "Media",
+  "downloadTabsComic": "Comic",
+  "downloadedTabsAll": "All",
+  "downloadedTabsNovel": "Novel",
+  "downloadedTabsMedia": "Media",
+  "downloadedTabsComic": "Comic",
+  "downloadedTabsArchived": "Archived",
+  "noDownloads": "No downloads",
+
+  "downloadPause": "Pause",
+  "downloadResume": "Resume",
+  "sourceCategoryNovel": "Novel",
+  "sourceCategoryMedia": "Media",
+  "sourceCategoryComic": "Comic",
+  "sourceCategoryEmpty": "No {category} sources",
+  "@sourceCategoryEmpty": {
+    "description": "Empty state message for a source category tab",
+    "placeholders": { "category": {} }
+  },
+  "rsshubLatencyMs": "{ms}ms",
+  "@rsshubLatencyMs": {
+    "description": "RSSHub instance latency in milliseconds",
+    "placeholders": { "ms": {} }
+  },
+  "rsshubLatencyFailed": "Failed",
+  "downloaderSelectTitle": "Downloader Selection",
+  "comicFormatSelectTitle": "Comic Format",
+  "comicFormatJpg": "Single Page JPG",
+  "comicFormatPng": "Single Page PNG",
+  "comicFormatCbz": "CBZ Archive",
+  "novelFormatSelectTitle": "Novel Format",
+  "novelFormatTxt": "TXT",
+  "novelFormatEpub": "EPUB",
+
+  "rsshubRouteBilibiliBangumi": "Bilibili Bangumi",
+  "rsshubRouteBilibiliBangumiPath": "/bilibili/bangumi/media/:mediaid",
+  "rsshubRouteBilibiliMangaUpdate": "Bilibili Manga Update",
+  "rsshubRouteBilibiliMangaUpdatePath": "/bilibili/manga/update/:comicid",
+  "rsshubRouteBilibiliUserVideo": "Bilibili User Videos",
+  "rsshubRouteBilibiliUserVideoPath": "/bilibili/user/video/:uid",
+  "rsshubRouteBilibiliRanking": "Bilibili Ranking",
+  "rsshubRouteBilibiliRankingPath": "/bilibili/partion/ranking/:tid/:days?",
+  "rsshubRouteYoutubeChannel": "YouTube Channel",
+  "rsshubRouteYoutubeChannelPath": "/youtube/channel/:id",
+  "rsshubRouteTwitterUser": "Twitter User",
+  "rsshubRouteLinovelib": "Linovelib",
+  "rsshubRouteSfacg": "SFACG",
+
+  "importMediaTitle": "Import Media",
+  "importMediaFormatsHint": "Supports mp4, mkv, avi, mov and common video formats",
+  "importMediaPickFile": "Select Video File",
+  "importMediaPickFolder": "Select Video Folder",
+  "importNovelTitle": "Import Novel",
+  "importNovelFormatsHint": "Supports .txt and .epub formats",
+  "importNovelPickFile": "Select File",
+  "importNovelPickFolder": "Select Folder",
+  "importComicTitle": "Import Comic",
+  "importComicFormatsHint": "Supports cbz, cbr, cbt and common comic archive formats",
+  "importComicPickFile": "Select Comic File",
+  "importComicPickFolder": "Select Comic Folder",
+
+  "novelBrightness": "Brightness",
+
+  "playerLock": "Lock",
+  "playerUnlock": "Unlock",
+  "playerAutoPlayNext": "Auto-play next",
+  "playerDecodeMode": "Decode mode",
+  "playerDecodeAuto": "Auto",
+  "playerDecodeSw": "Software",
+  "playerDecodeHw": "Hardware",
+  "playerDecodeHwPlus": "Hardware+",
+  "playerAudioChannel": "Audio channel",
+  "playerAudioStereo": "Stereo",
+  "playerAudioMono": "Mono",
+  "playerAudioAutoProtect": "Auto-protect",
+  "playerAudioReverseStereo": "Reverse stereo",
+  "playerAspectRatio": "Aspect ratio",
+  "playerAspectDefault": "Default",
+  "playerAspectFill": "Fill",
+  "playerAspect43": "4:3",
+  "playerAspect169": "16:9",
+  "playerPlaybackSpeed": "Playback speed",
+  "playerSubtitle": "Subtitle",
+  "playerSubtitleSettings": "Subtitle settings",
+  "playerSubtitleDelay": "Subtitle delay (ms)",
+  "playerFontSize": "Font size",
+  "playerSubtitleOutline": "Subtitle outline",
+  "playerTimer": "Sleep timer",
+  "playerPlayInfo": "Play info",
+  "playerExternalPlay": "External play",
+  "playerVideoExpired": "Video link expired, please retry",
+  "playerStallDetected": "Playback stalled, reconnecting…",
+  "playerRetry": "Retry",
+  "playerNextEpisode": "Next episode",
+  "playerPreviousEpisode": "Previous episode",
+  "playerShare": "Share",
+
+  "danmakuFilterKeywords": "Filter keywords",
+  "danmakuTimeOffset": "Time offset (s)",
+  "danmakuArea": "Display area",
+  "danmakuDuration": "Duration (s)",
+  "danmakuLineHeight": "Line height",
+  "danmakuHideTop": "Hide top",
+  "danmakuHideBottom": "Hide bottom",
+  "danmakuHideScroll": "Hide scroll",
+  "danmakuFollowSpeed": "Follow playback speed",
+  "danmakuAddKeyword": "Add keyword",
+  "danmakuKeywordHint": "Enter keyword or regex",
+  "danmakuSearch": "Search danmaku",
+  "danmakuSearchHint": "Enter anime name to search",
+  "danmakuMatchEpisode": "Match episode",
+  "danmakuNoResult": "No results",
+  "danmakuLoadFailed": "Failed to load danmaku",
+  "danmakuLoaded": "Danmaku loaded",
+  "danmakuCacheHit": "Danmaku cached",
+
+  "danmakuSourceTitle": "Danmaku Source",
+  "@danmakuSourceTitle": {
+    "description": "Danmaku source selection sheet title"
+  },
+  "danmakuSourceHint": "Choose danmaku source",
+  "@danmakuSourceHint": {
+    "description": "Subtitle hint on the danmaku source sheet"
+  },
+  "danmakuSourceDandanplay": "dandanplay",
+  "@danmakuSourceDandanplay": {
+    "description": "dandanplay danmaku source option"
+  },
+  "danmakuSourceBilibili": "bilibili",
+  "@danmakuSourceBilibili": {
+    "description": "bilibili danmaku source option"
+  },
+  "danmakuSourceOff": "Off",
+  "@danmakuSourceOff": {
+    "description": "Disable danmaku source option"
+  },
+  "danmakuSourceDandanplayDesc": "Auto-match by anime title",
+  "@danmakuSourceDandanplayDesc": {
+    "description": "dandanplay source description"
+  },
+  "danmakuSourceBilibiliDesc": "Match by video av/BV id",
+  "@danmakuSourceBilibiliDesc": {
+    "description": "bilibili source description"
+  },
+  "danmakuSourceOffDesc": "No danmaku",
+  "@danmakuSourceOffDesc": {
+    "description": "Disabled danmaku source description"
+  },
+
+  "danmakuDisplaySettingsTitle": "Danmaku Display Settings",
+  "@danmakuDisplaySettingsTitle": {
+    "description": "Danmaku display settings entry title"
+  },
+  "danmakuDisplaySettingsDesc": "Font size, opacity, time offset, etc.",
+  "@danmakuDisplaySettingsDesc": {
+    "description": "Danmaku display settings entry description"
+  },
+  "danmakuFontSize": "Font Size",
+  "@danmakuFontSize": {
+    "description": "Danmaku font size"
+  },
+  "danmakuOpacity": "Opacity",
+  "@danmakuOpacity": {
+    "description": "Danmaku opacity"
+  },
+  "playerSettingsTitle": "Player Settings",
+  "@playerSettingsTitle": {
+    "description": "Player settings title"
+  },
+  "playerSettingsDesc": "Decode mode, aspect ratio, playback speed, etc.",
+  "@playerSettingsDesc": {
+    "description": "Player settings description"
+  },
+  "playerDefaultDecodeMode": "Default Decode Mode",
+  "@playerDefaultDecodeMode": {
+    "description": "Default decode mode"
+  },
+  "playerDefaultAudioChannel": "Default Audio Channel",
+  "@playerDefaultAudioChannel": {
+    "description": "Default audio channel"
+  },
+  "playerDefaultAspectRatio": "Default Aspect Ratio",
+  "@playerDefaultAspectRatio": {
+    "description": "Default aspect ratio"
+  },
+  "playerDefaultSpeed": "Default Playback Speed",
+  "@playerDefaultSpeed": {
+    "description": "Default playback speed"
+  },
+  "playerDefaultAutoPlay": "Default Auto-play Next",
+  "@playerDefaultAutoPlay": {
+    "description": "Default auto-play next"
+  },
+  "playerSubtitleFontSize": "Subtitle Font Size",
+  "@playerSubtitleFontSize": {
+    "description": "Subtitle font size"
+  },
+  "subtitleTitle": "Subtitles",
+  "@subtitleTitle": {
+    "description": "Subtitle panel title"
+  },
+  "subtitleOffset": "Offset",
+  "@subtitleOffset": {
+    "description": "Subtitle offset slider label"
+  },
+  "subtitleShow": "Show subtitles",
+  "@subtitleShow": {
+    "description": "Subtitle visibility switch label"
+  },
+  "subtitleNone": "Off",
+  "@subtitleNone": {
+    "description": "Option to disable subtitles"
+  },
+  "subtitleNoTracks": "No subtitle tracks available",
+  "@subtitleNoTracks": {
+    "description": "Shown when no subtitle tracks are available"
+  },
+  "subtitleStyleTitle": "Subtitle Style",
+  "subtitleFontSize": "Font Size",
+  "subtitleScale": "Scale",
+  "subtitleBorderSize": "Border Width",
+  "subtitleShadowOffset": "Shadow Offset",
+  "subtitleTextColor": "Text Color",
+  "subtitleBorderColorLabel": "Border Color",
+  "subtitleShadowColorLabel": "Shadow Color",
+  "subtitlePosition": "Position",
+  "subtitleAssOverride": "Override ASS/SSA Style",
+  "subtitleTrackN": "Track {n}",
+  "@subtitleTrackN": {
+    "description": "Fallback subtitle track label using its id",
+    "placeholders": { "n": {} }
+  },
+  "readerSettingsTitle": "Reader Settings",
+  "@readerSettingsTitle": {
+    "description": "Reader settings title"
+  },
+  "readerSettingsDesc": "Reading mode, background, orientation, etc.",
+  "@readerSettingsDesc": {
+    "description": "Reader settings description"
+  },
+  "readerGeneralGroup": "General Reading Preferences",
+  "@readerGeneralGroup": {
+    "description": "Reader settings: general reading preferences"
+  },
+  "novelReaderSettingsTitle": "Novel Reader Settings",
+  "@novelReaderSettingsTitle": {
+    "description": "Novel reader default settings title"
+  },
+  "novelReaderSettingsDesc": "Font size, line height, spacing, margin, background",
+  "@novelReaderSettingsDesc": {
+    "description": "Novel reader default settings description"
+  },
+  "comicReaderSettingsTitle": "Comic Reader Settings",
+  "@comicReaderSettingsTitle": {
+    "description": "Comic reader default settings title"
+  },
+  "comicReaderSettingsDesc": "Direction, tap zone, filter, zoom & gesture",
+  "@comicReaderSettingsDesc": {
+    "description": "Comic reader default settings description"
+  },
+  "novelTypographyGroup": "Novel Typography",
+  "@novelTypographyGroup": {
+    "description": "Novel default: typography"
+  },
+  "novelParagraphSpacing": "Paragraph Spacing",
+  "@novelParagraphSpacing": {
+    "description": "Novel paragraph spacing"
+  },
+  "novelMargin": "Margin",
+  "@novelMargin": {
+    "description": "Novel margin"
+  },
+  "novelShadow": "Text Shadow",
+  "@novelShadow": {
+    "description": "Novel text shadow"
+  },
+  "novelBackgroundPreset": "Background Preset",
+  "@novelBackgroundPreset": {
+    "description": "Novel background preset"
+  },
+  "novelPageAnimation": "Page Animation",
+  "@novelPageAnimation": {
+    "description": "Novel page turn animation"
+  },
+  "novelTapZoneInvert": "Tap Zone Invert",
+  "@novelTapZoneInvert": {
+    "description": "Novel tap zone invert"
+  },
+  "comicFilterGroup": "Image Filter",
+  "@comicFilterGroup": {
+    "description": "Comic default: image filter"
+  },
+  "comicFilterBrightness": "Brightness",
+  "@comicFilterBrightness": {
+    "description": "Comic filter brightness"
+  },
+  "comicFilterContrast": "Contrast",
+  "@comicFilterContrast": {
+    "description": "Comic filter contrast"
+  },
+  "comicFilterColorTemp": "Color Temperature",
+  "@comicFilterColorTemp": {
+    "description": "Comic filter color temperature"
+  },
+  "comicFilterInverted": "Invert Filter",
+  "@comicFilterInverted": {
+    "description": "Comic image invert filter"
+  },
+  "comicTapZoneInvert": "Tap Zone Invert",
+  "@comicTapZoneInvert": {
+    "description": "Comic tap zone invert"
+  },
+  "novelZoomGroup": "Zoom & Typography",
+  "@novelZoomGroup": {
+    "description": "Novel defaults: zoom and typography"
+  },
+  "comicZoomGroup": "Zoom & Gesture",
+  "@comicZoomGroup": {
+    "description": "Comic defaults: zoom and gesture"
+  },
+  "readerDefaultMode": "Default Reading Mode",
+  "@readerDefaultMode": {
+    "description": "Default reading mode"
+  },
+  "readerDefaultBackground": "Default Background",
+  "@readerDefaultBackground": {
+    "description": "Default reader background"
+  },
+  "readerBackgroundWhite": "White",
+  "@readerBackgroundWhite": {
+    "description": "White background"
+  },
+  "readerBackgroundBeige": "Beige",
+  "@readerBackgroundBeige": {
+    "description": "Beige background"
+  },
+  "readerBackgroundDark": "Dark",
+  "@readerBackgroundDark": {
+    "description": "Dark background"
+  },
+  "readerDefaultOrientation": "Default Orientation",
+  "@readerDefaultOrientation": {
+    "description": "Default reader orientation"
+  },
+  "readerOrientationHorizontal": "Horizontal",
+  "@readerOrientationHorizontal": {
+    "description": "Horizontal orientation"
+  },
+  "readerOrientationVertical": "Vertical",
+  "@readerOrientationVertical": {
+    "description": "Vertical orientation"
+  },
+  "readerDoubleTapZoom": "Double Tap Zoom",
+  "@readerDoubleTapZoom": {
+    "description": "Double tap zoom"
+  },
+  "readerOrientationLock": "Orientation Lock",
+  "@readerOrientationLock": {
+    "description": "Orientation lock"
+  },
+  "layoutSettings": "Layout Settings",
+  "@layoutSettings": {
+    "description": "Layout settings"
+  },
+  "layoutSettingsDesc": "Bookshelf grid/list, density",
+  "@layoutSettingsDesc": {
+    "description": "Layout settings description"
+  },
+  "bookshelfLayoutMode": "Bookshelf Layout Mode",
+  "@bookshelfLayoutMode": {
+    "description": "Bookshelf layout mode"
+  },
+  "bookshelfLayoutGrid": "Grid",
+  "@bookshelfLayoutGrid": {
+    "description": "Grid layout"
+  },
+  "bookshelfLayoutList": "List",
+  "@bookshelfLayoutList": {
+    "description": "List layout"
+  },
+  "bookshelfLayoutDensity": "Grid Density",
+  "@bookshelfLayoutDensity": {
+    "description": "Grid density"
+  },
+  "bookshelfDensityCompact": "Compact",
+  "@bookshelfDensityCompact": {
+    "description": "Compact density"
+  },
+  "bookshelfDensityStandard": "Standard",
+  "@bookshelfDensityStandard": {
+    "description": "Standard density"
+  },
+  "bookshelfDensityComfortable": "Comfortable",
+  "@bookshelfDensityComfortable": {
+    "description": "Comfortable density"
+  },
+  "sourceHide": "Hide",
+  "@sourceHide": {
+    "description": "Hide source"
+  },
+  "sourceShowHidden": "Show Hidden Sources",
+  "@sourceShowHidden": {
+    "description": "Show hidden sources"
+  },
+  "sourceEdit": "Edit Source",
+  "sourceDelete": "Delete Source",
+  "sourceMigrate": "Migrate Source",
+  "sourceEditBuiltinNotAllowed": "Built-in sources cannot be edited",
+  "sourceEditSaved": "Source updated",
+  "sourceEditFailed": "Failed to update source",
+  "sourceDeleteBuiltinNotAllowed": "Built-in sources cannot be deleted",
+  "sourceDeleted": "Source deleted",
+  "sourceDeleteFailed": "Failed to delete source",
+  "sourceDeprecatedHint": "This source is deprecated. Please use an alternative.",
+  "sourceNameLabel": "Source Name",
+  "sourceUrlLabel": "Source URL",
+  "back": "Back",
+  "sourceType": "Type",
+  "sourceTypeAnime": "Anime",
+  "sourceTypeManga": "Manga",
+  "sourceTypeNovel": "Novel",
+  "playerTimerOff": "Turn off timer",
+  "playerTimerMinutes": "{minutes} minutes",
+  "@playerTimerMinutes": {
+    "description": "Sleep timer duration in minutes",
+    "placeholders": { "minutes": { "type": "int" } }
+  },
+  "playerTimerCustom": "Custom",
+  "playerTimerCanceled": "Sleep timer canceled",
+  "playerTimerFired": "Sleep timer fired, playback paused",
+
+  "noDescription": "No description available",
+
+  "aboutAppTitle": "About",
+  "openSourceLicenses": "Open source licenses",
+  "thirdPartyLibraries": "Third-party libraries",
+  "projectRepository": "Project repository",
+  "checkUpdate": "Check for updates",
+  "updateChecking": "Checking for updates…",
+  "updateLatest": "You are on the latest version",
+  "updateAvailable": "New version {version} available",
+  "updateAvailableHint": "Open the releases page to download?",
+  "updateGoToDownload": "Go to download",
+  "updateCheckFailed": "Failed to check for updates. Try again later.",
+
+  "settingsGroupLanguage": "Language",
+  "languageTitle": "Interface language",
+  "languageFollowSystem": "Follow system",
+  "languageChinese": "简体中文",
+  "languageEnglish": "English",
+
+  "chapterList": "Chapter list",
+  "currentChapter": "Current chapter",
+
+  "searchByAuthor": "Search by author",
+  "noRecommendation": "No recommendations",
+
+  "restore": "Restore",
+  "archive": "Archive",
+  "archivedEmpty": "No archived content",
+  "archivedHint": "Archived files are kept on disk and can be restored anytime",
+  "deletePermanently": "Delete permanently",
+  "restoreSuccess": "Restored",
+  "statusArchived": "Archived",
+
+  "searchHistoryTitle": "Search history",
+  "clearSearchHistory": "Clear history",
+  "clearSearchHistoryConfirm": "Clear all search history?",
+  "noSearchHistory": "No search history",
+  "hotSearch": "Hot search",
+  "noHotSearch": "No hot search",
+
+  "importDataParsing": "Parsing…",
+  "importDataSuccess": "Import successful",
+  "importDataFailed": "Import failed",
+  "importDataInvalidFormat": "Invalid file format",
+  "importDataSummary": "Imported {plugins} plugins / {favorites} favorites / {history} history",
+  "@importDataSummary": {
+    "placeholders": {
+      "plugins": { "type": "int" },
+      "favorites": { "type": "int" },
+      "history": { "type": "int" }
+    }
+  },
+  "confirmImport": "Confirm import",
+
+  "exportFolderDefault": "Default path (Documents)",
+  "exportDataSuccess": "Export successful",
+  "exportDataFailed": "Export failed",
+  "exportDataInProgress": "Exporting…",
+  "exportDataFileSaved": "Saved to {path}",
+  "@exportDataFileSaved": {
+    "placeholders": {
+      "path": { "type": "String" }
+    }
+  },
+  "exportNothingToExport": "Nothing to export",
+
+  "notImplemented": "Not implemented yet",
+
+  "cast": "Cast",
+  "castNotSupportedYet": "Cast is not supported yet",
+  "cloudSync": "Cloud sync",
+  "cloudSyncNotSupportedYet": "Coming soon",
+
+  "cloudSyncNotConfigured": "Not configured, tap to set up",
+  "cloudSyncFeatureWebdav": "WebDAV backup",
+  "cloudSyncFeatureSync": "Sync favorites and progress across devices",
+
+  "enableRecommendedSources": "Enable Recommended Sources",
+  "enableRecommendedSourcesHint": "Enable all available recommended sources at once",
+  "recommendedSourcesEnabled": "Enabled {count} recommended sources",
+  "@recommendedSourcesEnabled": {
+    "description": "Toast after enabling recommended sources",
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "castToDevice": "Cast to device",
+  "castingTo": "Casting to {device}",
+  "@castingTo": {
+    "description": "Casting to a device name",
+    "placeholders": { "device": {} }
+  },
+  "castNoDevices": "No cast devices found",
+  "castNotSupportedOnDevice": "Casting is not supported on this device",
+  "castDisconnect": "Disconnect",
+  "pip": "Picture-in-Picture",
+  "pipNotSupportedOnDevice": "Picture-in-Picture is not supported on this device",
+  "screenshot": "Screenshot",
+  "screenshotSaved": "Screenshot saved",
+  "screenshotFailed": "Screenshot failed",
+  "screenshotPathSetting": "Screenshot save path",
+  "screenshotPathDefault": "Default (Documents/screenshots)",
+
+  "imageLoadFailed": "Image load failed",
+
+  "seriesTitle": "Series",
+  "@seriesTitle": {
+    "description": "Series entry button label and series detail screen title"
+  },
+  "seasonsTitle": "Seasons",
+  "@seasonsTitle": {
+    "description": "Seasons section title"
+  },
+  "episodeCount": "{count} episodes",
+  "@episodeCount": {
+    "description": "Episode count badge on season card",
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "seasonCount": "{count} seasons",
+  "@seasonCount": {
+    "description": "Season count label",
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "imageFilter": "Image Filter",
+  "brightness": "Brightness",
+  "contrast": "Contrast",
+  "colorTemperature": "Color Temperature",
+  "saturation": "Saturation",
+  "hue": "Hue",
+  "resetFilter": "Reset Filter",
+  "saveImage": "Save Image",
+  "shareImage": "Share Image",
+  "imageSavedTo": "Image saved to {path}",
+  "@imageSavedTo": {
+    "description": "Toast after saving a reader image",
+    "placeholders": { "path": { "type": "String" } }
+  },
+  "imageSaveFailed": "Failed to save image",
+  "imagePathCopied": "Image path copied to clipboard",
+
+  "chineseConverter": "Chinese Conversion",
+  "noConvert": "No Conversion",
+  "traditionalToSimplified": "Traditional to Simplified",
+  "simplifiedToTraditional": "Simplified to Traditional",
+  "autoPageInterval": "Auto Page Interval",
+  "autoPageOff": "Off",
+  "pauseAutoPage": "Pause Auto Page",
+  "resumeAutoPage": "Resume Auto Page",
+  "customFont": "Custom Font",
+  "fontSystem": "System",
+  "fontSerif": "Serif",
+  "fontMonospace": "Monospace",
+  "addBookmark": "Add Bookmark",
+  "bookmarkList": "Bookmark List",
+  "bookmarkAdded": "Bookmark Added",
+  "deleteBookmark": "Delete Bookmark",
+  "noBookmarks": "No Bookmarks",
+  "bookmarkNoteHint": "Note (optional)",
+  "novelChapterProgress": "Ch. {current} / {total}",
+  "@novelChapterProgress": {
+    "placeholders": {
+      "current": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "novelLetterSpacing": "Letter spacing",
+  "novelFontStyle": "Font style",
+  "fontBold": "Bold",
+  "fontItalic": "Italic",
+  "fontUnderline": "Underline",
+  "novelTextColor": "Text color",
+  "novelTextColorFollowBg": "Auto (follow background)",
+  "novelShadowColor": "Shadow color",
+  "novelShadowColorAuto": "Auto (text color, translucent)",
+
+  "novelSectionText": "Text",
+  "novelSectionTitle": "Chapter title",
+  "novelSectionColor": "Colors & background",
+  "novelSectionPage": "Paging & interaction",
+  "novelSectionMisc": "Other",
+  "novelShowChapterTitle": "Show chapter title in body",
+  "novelTitleFontScale": "Title font scale",
+  "novelTitleBold": "Bold title",
+  "novelTitleColor": "Title color",
+  "novelTitleColorAuto": "Follow accent color",
+
+  "importShuyuan": "Import Book Source",
+  "shuyuanImportTitle": "Import Book Source",
+  "shuyuanImportHint": "Supports book source rules (@css/@xpath/@json/@js + ## regex)",
+  "shuyuanImportFromUrl": "URL",
+  "shuyuanImportFromFile": "File",
+  "shuyuanImportFromJson": "JSON",
+  "shuyuanImportUrlHint": "URL of book source JSON",
+  "shuyuanImportJsonHint": "Paste book source JSON config",
+  "shuyuanImportFilePicker": "Select Book Source File",
+  "shuyuanImportParse": "Parse",
+  "shuyuanImportParsing": "Parsing…",
+  "shuyuanImportParseFailed": "Parse failed, no valid book sources detected",
+  "shuyuanImportPreview": "Preview ({count})",
+  "@shuyuanImportPreview": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "shuyuanImportSaveAll": "Import All",
+  "shuyuanImportEmpty": "No parsed results",
+  "shuyuanImportValid": "Valid",
+  "shuyuanImportInvalid": "Invalid",
+  "shuyuanImportSuccess": "Imported {count} book sources",
+  "@shuyuanImportSuccess": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "shuyuanImportSelected": "Import {count} selected",
+  "@shuyuanImportSelected": {
+    "description": "Bottom button label showing count of selected sources to import",
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "shuyuanImportFailed": "Import failed",
+  "shareFailed": "Share failed",
+  "openInBrowserFailed": "Failed to open browser",
+  "updatedAtLabel": "Updated: ",
+  "searchChapter": "Search chapters",
+  "noChaptersFound": "No matching chapters found",
+  "sortAscending": "Ascending",
+  "sortDescending": "Descending",
+  "downloadSingleChapter": "Download chapter",
+  "chapterBookmark": "Chapter bookmark",
+  "chapterRead": "Read mark",
+  "continueReading": "Continue reading",
+  "startFromBeginning": "Start from beginning",
+  "openInAppBrowser": "Open in app browser",
+  "refreshMetadata": "Refresh metadata",
+  "removeFromFavorites": "Remove from favorites",
+  "coverViewer": "Cover",
+  "downloadPreset1": "Download latest 1",
+  "downloadPreset5": "Download latest 5",
+  "downloadPreset10": "Download latest 10",
+  "downloadUnread": "Download unread",
+  "downloadFavorited": "Download favorited",
+  "tagLabel": "Tags",
+  "sourceLabel": "Source",
+
+  "reloadChapter": "Reload chapter",
+  "clearReadingProgress": "Clear reading progress",
+  "readingProgressCleared": "Reading progress cleared",
+  "novelMenuBookmarkList": "Bookmark list",
+  "novelMenuConfigureToolbar": "Configure bottom toolbar",
+  "novelTtsBackground": "Background playback",
+  "novelSectionFont": "Font style",
+  "searchInBook": "Search in book",
+  "wholeBook": "Whole book",
+  "noSearchResults": "No results",
+  "customBgColor": "Custom background",
+  "tapZoneInvert": "Tap invert",
+  "tapInvertNone": "None",
+  "tapInvertLeftRight": "Left/Right",
+  "tapInvertAll": "All",
+  "tapZonePreview": "Preview tap zones",
+  "tapZonePrev": "Prev page",
+  "tapZoneNext": "Next page",
+  "tapZoneToggle": "Toggle UI",
+  "startReading": "Start reading",
+  "stopReading": "Stop reading",
+  "noteList": "Notes",
+  "noNotes": "No notes yet",
+
+  "add": "Add",
+  "testConnection": "Test connection",
+  "noCustomInstances": "No custom instances",
+
+  "searchByDirector": "Search by director",
+  "searchByActor": "Search by actor",
+  "searchByTag": "Search by tag",
+  "searchAggregate": "All sources",
+  "searchSingle": "Single source",
+  "searchSelectSource": "Select a source",
+  "searchByWork": "Search by title",
+  "searchFieldAuthor": "Author",
+  "searchFieldDirector": "Director",
+  "searchFieldActor": "Cast",
+  "searchFieldWork": "Title",
+
+  "rsshubRouteQidian": "Qidian",
+  "rsshubRouteJjwxc": "JJWXC",
+  "rsshubRouteDoubanBooks": "Douban Books",
+  "rsshubRouteDmzj": "DMZJ",
+  "rsshubRouteJmcomic": "JM Comic",
+
+  "browseNetworkSelectedCount": "Selected {count}",
+  "@browseNetworkSelectedCount": {
+    "description": "AppBar title in multi-select mode showing selected count",
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "browseNetworkOpenSelected": "Open",
+  "browseNetworkDownloadSelected": "Download",
+  "browseNetworkDownloadStarted": "Started downloading {count} files",
+  "@browseNetworkDownloadStarted": {
+    "description": "Snackbar shown when batch download starts",
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "browseNetworkDownloadDone": "Downloaded {count} items",
+  "@browseNetworkDownloadDone": {
+    "description": "Snackbar shown when batch download completes",
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "browseNetworkDownloadFailed": "Download failed",
+  "browseNetworkDownloadPathMissing": "Download path unavailable",
+
+  "unknown": "Unknown",
+
+  "rssFeedListTitle": "RSS subscriptions",
+  "rssTestAllSpeed": "Test all speeds",
+  "rssSpeedFailed": "Speed test failed",
+  "rssSpeedMs": "{ms}ms",
+  "@rssSpeedMs": {
+    "description": "RSS feed speed test result in milliseconds",
+    "placeholders": { "ms": { "type": "int" } }
+  },
+
+  "unrecognizedFile": "Unrecognized file: {fileName}",
+  "@unrecognizedFile": {
+    "description": "Snackbar shown when a picked file extension is not recognized",
+    "placeholders": { "fileName": { "type": "String" } }
+  },
+  "importFailed": "Import failed: {reason}",
+  "@importFailed": {
+    "description": "Snackbar shown when an import/pick operation throws",
+    "placeholders": { "reason": { "type": "String" } }
+  },
+  "folderScanFailed": "Folder scan failed, please check permissions or path",
+  "@folderScanFailed": {
+    "description": "Snackbar shown when recursive folder scan throws FileSystemException"
+  },
+  "emptyFolder": "Folder is empty or has no usable files",
+  "@emptyFolder": {
+    "description": "Snackbar shown when a picked folder has no recognizable files"
+  },
+  "storagePermissionDenied": "Storage permission denied, cannot pick files",
+  "@storagePermissionDenied": {
+    "description": "Snackbar shown when runtime storage/media permission is denied"
+  },
+  "pickFileNoPath": "Could not get the path of the selected file (possibly a system limitation). Please try another file",
+  "@pickFileNoPath": {
+    "description": "Snackbar shown when a picked file has a null path (e.g. Android SAF edge case)"
+  },
+  "folderPickUnsupportedSaf": "Folder selection is not supported on this system (Android SAF). Please use \"Select File\" to add files one by one",
+  "@folderPickUnsupportedSaf": {
+    "description": "Snackbar shown when folder picker returns an Android SAF content URI that dart:io cannot list"
+  },
+  "setAsShelfCover": "Set as shelf cover",
+  "@setAsShelfCover": {
+    "description": "Popup menu item to set current comic cover as shelf cover"
+  },
+  "openDownloadManager": "Open download manager",
+  "@openDownloadManager": {
+    "description": "Popup menu item to open download manager screen"
+  },
+  "details": "Details",
+  "@details": {
+    "description": "Popup menu item to show content details"
+  },
+  "coverUpdated": "Cover updated",
+  "@coverUpdated": {
+    "description": "Snackbar shown when shelf cover is successfully updated"
+  },
+  "coverUpdateFailed": "Cover update failed: favorite entry not found",
+  "@coverUpdateFailed": {
+    "description": "Snackbar shown when shelf cover update fails (favorite entry not found)"
+  },
+  "authorLabel": "Author",
+  "@authorLabel": {
+    "description": "Label for author field in details sheet"
+  },
+  "statusLabel": "Status",
+  "@statusLabel": {
+    "description": "Label for status field in details sheet"
+  },
+  "setAsCover": "Set as cover",
+  "@setAsCover": {
+    "description": "Long-press menu item to set image as cover"
+  },
+  "mediaInfo": "Media info",
+  "@mediaInfo": {
+    "description": "Player more menu item to show media info"
+  },
+  "playExternal": "Play external",
+  "@playExternal": {
+    "description": "Player more menu item to play in external player"
+  },
+  "loadExternalSubtitle": "Load external subtitle",
+  "@loadExternalSubtitle": {
+    "description": "Subtitle panel item to load external subtitle file"
+  },
+  "loadExternalSubtitleFailed": "External subtitle loading failed",
+  "@loadExternalSubtitleFailed": {
+    "description": "Snackbar shown when external subtitle loading fails"
+  },
+  "danmakuCustomUrl": "Custom URL",
+  "@danmakuCustomUrl": {
+    "description": "Danmaku source sheet option for custom URL source"
+  },
+  "danmakuCustomUrlHint": "Enter danmaku source URL",
+  "@danmakuCustomUrlHint": {
+    "description": "Hint text for custom danmaku URL input field"
+  },
+  "danmakuCustomUrlDesc": "Load danmaku from a custom URL",
+  "@danmakuCustomUrlDesc": {
+    "description": "Description for custom URL danmaku source option"
+  },
+  "onlineTabHome": "Home",
+  "@onlineTabHome": {
+    "description": "Tab label for online content home tab"
+  },
+  "onlineTabSchedule": "Schedule",
+  "@onlineTabSchedule": {
+    "description": "Tab label for weekly schedule tab"
+  },
+  "onlineTabRanking": "Ranking",
+  "@onlineTabRanking": {
+    "description": "Tab label for ranking tab"
+  },
+  "filterYear": "Year",
+  "@filterYear": {
+    "description": "Filter sheet field label for year"
+  },
+  "filterRegion": "Region",
+  "@filterRegion": {
+    "description": "Filter sheet field label for region"
+  },
+  "filterSort": "Sort",
+  "@filterSort": {
+    "description": "Filter sheet field label for sort order"
+  },
+  "filterCategory": "Category",
+  "@filterCategory": {
+    "description": "Dynamic filter group label for source categories"
+  },
+  "filterTag": "Tag",
+  "@filterTag": {
+    "description": "Dynamic filter group label for source tags"
+  },
+  "sortHottest": "Hottest",
+  "@sortHottest": {
+    "description": "Sort option label for hottest items"
+  },
+  "sortRating": "Rating",
+  "@sortRating": {
+    "description": "Sort option label for highest rated items"
+  },
+  "viewAll": "View all",
+  "@viewAll": {
+    "description": "Button label to view all items in a home section"
+  },
+  "latestUpdates": "Latest updates",
+  "@latestUpdates": {
+    "description": "Home section title for latest updated items"
+  },
+  "hotRecommendations": "Hot picks",
+  "@hotRecommendations": {
+    "description": "Home section title for hot recommended items"
+  },
+  "weekdayMon": "Mon",
+  "@weekdayMon": {
+    "description": "Weekday label Monday"
+  },
+  "weekdayTue": "Tue",
+  "@weekdayTue": {
+    "description": "Weekday label Tuesday"
+  },
+  "weekdayWed": "Wed",
+  "@weekdayWed": {
+    "description": "Weekday label Wednesday"
+  },
+  "weekdayThu": "Thu",
+  "@weekdayThu": {
+    "description": "Weekday label Thursday"
+  },
+  "weekdayFri": "Fri",
+  "@weekdayFri": {
+    "description": "Weekday label Friday"
+  },
+  "weekdaySat": "Sat",
+  "@weekdaySat": {
+    "description": "Weekday label Saturday"
+  },
+  "weekdaySun": "Sun",
+  "@weekdaySun": {
+    "description": "Weekday label Sunday"
+  },
+  "regionChina": "China",
+  "@regionChina": {
+    "description": "Region filter option: mainland China"
+  },
+  "regionHongKong": "Hong Kong, China",
+  "@regionHongKong": {
+    "description": "Region filter option: Hong Kong, China"
+  },
+  "regionTaiwan": "Taiwan, China",
+  "@regionTaiwan": {
+    "description": "Region filter option: Taiwan, China"
+  },
+  "regionJapan": "Japan",
+  "@regionJapan": {
+    "description": "Region filter option: Japan"
+  },
+  "regionKorea": "Korea",
+  "@regionKorea": {
+    "description": "Region filter option: Korea"
+  },
+  "regionUSA": "USA",
+  "@regionUSA": {
+    "description": "Region filter option: USA"
+  },
+  "regionOther": "Other",
+  "@regionOther": {
+    "description": "Region filter option: other regions"
+  },
+  "unsupportedRarFormat": "RAR format comics are not supported",
+  "@unsupportedRarFormat": {
+    "description": "Shown when a .cbr/.rar comic archive cannot be extracted"
+  },
+  "unsupportedEpubFormat": "EPUB format is not supported, please use a dedicated reader",
+  "@unsupportedEpubFormat": {
+    "description": "Shown when an .epub file is opened in the text viewer"
+  },
+  "unsupportedFormat": "This format is not supported",
+  "@unsupportedFormat": {
+    "description": "Generic unsupported format message for .umd/.mobi/.fb2/.azw3 etc."
+  },
+  "localFileLabel": "Local file",
+  "@localFileLabel": {
+    "description": "Label shown as chapter placeholder when reading a local file in specialized readers"
+  },
+  "localFileLoadFailed": "Failed to read local file",
+  "@localFileLoadFailed": {
+    "description": "Error message shown when a local file fails to load in specialized readers"
+  },
+
+  "playerDefaultOrientation": "Lock Orientation",
+  "playerOrientationAuto": "Follow System",
+  "playerOrientationPortrait": "Portrait",
+  "playerOrientationLandscape": "Landscape",
+  "playerGestureSeekMultiplier": "Drag Seek Multiplier",
+  "playerSeekHalf": "0.5x",
+  "playerSeekNormal": "1x",
+  "playerSeekDouble": "2x",
+  "playerDoubleTapPlayPause": "Double Tap Play/Pause",
+  "playerLongPressSpeedUp": "Long Press 2x Speed",
+  "playerSubtitleBottomMargin": "Subtitle Bottom Margin",
+  "playerDefaultVolume": "Default Volume",
+  "playerCoreGroup": "Playback Core",
+  "@playerCoreGroup": {
+    "description": "Player settings group: core playback"
+  },
+  "playerSubtitleGroup": "Subtitle",
+  "@playerSubtitleGroup": {
+    "description": "Player settings group: subtitle"
+  },
+  "playerGestureGroup": "Gesture & Control",
+  "@playerGestureGroup": {
+    "description": "Player settings group: gesture and control"
+  },
+
+  "novelDefaultGroupTitle": "Novel Defaults",
+  "novelDefaultPageTurnAnimation": "Page Turn Animation",
+  "novelDefaultFontSize": "Font Size",
+  "novelDefaultLineHeight": "Line Height",
+  "novelDefaultBackground": "Background",
+  "novelDefaultTtsRate": "TTS Rate",
+  "novelDefaultChineseConversion": "Chinese Conversion",
+  "novelBgWhite": "White",
+  "novelBgCream": "Cream",
+  "novelBgDarkGray": "Dark Gray",
+  "novelBgBlack": "Black",
+
+  "comicDefaultGroupTitle": "Comic Defaults",
+  "comicDefaultReadingDirection": "Reading Direction",
+  "comicDefaultTapZoneLayout": "Tap Zone Layout",
+  "comicDefaultInvertFilter": "Invert Filter",
+  "comicDefaultInitialZoom": "Initial Zoom",
+  "comicDefaultDoubleTapZoom": "Double Tap Zoom",
+  "comicDefaultScrollWheel": "Scroll Wheel Direction",
+  "comicTapLayout1": "Layout 1",
+  "comicTapLayout2": "Layout 2",
+  "comicTapLayout3": "Layout 3",
+  "comicTapLayout4": "Layout 4",
+  "comicTapLayout5": "Layout 5",
+  "comicZoomFitWidth": "Fit Width",
+  "comicZoomFitHeight": "Fit Height",
+  "comicZoomOriginal": "Original",
+  "comicZoom2x": "2x",
+  "comicZoom3x": "3x",
+  "comicWheelNatural": "Natural",
+  "comicWheelInverted": "Inverted",
+  "comicDirLtr": "LTR",
+  "comicDirRtl": "RTL",
+  "comicDirVertical": "Vertical",
+  "comicDirWebtoon": "Webtoon",
+  "comicDirWebtoonGap": "Webtoon (gap)",
+
+  "danmakuDisplayFontSize": "Font Size",
+  "danmakuDisplayOpacity": "Opacity",
+  "danmakuDisplayScrollSpeed": "Scroll Speed",
+  "danmakuDisplayArea": "Display Area",
+  "danmakuDisplayMaxOnScreen": "Max On Screen",
+  "danmakuDisplayShowTop": "Show Top",
+  "danmakuDisplayShowBottom": "Show Bottom",
+  "danmakuDisplayShowFull": "Show Full",
+  "danmakuDisplayBlockedKeywords": "Blocked Keywords",
+  "danmakuDisplayBlockedKeywordsHint": "One keyword per line",
+  "danmakuSizeSmall": "Small",
+  "danmakuSizeMedium": "Medium",
+  "danmakuSizeLarge": "Large",
+  "danmakuSpeedSlow": "Slow",
+  "danmakuSpeedMedium": "Medium",
+  "danmakuSpeedFast": "Fast",
+  "danmakuAreaQuarter": "Quarter",
+  "danmakuAreaHalf": "Half",
+  "danmakuAreaFull": "Full",
+  "danmakuMaxTen": "10",
+  "danmakuMaxTwenty": "20",
+  "danmakuMaxFifty": "50",
+  "danmakuMaxHundred": "100",
+  "danmakuDisplayGroupFilter": "Filter & Block",
+  "@danmakuDisplayGroupFilter": {
+    "description": "Danmaku display group: filter and block"
+  },
+  "danmakuDisplayGroupAppearance": "Appearance",
+  "@danmakuDisplayGroupAppearance": {
+    "description": "Danmaku display group: appearance"
+  },
+  "danmakuDisplayGroupDisplayRange": "Display Range",
+  "@danmakuDisplayGroupDisplayRange": {
+    "description": "Danmaku display group: display range"
+  },
+  "danmakuDisplayGroupSpeed": "Speed",
+  "@danmakuDisplayGroupSpeed": {
+    "description": "Danmaku display group: speed"
+  },
+
+  "layoutTypeLabel": "Layout Type",
+  "layoutGridLarge": "Large Grid",
+  "layoutGridMedium": "Medium Grid",
+  "layoutGridSmall": "Small Grid",
+  "layoutListComfortable": "Comfortable List",
+  "layoutListCompact": "Compact List",
+  "layoutGridColumns": "Grid Columns",
+  "layoutGridSpacing": "Grid Spacing",
+  "layoutCoverRadius": "Cover Radius",
+  "layoutTitleFontSize": "Title Font Size",
+  "layoutShowTitle": "Show Title",
+  "layoutTitleMaxLines": "Title Max Lines",
+  "layoutShowAuthor": "Show Author",
+  "layoutShowProgress": "Show Progress",
+  "layoutOpenSettings": "Open Layout Settings",
+  "bookshelfLayoutGroup": "Bookshelf Layout",
+  "@bookshelfLayoutGroup": {
+    "description": "Layout settings group: bookshelf layout"
+  },
+  "layoutTypeGroup": "Global Layout Type",
+  "@layoutTypeGroup": {
+    "description": "Layout settings group: layout type"
+  },
+  "layoutGridCoverGroup": "Grid & Cover",
+  "@layoutGridCoverGroup": {
+    "description": "Layout settings group: grid and cover"
+  },
+  "layoutDisplayGroup": "Display Options",
+  "@layoutDisplayGroup": {
+    "description": "Layout settings group: display options"
+  },
+
+  "downloadStatusInProgress": "In Progress",
+
+  "cloudSyncWebdavUrl": "WebDAV URL",
+  "cloudSyncWebdavUsername": "Username",
+  "cloudSyncWebdavPassword": "Password",
+  "cloudSyncTestConnection": "Test Connection",
+  "cloudSyncConnectionSuccess": "Connected ({ms}ms)",
+  "cloudSyncConnectionFailed": "Connection Failed",
+  "cloudSyncAutoSync": "Auto Sync",
+  "cloudSyncSyncFrequencyManual": "Manual",
+  "cloudSyncSyncFrequencyDaily": "Daily",
+  "cloudSyncSyncFrequencyWeekly": "Weekly",
+  "cloudSyncSyncNow": "Sync Now",
+  "cloudSyncLastSyncTime": "Last sync: {time}",
+  "cloudSyncNeverSynced": "Never synced",
+  "cloudSyncSyncSuccess": "Sync successful",
+  "cloudSyncSyncFailed": "Sync failed",
+  "cloudSyncSaveConfig": "Save Config",
+  "@cloudSyncConnectionSuccess": {
+    "placeholders": {
+      "ms": { "type": "int" }
+    }
+  },
+  "@cloudSyncLastSyncTime": {
+    "placeholders": {
+      "time": { "type": "String" }
+    }
+  },
+
+  "readingProgress": "Reading progress",
+  "watchingProgress": "Watching progress",
+  "totalChapters": "Total chapters",
+  "totalEpisodes": "Total episodes",
+  "chaptersRead": "Read",
+  "episodesWatched": "Watched",
+  "progressLabel": "Progress",
+  "layoutModeLabel": "Layout mode",
+  "layoutListStyle": "List style",
+  "lastReadAt": "Last read",
+  "lastWatchedAt": "Last watched",
+  "anime": "Anime",
+  "episodeList": "Episodes",
+  "chapterListWithCount": "Chapter list ({count})",
+  "@chapterListWithCount": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "episodeListWithCount": "Episodes ({count})",
+  "@episodeListWithCount": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "lastReadInfo": "Last read: {time} · {chapter}",
+  "@lastReadInfo": {
+    "placeholders": {
+      "time": { "type": "String" },
+      "chapter": { "type": "String" }
+    }
+  },
+  "lastWatchedInfo": "Last watched: {time} · {episode}",
+  "@lastWatchedInfo": {
+    "placeholders": {
+      "time": { "type": "String" },
+      "episode": { "type": "String" }
+    }
+  },
+  "notStartedYet": "Not started yet",
+  "timeJustNow": "Just now",
+  "timeMinutesAgo": "{n} minutes ago",
+  "@timeMinutesAgo": {
+    "placeholders": { "n": { "type": "int" } }
+  },
+  "timeHoursAgo": "{n} hours ago",
+  "@timeHoursAgo": {
+    "placeholders": { "n": { "type": "int" } }
+  },
+  "timeDaysAgo": "{n} days ago",
+  "@timeDaysAgo": {
+    "placeholders": { "n": { "type": "int" } }
+  },
+
+  "expand": "Expand",
+  "collapse": "Collapse",
+  "sortSectionTitle": "Sort",
+  "displayTitle": "Display",
+  "sortByIndex": "By {unitWord} index",
+  "@sortByIndex": {
+    "placeholders": { "unitWord": {} }
+  },
+  "sortByName": "By {unitWord} name",
+  "@sortByName": {
+    "placeholders": { "unitWord": {} }
+  },
+  "sortBySource": "By source",
+  "sortByUploadDate": "By upload date",
+  "sortAscendingLabel": "Ascending",
+  "sortDescendingLabel": "Descending",
+  "filterUnread": "Unread",
+  "filterDownloaded": "Downloaded",
+  "filterBookmarked": "Bookmarked",
+  "displaySourceTitle": "Source title",
+  "displayNumber": "{unitWord} number",
+  "@displayNumber": {
+    "placeholders": { "unitWord": {} }
+  },
+  "resetButton": "Reset",
+  "doneButton": "Done",
+  "wordCount": "Word count",
+  "updatedTo": "Updated to {n}",
+  "@updatedTo": {
+    "placeholders": { "n": {} }
+  },
+  "unitWordChapter": "chapter",
+  "unitWordComicChapter": "chapter",
+  "unitWordEpisode": "episode",
+  "prevPage": "Previous page",
+  "nextPage": "Next page",
+  "nightMode": "Night mode",
+  "toolToc": "Contents",
+  "toolPrevChapter": "Previous chapter",
+  "toolNextChapter": "Next chapter",
+  "toolNightMode": "Night mode",
+  "toolAutoPage": "Auto page",
+  "toolSettings": "Settings",
+  "toolBookmark": "Bookmark",
+  "toolBookmarkList": "Bookmarks",
+  "toolSearch": "Search in book",
+  "toolTts": "Read aloud",
+  "configureBottomToolbar": "Configure toolbar",
+  "bottomToolbarConfigTitle": "Bottom toolbar",
+  "slotsShown": "Shown",
+  "slotsHidden": "Hidden (tap + to add)",
+  "novelCacheBook": "Cache book",
+  "novelResetBookPrefs": "Reset book to default",
+  "novelResetBookDone": "Book settings reset to default",
+  "readerCropEdge": "Crop edges",
+  "readerRotatePage": "Rotate page",
+  "readerKeepScreenOn": "Keep screen on",
+  "readerProgressBarOnRight": "Progress bar on right",
+  "readerShowPageNumber": "Show page number",
+  "readerSplitDoublePage": "Split double page",
+  "readerSplitDoublePageHint": "Double-page split enabled; switched to horizontal single-page mode",
+  "readerInitialZoom": "Initial zoom",
+  "readerZoomFitWidth": "Fit width",
+  "readerZoomFitHeight": "Fit height",
+  "readerZoomOriginal": "Original size",
+  "readerFullscreen": "Fullscreen",
+  "readerLongPressMenu": "Long-press menu",
+  "readerGrayscale": "Grayscale",
+  "readerPreventShrink": "Prevent shrink",
+  "readerChapterTransition": "Chapter transition",
+  "comicDefaultFullscreen": "Fullscreen",
+  "comicDefaultLongPressMenu": "Long-press menu",
+  "comicDefaultGrayscale": "Grayscale",
+  "comicDefaultPreventShrink": "Prevent shrink",
+  "comicDefaultChapterTransition": "Chapter transition",
+  "copyImage": "Copy image",
+  "copyImageSuccess": "Image copied to clipboard",
+  "copyImageFailed": "Failed to copy image",
+  "chapterTransitionCard": "Chapter: {title}",
+  "@chapterTransitionCard": {
+    "description": "Chapter transition title card",
+    "placeholders": { "title": {} }
+  },
+  "readerProgress": "Progress",
+  "regexSearch": "Regex",
+  "locateCurrent": "Locate current",
+  "scrollToTop": "Top",
+  "scrollToBottom": "Bottom",
+  "bookmarkedHint": "Bookmarked",
+
+  "playerFullscreen": "Fullscreen",
+  "playerExitFullscreen": "Exit fullscreen",
+  "playerScreenshot": "Screenshot",
+  "playerBrightness": "Brightness",
+  "playerVolume": "Volume",
+  "playerSuperRes": "Super resolution",
+  "playerLine": "Playback line",
+  "playerSelectLine": "Select line",
+  "playerEpisodes": "Episodes",
+  "playerPip": "Picture in picture",
+  "playerCast": "Cast",
+  "playerMore": "More",
+  "seekForward10": "Forward 10s",
+  "seekBackward10": "Backward 10s",
+
+  "novelTitleAlignLeft": "Left",
+  "novelTitleAlignCenter": "Center",
+  "novelTitleAlignRight": "Right",
+  "novelTitleAlignHidden": "Hidden",
+
+  "novelSectionTts": "Read aloud (TTS)",
+  "ttsRate": "Speech rate",
+  "ttsSleepTimer": "Sleep timer",
+  "ttsSleepOff": "Off",
+  "ttsSleepCustom": "Custom",
+  "ttsSleepCustomMinutes": "Custom minutes",
+  "ttsSleepRemaining": "Remaining {min} min {sec} sec",
+  "@ttsSleepRemaining": {
+    "description": "TTS sleep timer remaining time",
+    "placeholders": {
+      "min": { "type": "int" },
+      "sec": { "type": "int" }
+    }
+  },
+  "ttsPrevSentence": "Previous sentence",
+  "ttsPauseOrResume": "Pause / Resume",
+  "ttsExit": "Exit reading",
+  "ttsNextSentence": "Next sentence",
+  "minuteUnit": "{minutes} min",
+  "@minuteUnit": {
+    "description": "Minute count suffix for sleep timer options",
+    "placeholders": { "minutes": { "type": "int" } }
+  },
+
+  "novelFontFileGroup": "Font file & emphasis color",
+  "novelChooseFontFile": "Body font file",
+  "novelTitleFontFile": "Title font file",
+  "novelSettingsSearch": "Search settings",
+  "novelSettingsCommon": "Common",
+  "novelSettingsNoResult": "No matching settings",
+  "novelFontFileCurrent": "Selected: {name}",
+  "@novelFontFileCurrent": {
+    "description": "Current custom font file name",
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "novelClearFontFile": "Clear font file",
+  "novelEmphasisColor": "Emphasis color",
+  "novelEmphasisColorAuto": "Auto (title color)",
+
+  "novelSectionShadowUnderline": "Shadow & underline",
+  "novelShadowBlur": "Shadow blur radius",
+  "novelShadowOffsetX": "Shadow X offset",
+  "novelShadowOffsetY": "Shadow Y offset",
+  "novelUnderlineColor": "Underline color",
+  "novelUnderlineColorAuto": "Auto (body color)",
+  "novelUnderlineDashed": "Dashed underline",
+  "novelUnderlineThickness": "Underline thickness",
+  "novelUnderlineDashLength": "Dash segment length",
+  "novelUnderlineDashGap": "Dash gap length",
+
+  "novelTitlePosition": "Title position",
+  "novelTitleSegmentMode": "Title segment mode",
+  "novelTitleSubScale": "Sub-line scale",
+  "novelTitleSegmentSpacing": "Title–subline spacing",
+  "novelTitleSubLineSpacing": "Sub-line line spacing",
+  "novelTitleTopMargin": "Title top margin",
+  "novelTitleBottomMargin": "Title bottom margin",
+
+  "novelSectionHeaderFooter": "Header & footer",
+  "novelHeaderLeft": "Header left",
+  "novelHeaderCenter": "Header center",
+  "novelHeaderRight": "Header right",
+  "novelFooterLeft": "Footer left",
+  "novelFooterCenter": "Footer center",
+  "novelFooterRight": "Footer right",
+  "novelHeaderFooterColor": "Header & footer color",
+  "novelHeaderFooterMargin": "Header & footer margin",
+
+  "novelHfPageAndProgress": "Page & progress",
+  "novelHfTimeAndBattery": "Time & battery",
+
+  "layoutDetailGroup": "Layout Details",
+  "layoutProgressDisplay": "Progress Display",
+  "progressBar": "Progress Bar",
+  "progressText": "Percentage",
+  "editRoute": "Edit Route",
+  "routeTitle": "Title",
+  "routeUrl": "URL",
+  "routeSaved": "Route saved",
+  "requiredHint": "Required",
+  "localImportPickFile": "Pick Local File",
+  "sourceName": "Name",
+  "sourceBaseUrl": "Base URL",
+  "sourceCannotEdit": "Built-in sources cannot be edited",
+  "sourceCannotDelete": "Built-in sources cannot be deleted",
+  "comicVisualZoomGroup": "Display & Zoom",
+  "comicPageProgressGroup": "Page & Progress",
+  "generalSettingsGroup": "General",
+  "launchScreenTitle": "Launch Screen",
+  "dateFormatTitle": "Date Format",
+  "dateFormatDefault": "Default (yyyy/mm/dd)",
+  "dateFormatMmDdYy": "mm/dd/yy",
+  "dateFormatDdMmYy": "dd/mm/yy",
+  "dateFormatYyyyMmDd": "yyyy-mm-dd",
+  "dateFormatDdMmmYyyy": "dd mmm yyyy",
+  "dateFormatMmmDd": "mmm dd",
+  "dateFormatYyyy": "yyyy",
+  "comicSettingsOverview": "Current Settings",
+  "comicResetConfirm": "Reset all comic reader settings to default? This cannot be undone.",
+  "on": "On",
+  "off": "Off",
+  "readerGroupPageTap": "Page & Tap",
+  "readerGroupViewFilter": "Display & Filter",
+  "readerGroupProgress": "Progress & Display",
+  "readerGroupFlash": "Flash Effect",
+  "readerCommonSettings": "Common",
+  "readerSearchSettings": "Search settings…"
+}

@@ -1,0 +1,8 @@
+include: package:flutter_lints/flutter.yaml
+
+# 设计系统治理规则见 docs/DESIGN_SYSTEM.md。
+# 关键门禁（由 Code Review + 文档约束保证，非 lint 强制）：
+# - feature 代码禁止硬编码 Color(0xFF…) / EdgeInsets 魔法数字；视觉常量取自 core/theme/app_tokens.dart。
+# - 颜色统一走 Theme.of(context).colorScheme；阴影走 AppShadows；渐变走 AppGradients。
+# - 任何用户可见字符串必须走 AppLocalizations.of(context)，不得写死中/英文。
+# - 重复 UI 模式（≥2 次）必须下沉到 core/widgets，禁止复制粘贴实现。

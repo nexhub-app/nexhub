@@ -1,0 +1,124 @@
+name: nexhub
+description: 四合一媒体聚合客户端（动漫 / 漫画 / 小说 / 影视）—— Material 3 设计系统基础脚手架。
+publish_to: 'none'
+version: 0.1.0+1
+repository: https://github.com/nexhub-app/nexhub
+
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.19.0
+  # 莫奈取色（Material You 系统动态色 / 从壁纸提取的和谐调色板）
+  dynamic_color: ^1.7.0
+  # 运行时主题状态（亮/暗/跟随 + 自定义主色 + 莫奈开关）
+  provider: ^6.1.2
+  # 自定义主题色选择器
+  flutter_colorpicker: ^1.1.0
+  # HTTP 统一实例（含 CookieManager / stealth 延迟 / 验证感知）
+  dio: ^5.4.3+1
+  # JS 沙箱（ScriptResolver 执行源内嵌脚本，quickjs 内核）
+  flutter_js: ^0.8.1
+  # HTML / CSS 选择器解析
+  html: ^0.15.4
+  # XPath 引擎（内置源声明式选择器：substring-before/after、following-sibling、text() 等）
+  xpath_selector: ^3.0.2
+  # xpath_selector 的 html 解析适配（基于 package:html）
+  xpath_selector_html_parser: ^3.0.1
+  # RSS 文章正文富文本渲染（保留 HTML 标签 / 图片 / 样式）
+  flutter_html: ^3.0.0
+  # XML 解析（RSS / Atom 订阅源）
+  xml: ^6.5.0
+  # 摘要与编解码（md5 / base64 / rc4 / aes）
+  crypto: ^3.0.3
+  pointycastle: ^3.9.1
+  # 路径工具
+  path: ^1.9.0
+  # 阅读器偏好 / 进度持久化（按 comicId / novelId 存储）
+  shared_preferences: ^2.2.2
+  # CBZ / EPUB 打包（下载管理器，纯 Dart ZIP 实现）
+  archive: ^3.6.1
+  # 下载基路径（平台文档目录）
+  path_provider: ^2.1.3
+  # 在系统浏览器中打开 URL（验证流程 / 外部链接）
+  url_launcher: ^6.3.0
+  # 应用包信息（关于页读取版本号 / 构建号）
+  package_info_plus: ^8.0.0
+  # 本地/文件选择（导入本地文件、源 JSON 文件）
+  file_picker: ^8.0.0
+  # 运行时权限申请（F2.C：本地导入前申请 READ_MEDIA_* / READ_EXTERNAL_STORAGE）
+  permission_handler: ^11.3.1
+  # Hive 持久化（源/收藏/进度/下载任务/danmaku 缓存）
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  # GBK 解码（源站内容可能为 GBK 编码）
+  fast_gbk: ^1.0.0
+  # WebView（验证流程 / WebView 视频提取 / WebViewResolver）
+  flutter_inappwebview: ^6.0.0
+  # 视频播放器内核（media_kit + fvp）
+  media_kit: ^1.2.6
+  media_kit_video: ^2.0.1
+  media_kit_libs_video: ^1.0.7
+  fvp: ^0.37.3
+  # 投屏（Chromecast，纯 Dart 实现，无需 Google Cast SDK）
+  cast: ^2.1.0
+  # 画中画（Android 原生 PiP，iOS / 桌面优雅降级）
+  floating: ^6.0.0
+  # 弹幕（canvas_danmaku）
+  canvas_danmaku: ^0.2.7
+  # 屏幕亮度控制（阅读器亮度手势）
+  screen_brightness: ^0.2.2
+  # 屏幕常亮（漫画阅读器 keepScreenOn 开关）
+  wakelock_plus: ^1.2.0
+  # 电池电量（阅读器页脚电量显示）
+  battery_plus: ^6.0.0
+  # 带缓存的网络图片（统一 SourceImage，注入防盗链 headers + 重试）
+  cached_network_image: ^3.4.1
+  # 剪贴板图片二进制复制（长按菜单「复制图片」，跨平台真复制，Rust 后端需 NDK）
+  super_clipboard: ^0.9.1
+  # 系统分享（详情页分享到微信/QQ/记事本等）
+  share_plus: ^10.1.0
+  # TTS 朗读（小说阅读器）
+  flutter_tts: ^4.2.0
+  # 安全存储敏感凭据（WebDAV 密码）
+  flutter_secure_storage: ^9.0.0
+  # 网络状态检测（仅 WiFi 下载模式：判断是否连接 WiFi）
+  connectivity_plus: ^6.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  # 从单一源图生成各平台启动图标
+  flutter_launcher_icons: ^0.14.2
+  # Hive 适配器代码生成
+  hive_generator: ^2.0.1
+  build_runner: ^2.4.11
+
+flutter:
+  uses-material-design: true
+  # 启用 l10n 代码生成（配合 l10n.yaml）
+  generate: true
+  assets:
+    - assets/icon/
+    - assets/builtin/
+    - plugins/builtin/
+
+# ===== 启动图标生成配置（源图：assets/icon/icon.png）=====
+flutter_launcher_icons:
+  image_path: "assets/icon/icon.png"
+  android: true
+  ios: true
+  windows:
+    generate: true
+    image_path: "assets/icon/icon.png"
+  web:
+    generate: true
+  macos:
+    generate: true
+  adaptive_icon_background: "#0EA5E9" # 蓝青主色，作为自适应图标背景
+  adaptive_icon_foreground: "assets/icon/icon.png"
