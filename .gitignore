@@ -121,3 +121,6 @@ tools/scan_golden_sources2.py
 .r20_official/
 bqg_search.html
 tmp_dump.html
+
+# 独立网站代码（勿提交）
+website/
