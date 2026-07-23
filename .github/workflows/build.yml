@@ -1,5 +1,5 @@
 # =============================================================================
-# NexHub 自动打包 + 发布工作流（v7 — Linux 增加原生依赖库与诊断，修链接期缺库）
+# NexHub 自动打包 + 发布工作流（v8 — 修复 Release 发布页正文为空：release job 未 checkout）
 # -----------------------------------------------------------------------------
 # 触发：推送 v* 标签自动发布；也支持网页手动 Run workflow 试跑。
 #
@@ -31,6 +31,11 @@
 #     - 增加诊断与健壮性：flutter doctor -v / --version、precache --linux、
 #       flutter clean（置于 pub get 之前，避免清掉 .dart_tool/package_config）、
 #       pub get 失败重试并输出 verbose 日志、build 用 pipefail + tee 失败 tail 500 行。
+#   v8（当前）：
+#     - **修复 Release 发布页正文为空**：release job 之前没有 actions/checkout，
+#       工作目录里根本没有 RELEASE_NOTES.md，导致 softprops/action-gh-release 的
+#       body_path 读不到文件 → 发布页正文空白。已加 checkout；并加 allowUpdates: true
+#       （同一 tag 重跑时更新已有 Release 而非报 "已存在" 失败）。
 # =============================================================================
 
 name: Build & Release NexHub
@@ -197,6 +202,7 @@ jobs:
     permissions:
       contents: write
     steps:
+      - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with:
           path: artifacts
@@ -205,6 +211,7 @@ jobs:
         with:
           name: NexHub ${{ github.ref_name }}
           body_path: RELEASE_NOTES.md
+          allowUpdates: true
           files: |
             artifacts/android-apk/app-release.apk
             artifacts/windows-build/NexHub-windows-x64.zip
