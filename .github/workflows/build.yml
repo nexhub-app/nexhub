@@ -1,5 +1,5 @@
 # =============================================================================
-# NexHub 自动打包 + 发布工作流（v8 — 修复 Release 发布页正文为空：release job 未 checkout）
+# NexHub 自动打包 + 发布工作流（v9 — Windows 固定 windows-2022 镜像，修 VS2019 生成器误选）
 # -----------------------------------------------------------------------------
 # 触发：推送 v* 标签自动发布；也支持网页手动 Run workflow 试跑。
 #
@@ -10,32 +10,22 @@
 #       并修复 intl ^0.19.0→^0.20.2（匹配 flutter_localizations 要求）
 #   v4: 修复 d0537c9 误回退 intl 到 ^0.19.0（重新锁定 ^0.20.2）；
 #       四个编译 job 在 build 前显式 flutter gen-l10n
-#   v5: 移除 ilammy/msvc-dev-cmd@v1（误诊：移除后仍是 "Visual Studio 16 2019" 生成器报错，
-#       证明是 Flutter 自身 vswhere 偏好 VS2019，而非 ilammy 所致）。
-#   v6（当前）：
-#     - **加回 ilammy/msvc-dev-cmd@v1 但固定 VS2022**：`vs-version: '[17,18)'`。
-#       该 Action 通过 vswhere 定位 VS2022 并设置 VSINSTALLDIR 等环境变量，
-#       Flutter 读取后改用 "Visual Studio 17 2022" 生成器，CMake 即可找到 VS2022
-#       （windows-latest 上 VS2022 完整可用，VS2019 实为残缺/被误选）。
-#     - 三个桌面平台 job 在依赖获取前显式开启桌面支持：
-#       windows → flutter config --enable-windows-desktop
-#       linux   → flutter config --enable-linux-desktop
-#       macos   → flutter config --enable-macos-desktop
-#     - upload-artifact 加 if-no-files-found: error
-#   v7（当前）：
-#     - **Linux job 链接期失败**（Windows 经 v6 已通过）：原 apt 仅装 GTK 基础库，
-#       而 media_kit / screen_brightness / flutter_inappwebview 等插件链接时需
-#       X11 / GL / ALSA / Pulse 等原生库。扩充 apt 列表：
-#       libx11-dev libxcursor-dev libxrandr-dev libxi-dev libasound2-dev
-#       libxss1 libpulse-dev libglu1-mesa-dev libgl1-mesa-dev。
-#     - 增加诊断与健壮性：flutter doctor -v / --version、precache --linux、
-#       flutter clean（置于 pub get 之前，避免清掉 .dart_tool/package_config）、
-#       pub get 失败重试并输出 verbose 日志、build 用 pipefail + tee 失败 tail 500 行。
-#   v8（当前）：
-#     - **修复 Release 发布页正文为空**：release job 之前没有 actions/checkout，
-#       工作目录里根本没有 RELEASE_NOTES.md，导致 softprops/action-gh-release 的
-#       body_path 读不到文件 → 发布页正文空白。已加 checkout；并加 allowUpdates: true
-#       （同一 tag 重跑时更新已有 Release 而非报 "已存在" 失败）。
+#   v5: 移除 ilammy/msvc-dev-cmd@v1（误诊：移除后仍是 "Visual Studio 16 2019" 生成器报错）
+#   v6: 加回 ilammy/msvc-dev-cmd@v1 固定 VS2022（vs-version: '[17,18)'）——
+#       **实测仍失败**：Flutter 3.32 用自身 vswhere 选生成器，ilammy 的环境变量
+#       未能覆盖其生成器偏好，Windows job 依旧报 "Visual Studio 16 2019 ... not found"
+#   v7: Linux job 链接期缺原生库修复：扩充 apt（X11/GL/ALSA/Pulse 等）；
+#       加诊断(precache/doctor)与健壮性(clean 先于 pub get、pub get 重试、build tee)
+#   v8: Release 发布页正文为空修复：release job 加 actions/checkout + allowUpdates: true
+#   v9（当前）：
+#     - **Windows CMake "Visual Studio 16 2019 could not find any instance of Visual Studio"
+#       根因定案**：Flutter 3.32.0 在 windows-latest 镜像上误选了残缺的 VS2019 生成器。
+#       ilammy 固定 VS2022（v6）未能覆盖 Flutter 自身 vswhere 的生成器选择，故无效。
+#     - **最终修复**：Windows runner 由 windows-latest 固定为 **windows-2022**
+#       （该镜像的 VS2022 + Windows SDK 与 Flutter 3.32 期望一致，生成器自动选对），
+#       并移除 ilammy/msvc-dev-cmd@v1 步骤。其余桌面 job 桌面支持与 gen-l10n 保持不变。
+#     - 注：用户曾粘贴过 "AppLocalizations/flutter_gen 缺失" 的 Summary，与本次实际
+#       Windows VS2019 报错并非同一错误；gen-l10n 已在 v4 起每个编译 job 显式执行，可忽略。
 # =============================================================================
 
 name: Build & Release NexHub
@@ -78,14 +68,9 @@ jobs:
 
   windows:
     name: Windows
-    runs-on: windows-latest
+    runs-on: windows-2022
     steps:
       - uses: actions/checkout@v4
-      - name: 配置 MSVC 工具链（强制 VS2022，规避 windows-latest 误选 VS2019 生成器）
-        uses: ilammy/msvc-dev-cmd@v1
-        with:
-          vs-version: '[17,18)'
-          arch: x64
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.32.0'
