@@ -1,5 +1,5 @@
 # =============================================================================
-# NexHub 自动打包 + 发布工作流（v4 — 修复 intl 回退 + 显式 gen-l10n）
+# NexHub 自动打包 + 发布工作流（v5 — 移除 ilammy/msvc-dev-cmd 修复 Windows CMake 找不到 VS）
 # -----------------------------------------------------------------------------
 # 触发：推送 v* 标签自动发布；也支持网页手动 Run workflow 试跑。
 #
@@ -8,12 +8,17 @@
 #   v2: 尝试 flutter-action@v3 → **v3 不存在**，4 个 job 全部 Unable to resolve action
 #   v3: 改回 subosito/flutter-action@v2，固定 Flutter 3.32.0，加 --verbose；
 #       并修复 intl ^0.19.0→^0.20.2（匹配 flutter_localizations 要求）
-#   v4（当前）：
-#     - 修复 d0537c9 误把 intl 回退到 ^0.19.0（导致 flutter pub get 仍冲突）—
-#       重新锁定 intl: ^0.20.2
-#     - 每个编译 job 在 flutter build 之前显式执行 flutter gen-l10n，
-#       确保 AppLocalizations / flutter_gen 虚拟包映射在编译前就绪
-#       （避免 "AppLocalizations isn't a type" / FileSystemException）
+#   v4: 修复 d0537c9 误回退 intl 到 ^0.19.0（重新锁定 ^0.20.2）；
+#       四个编译 job 在 build 前显式 flutter gen-l10n
+#   v5（当前）：
+#     - **移除 ilammy/msvc-dev-cmd@v1**：该 Action 默认只在 VS2017/2019 范围找编译器，
+#       在 windows-latest（只有 VS2022）上会让 CMake 误用 "Visual Studio 16 2019"
+#       生成器并报 "could not find any instance of Visual Studio"。
+#       改为依赖 Flutter 自带 vswhere 自动探测 windows-latest 的 VS2022（标准做法）。
+#     - 三个桌面平台 job 在依赖获取前显式开启桌面支持：
+#       windows → flutter config --enable-windows-desktop
+#       linux   → flutter config --enable-linux-desktop
+#       macos   → flutter config --enable-macos-desktop
 #     - upload-artifact 加 if-no-files-found: error
 # =============================================================================
 
@@ -60,12 +65,13 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ilammy/msvc-dev-cmd@v1
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.32.0'
           channel: 'stable'
           cache: true
+      - name: 启用 Windows 桌面支持
+        run: flutter config --enable-windows-desktop
       - name: 获取依赖
         run: flutter pub get 2>&1
       - name: 生成多语言文件 (gen-l10n)
@@ -94,6 +100,8 @@ jobs:
           flutter-version: '3.32.0'
           channel: 'stable'
           cache: true
+      - name: 启用 Linux 桌面支持
+        run: flutter config --enable-linux-desktop
       - name: 获取依赖
         run: flutter pub get 2>&1
       - name: 生成多语言文件 (gen-l10n)
@@ -118,6 +126,8 @@ jobs:
           flutter-version: '3.32.0'
           channel: 'stable'
           cache: true
+      - name: 启用 macOS 桌面支持
+        run: flutter config --enable-macos-desktop
       - name: 获取依赖
         run: flutter pub get 2>&1
       - name: 生成多语言文件 (gen-l10n)
