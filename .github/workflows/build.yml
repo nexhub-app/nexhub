@@ -1,5 +1,5 @@
 # =============================================================================
-# NexHub 自动打包 + 发布工作流（v5 — 移除 ilammy/msvc-dev-cmd 修复 Windows CMake 找不到 VS）
+# NexHub 自动打包 + 发布工作流（v6 — ilammy 固定 VS2022 修复 Windows CMake 误选 VS2019 生成器）
 # -----------------------------------------------------------------------------
 # 触发：推送 v* 标签自动发布；也支持网页手动 Run workflow 试跑。
 #
@@ -10,11 +10,13 @@
 #       并修复 intl ^0.19.0→^0.20.2（匹配 flutter_localizations 要求）
 #   v4: 修复 d0537c9 误回退 intl 到 ^0.19.0（重新锁定 ^0.20.2）；
 #       四个编译 job 在 build 前显式 flutter gen-l10n
-#   v5（当前）：
-#     - **移除 ilammy/msvc-dev-cmd@v1**：该 Action 默认只在 VS2017/2019 范围找编译器，
-#       在 windows-latest（只有 VS2022）上会让 CMake 误用 "Visual Studio 16 2019"
-#       生成器并报 "could not find any instance of Visual Studio"。
-#       改为依赖 Flutter 自带 vswhere 自动探测 windows-latest 的 VS2022（标准做法）。
+#   v5: 移除 ilammy/msvc-dev-cmd@v1（误诊：移除后仍是 "Visual Studio 16 2019" 生成器报错，
+#       证明是 Flutter 自身 vswhere 偏好 VS2019，而非 ilammy 所致）。
+#   v6（当前）：
+#     - **加回 ilammy/msvc-dev-cmd@v1 但固定 VS2022**：`vs-version: '[17,18)'`。
+#       该 Action 通过 vswhere 定位 VS2022 并设置 VSINSTALLDIR 等环境变量，
+#       Flutter 读取后改用 "Visual Studio 17 2022" 生成器，CMake 即可找到 VS2022
+#       （windows-latest 上 VS2022 完整可用，VS2019 实为残缺/被误选）。
 #     - 三个桌面平台 job 在依赖获取前显式开启桌面支持：
 #       windows → flutter config --enable-windows-desktop
 #       linux   → flutter config --enable-linux-desktop
@@ -65,6 +67,11 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+      - name: 配置 MSVC 工具链（强制 VS2022，规避 windows-latest 误选 VS2019 生成器）
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          vs-version: '[17,18)'
+          arch: x64
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.32.0'
