@@ -61,6 +61,11 @@ class ChapterListSection extends StatefulWidget {
   /// 返回某集的播放位置（毫秒），0 表示无记录。null 时不显示进度指示。
   final int Function(int originalIndex)? getPosition;
 
+  /// 是否仍有章节在后台渐进加载中（如长目录多页续抓）。true 时：
+  /// - 列表为空则显示"加载中"而非"暂无内容"；
+  /// - 列表非空则在末尾追加一个加载指示行，提示用户剩余章节正在补齐。
+  final bool loadingMore;
+
   const ChapterListSection({
     super.key,
     required this.chapters,
@@ -77,6 +82,7 @@ class ChapterListSection extends StatefulWidget {
     this.enableGridMode = false,
     this.contentId,
     this.getPosition,
+    this.loadingMore = false,
   });
 
   @override
@@ -97,6 +103,13 @@ class _ChapterListSectionState extends State<ChapterListSection> {
 
   /// 当前选中的线路（null 表示全部线路）。仅当 [groupByLine] 且线路数 > 1 时有效。
   String? _selectedLine;
+
+  /// 长列表折叠：默认只渲染前 [_collapseHead] + 后 [_collapseTail] 章，
+  /// 中间折叠为"展开"按钮，防止上千章一次性全量渲染导致详情页卡顿。
+  /// 用户点击展开后置 true（搜索/筛选/区间选择时不折叠，保证结果完整）。
+  bool _chaptersExpanded = false;
+  static const int _collapseHead = 20;
+  static const int _collapseTail = 20;
 
   /// 区间 chips 横向滚动控制器（选中后自动居中）。
   final ScrollController _chipScrollCtrl = ScrollController();
@@ -242,6 +255,13 @@ class _ChapterListSectionState extends State<ChapterListSection> {
     final scheme = Theme.of(context).colorScheme;
 
     if (widget.chapters.isEmpty) {
+      // 后台仍在续抓目录时显示"加载中"，避免误报"暂无内容"。
+      if (widget.loadingMore) {
+        return const Padding(
+          padding: EdgeInsets.all(AppTokens.spaceLg),
+          child: Center(child: CircularProgressIndicator()),
+        );
+      }
       return Padding(
         padding: const EdgeInsets.all(AppTokens.spaceLg),
         child: Center(child: Text(l10n.emptyContent)),
@@ -306,6 +326,24 @@ class _ChapterListSectionState extends State<ChapterListSection> {
       widget.chapters,
       List<int>.generate(widget.chapters.length, (i) => i),
     );
+
+    // ── 长列表折叠：仅在"无搜索/无筛选/无区间选择/未手动展开"时生效。
+    // 默认只渲染前 _collapseHead + 后 _collapseTail 章（各20），中间用
+    // "展开剩余 N 章"按钮占位，避免上千个 ListTile 全量渲染导致卡顿。
+    final bool collapseActive = !_chaptersExpanded &&
+        _rangeStart == null &&
+        _query.isEmpty &&
+        _filterQuery.filter.isEmpty &&
+        indices.length > _collapseHead + _collapseTail;
+    final List<int> headIndices =
+        collapseActive ? indices.sublist(0, _collapseHead) : indices;
+    final List<int> tailIndices = collapseActive
+        ? indices.sublist(indices.length - _collapseTail)
+        : const <int>[];
+    final int hiddenCount = collapseActive
+        ? indices.length - _collapseHead - _collapseTail
+        : 0;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -316,10 +354,35 @@ class _ChapterListSectionState extends State<ChapterListSection> {
             padding: const EdgeInsets.all(AppTokens.spaceLg),
             child: Center(child: Text(l10n.noChaptersFound)),
           )
-        else if (_isGridMode && widget.enableGridMode)
-          _buildChapterGrid(context, l10n, scheme, indices)
-        else
-          ..._buildChapterTiles(context, l10n, scheme, indices),
+        else if (_isGridMode && widget.enableGridMode) ...<Widget>[
+          _buildChapterGrid(context, l10n, scheme, headIndices),
+          if (collapseActive) _buildExpandButton(context, l10n, hiddenCount),
+          if (collapseActive)
+            _buildChapterGrid(context, l10n, scheme, tailIndices),
+        ] else ...<Widget>[
+          ..._buildChapterTiles(context, l10n, scheme, headIndices),
+          if (collapseActive) _buildExpandButton(context, l10n, hiddenCount),
+          if (collapseActive)
+            ..._buildChapterTiles(context, l10n, scheme, tailIndices),
+        ],
+        // 后台仍在续抓目录 → 末尾追加加载指示，提示剩余章节补齐中。
+        if (widget.loadingMore)
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: AppTokens.spaceMd),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const SizedBox(
+                  width: 16,
+                  height: 16,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                ),
+                const SizedBox(width: AppTokens.spaceSm),
+                Text(l10n.loading,
+                    style: Theme.of(context).textTheme.bodySmall),
+              ],
+            ),
+          ),
       ],
     );
   }
@@ -494,6 +557,22 @@ class _ChapterListSectionState extends State<ChapterListSection> {
               ],
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  /// 长列表折叠时中间的"展开剩余 N 章"按钮。
+  Widget _buildExpandButton(
+      BuildContext context, AppLocalizations l10n, int hiddenCount) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+          horizontal: AppTokens.spaceLg, vertical: AppTokens.spaceXs),
+      child: Center(
+        child: TextButton.icon(
+          onPressed: () => setState(() => _chaptersExpanded = true),
+          icon: const Icon(Icons.unfold_more),
+          label: Text(l10n.expandRemainingChapters(hiddenCount)),
         ),
       ),
     );

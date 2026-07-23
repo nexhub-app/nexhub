@@ -116,3 +116,8 @@ docs/
 # 内部源扫描脚本
 tools/scan_golden_sources.py
 tools/scan_golden_sources2.py
+
+# R20 临时备份与调试 dump（勿提交）
+.r20_official/
+bqg_search.html
+tmp_dump.html

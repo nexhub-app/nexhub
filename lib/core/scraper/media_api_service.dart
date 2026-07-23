@@ -464,8 +464,16 @@ class MediaApiService {
   }
 
   /// 小说章节列表（按 `toc` 路由解析，复用 Episode 结构）。
-  Future<List<Episode>> fetchNovelChapters(PluginConfig source, String id,
-      {String? renderedHtml}) async {
+  ///
+  /// [onProgress] 为可选渐进回调：超长书目录需多页串行抓取时，解析器会分批
+  /// 回传中间章节（如首页 + 每页增量），调用方据此先渲染首屏、后台续抓，
+  /// 避免整页被长目录阻塞。最终仍返回合并后的完整列表。
+  Future<List<Episode>> fetchNovelChapters(
+    PluginConfig source,
+    String id, {
+    String? renderedHtml,
+    void Function(List<Episode>)? onProgress,
+  }) async {
     final apiName = source.routes.containsKey('toc') ? 'toc' : 'chapters';
     if (renderedHtml != null && renderedHtml.isNotEmpty) {
       final r = await _resolveFromRenderedHtml(
@@ -480,6 +488,9 @@ class MediaApiService {
           source,
           apiName,
           vars: <String, String>{'id': id},
+          onProgress: onProgress == null
+              ? null
+              : (batch) => onProgress(batch.cast<Episode>()),
         );
     return _asEpisodes(r);
   }
@@ -626,6 +637,11 @@ class MediaApiService {
     // 切选集）可直接复用，不再反复弹验证页（修复「多个页面需要验证多次」）。
     // 缓存维度为 (source.id, apiName)，每个路由每会话仅捕获一次。
     WebViewHtmlCache.set(source.id, apiName, renderedHtml);
+    // 书源（xiaoshuo）回灌：必须用其专属解析器（WebBook 静态分析器）解析渲染后
+    // HTML，不能路由到 BuiltinResolver（书源无 selectors 形式规则，否则解析为空）。
+    if (source.selectors?['xiaoshuo'] is Map<String, dynamic>) {
+      return registry.resolveRenderedHtml(source, apiName, renderedHtml, vars: vars);
+    }
     // 回灌分流：
     // - hybrid + script override → [ScriptResolver.resolveFromHtml]（把渲染后
     //   HTML 作为 `raw` 喂给脚本入口）；

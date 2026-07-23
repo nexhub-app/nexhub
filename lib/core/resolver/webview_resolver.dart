@@ -204,6 +204,7 @@ class WebViewResolver implements SourceResolver {
     PluginConfig source,
     String apiName, {
     Map<String, String> vars = const {},
+    void Function(List<dynamic>)? onProgress,
   }) async {
     final base = ConfigLoader.instance.getActiveMirror(source);
     final url =

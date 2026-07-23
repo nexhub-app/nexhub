@@ -144,7 +144,9 @@ class BookInfo {
   static String _formatBookAuthor(String author) {
     if (author.isEmpty) return author;
     return author
-        .replaceAll(RegExp(r'^[作者：]\s*'), '')
+        // 去除 "作者:" / "作者：" 前缀（与 book_list.formatBookAuthor 一致，
+        // 用字面序列匹配而非字符类 [作者：]，后者只删首字"作"）
+        .replaceAll(RegExp(r'^\s*作\s*者\s*[:：]\s*'), '')
         .replaceAll(RegExp(r'^\s*[\-_—–]+'), '')
         .replaceAll(RegExp(r'[\-_—–]+\s*$'), '')
         .trim();

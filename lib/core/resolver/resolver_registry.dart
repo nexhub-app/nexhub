@@ -112,23 +112,56 @@ class ResolverRegistry {
         return const BuiltinResolver();
     }
   }
+
+  /// 渲染后 HTML 回灌（含书源）。
+  ///
+  /// 供 [MediaApiService._resolveFromRenderedHtml] 在识别为书源时调用，
+  /// 内部路由到 [_LazyShuyuanResolver.resolveRenderedHtml]，避免错误地走
+  /// [BuiltinResolver]（书源无 selectors 形式规则，否则渲染 HTML 解析为空）。
+  /// 非书源不应调用本方法（由调用方直接处理 Builtin/Script）。
+  Future<dynamic> resolveRenderedHtml(
+    PluginConfig source,
+    String apiName,
+    String html, {
+    Map<String, String> vars = const {},
+  }) {
+    if (_isShuyuanSource(source)) {
+      return _shuyuanResolver.resolveRenderedHtml(source, apiName, html, vars: vars);
+    }
+    throw UnsupportedError('resolveRenderedHtml 仅支持书源，收到 apiName=$apiName');
+  }
 }
 
 // 惰性单例：书源解析器（WebBook 内部维护 XiaoshuoHttp，
 // 复用静态 Dio 实例，单例化避免每次解析都重建）。
-final SourceResolver _shuyuanResolver = _LazyShuyuanResolver();
+final _LazyShuyuanResolver _shuyuanResolver = _LazyShuyuanResolver();
 
-class _LazyShuyuanResolver implements SourceResolver {
-  SourceResolver? _inner;
+class _LazyShuyuanResolver implements SourceResolver, RenderedHtmlCapable {
+  RenderedHtmlCapable? _inner;
 
   @override
   Future<dynamic> resolve(
     PluginConfig source,
     String apiName, {
     Map<String, String> vars = const {},
+    void Function(List<dynamic>)? onProgress,
   }) {
-    _inner ??= _createShuyuanResolver();
-    return _inner!.resolve(source, apiName, vars: vars);
+    _inner ??= _createShuyuanResolver() as RenderedHtmlCapable;
+    return (_inner! as SourceResolver)
+        .resolve(source, apiName, vars: vars, onProgress: onProgress);
+  }
+
+  /// 渲染后 HTML 回灌转发：委托真正的书源解析器（[ShuyuanNovelResolver]）解析，
+  /// 让 WebView 过验证后拿回的 HTML 能正确走 WebBook 规则解析，而非 BuiltinResolver。
+  @override
+  Future<dynamic> resolveRenderedHtml(
+    PluginConfig source,
+    String apiName,
+    String html, {
+    Map<String, String> vars = const {},
+  }) {
+    _inner ??= _createShuyuanResolver() as RenderedHtmlCapable;
+    return _inner!.resolveRenderedHtml(source, apiName, html, vars: vars);
   }
 
   SourceResolver _createShuyuanResolver() {
@@ -166,4 +199,19 @@ class _ShuyuanResolverFactory {
 /// 调用示例：`registerShuyuanResolver(ShuyuanNovelResolver.new);`
 void registerShuyuanResolver(SourceResolver Function() factory) {
   _ShuyuanResolverFactory.factory = factory;
+}
+
+/// 能直接解析「渲染后 HTML」的解析器（用于 WebView 过验证后回灌）。
+///
+/// 普通声明式/脚本源由 [BuiltinResolver]/[ScriptResolver] 已实现同名方法；
+/// 书源解析器（[ShuyuanNovelResolver]）通过本接口声明该能力，使
+/// [_LazyShuyuanResolver] / [MediaApiService] 能在回灌时正确分派，而非误用
+/// [BuiltinResolver]（书源无 selectors 形式规则）。
+abstract class RenderedHtmlCapable {
+  Future<dynamic> resolveRenderedHtml(
+    PluginConfig source,
+    String apiName,
+    String html, {
+    Map<String, String> vars = const {},
+  });
 }

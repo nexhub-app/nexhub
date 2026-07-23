@@ -30,6 +30,7 @@ class ScriptResolver implements SourceResolver {
     PluginConfig source,
     String apiName, {
     Map<String, String> vars = const {},
+    void Function(List<dynamic>)? onProgress,
   }) async {
     // 注意：不再对 `useWebview` 源无条件抛 [WebViewHtmlRequest]。
     //

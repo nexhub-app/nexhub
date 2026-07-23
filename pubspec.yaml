@@ -12,7 +12,7 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  intl: ^0.20.2
+  intl: ^0.19.0
   # 莫奈取色（Material You 系统动态色 / 从壁纸提取的和谐调色板）
   dynamic_color: ^1.7.0
   # 运行时主题状态（亮/暗/跟随 + 自定义主色 + 莫奈开关）

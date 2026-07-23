@@ -87,6 +87,7 @@
   "loading": "Loading…",
   "noResults": "No results",
   "loadFailed": "Failed to load",
+  "chapterLoadPartial": "Table of contents incomplete — showing {count} chapters (network may be unstable)",
   "noMoreResults": "No more results",
   "authorColon": "Author: ",
   "tagColon": "Tag: ",
@@ -1358,6 +1359,14 @@
   "updatedAtLabel": "Updated: ",
   "searchChapter": "Search chapters",
   "noChaptersFound": "No matching chapters found",
+  "expandRemainingChapters": "Show remaining {count} chapters",
+  "@expandRemainingChapters": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "sortAscending": "Ascending",
   "sortDescending": "Descending",
   "downloadSingleChapter": "Download chapter",

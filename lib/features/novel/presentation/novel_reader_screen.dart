@@ -175,6 +175,15 @@ class _NovelReaderScreenState extends State<NovelReaderScreen>
   /// 当前 [_pagination] 对应的章节下标。用于检测「跨章后分页是否需刷新」：
   /// 相邻两章页数可能相同，仅比较页数长度无法触发刷新（会残留上一章的分页）。
   int _paginationChapterIndex = -1;
+  /// 分页缓存签名：仅当影响分页的输入（正文版本 / 偏好版本 / 章节下标 / 可用
+  /// 尺寸 / 系统字号缩放 / 文字方向 / 章节标题 / 书名）真正变化时才重新分页。
+  /// 否则直接在 build（含翻页动画每帧触发的父层重建、_onPageChanged 触发的重建）
+  /// 中复用缓存，避免整章重新分页造成的卡顿，也避免翻页动画被重型计算抢占而
+  /// 看起来「无动画」。
+  String? _paginationSig;
+  /// 偏好版本号：任何阅读设置（字号/行距/段距/边距/字体/标题样式…）变化都自增，
+  /// 作为分页缓存签名的一部分，确保改设置后分页立即刷新。
+  int _prefsVersion = 0;
   bool _loading = true;
   String? _error;
   bool _isResolveError = false;
@@ -966,7 +975,6 @@ class _NovelReaderScreenState extends State<NovelReaderScreen>
   }
 
   /// TTS 模式下点击某一段落：跳转到该段落开始朗读。
-  /// 如果段落不在当前页，先跳到包含该段的页，再从该段开始朗读。
   void _onParagraphTapped(int globalParagraphIndex) {
     if (_paragraphs.isEmpty) return;
     final clamped = globalParagraphIndex.clamp(0, _paragraphs.length - 1);
@@ -974,7 +982,7 @@ class _NovelReaderScreenState extends State<NovelReaderScreen>
     final pages = _pagination?.pages;
     if (pages != null) {
       for (int i = 0; i < pages.length; i++) {
-        if (pages[i].contains(clamped)) {
+        if (pages[i].any((NovelLine l) => l.paragraphIndex == clamped)) {
           if (i != _currentPage) {
             _pageKey.currentState?.jumpToPage(i);
           }
@@ -1014,6 +1022,9 @@ class _NovelReaderScreenState extends State<NovelReaderScreen>
     final autoPageChanged =
         next.autoPageInterval != _prefs.autoPageInterval;
     _prefs = next;
+    // 任何阅读设置变化都使分页缓存失效（字号/行距/段距/边距/字体等不会 bump
+    // _contentVersion，但会影响分页高度，必须靠 _prefsVersion 触发重新分页）。
+    _prefsVersion++;
     await _store.save(widget.novelId, next);
     if (convertChanged && _rawParagraphs.isNotEmpty) {
       _refreshConvert();
@@ -1319,14 +1330,31 @@ class _NovelReaderScreenState extends State<NovelReaderScreen>
         : widget.chapters[_chapterIndex].title;
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
-        final newPagination = NovelPaginator.paginate(
-          paragraphs: _paragraphs,
-          constraints: constraints,
-          prefs: _prefs,
-          context: context,
-          chapterTitle: chapterTitleForBody,
-          bookName: widget.title,
-        );
+        final w = constraints.maxWidth;
+        final h = constraints.maxHeight;
+        // 分页缓存签名：仅在这些输入真正变化时重新分页，否则复用上一次结果。
+        // 关键：翻页动画每帧只触发 NovelAnimatedPageView 自身重建（其 State 内的
+        // setState），不会重建到这里；但 _onPageChanged → setState 与
+        // FavoritesManager 通知都会触发本 reader 重建 → 若每次都重新分页整章，
+        // 会在翻页瞬间产生明显卡顿，并使翻页动画被重型计算抢占、看起来「无动画」。
+        final scaler = MediaQuery.textScalerOf(context);
+        final dir = Directionality.of(context);
+        final sig =
+            '$_contentVersion|$_prefsVersion|$_chapterIndex|${w.round()}x${h.round()}|$scaler|$dir|$chapterTitleForBody|${widget.title}';
+        final bool sigChanged = _paginationSig != sig;
+        final int prevChapterIndex = _paginationChapterIndex;
+        if (_pagination == null || sigChanged) {
+          _pagination = NovelPaginator.paginate(
+            paragraphs: _paragraphs,
+            constraints: constraints,
+            prefs: _prefs,
+            context: context,
+            chapterTitle: chapterTitleForBody,
+            bookName: widget.title,
+          );
+          _paginationSig = sig;
+          _paginationChapterIndex = _chapterIndex;
+        }
 
         // 检测分页结果是否变化（跨章/改偏好/旋转屏幕时变化）。
         // _pagination 可能在本帧的 layout 阶段才被 LayoutBuilder 赋值，
@@ -1334,11 +1362,10 @@ class _NovelReaderScreenState extends State<NovelReaderScreen>
         // 让进度条重建以获取最新分页数据（详见 _loadChapter 时序注释）。
         // 注意：相邻两章页数可能相同，仅比较页数长度不够，必须同时检测章节下标变化，
         // 否则会残留上一章的分页（总页数/当前页显示正确但内容错位）。
-        final chapterChanged = _paginationChapterIndex != _chapterIndex;
-        final paginationChanged =
-            chapterChanged || _pagination?.pages.length != newPagination.pages.length;
-        _pagination = newPagination;
-        _paginationChapterIndex = _chapterIndex;
+        // 这里用「缓存前的旧章节下标」判断跨章，并用 sigChanged 覆盖「同章但
+        // 改了字号/边距等导致分页变化」的情况，确保进度条/分页始终与最新输入一致。
+        final chapterChanged = prevChapterIndex != _chapterIndex;
+        final paginationChanged = chapterChanged || sigChanged;
 
         if (_pagination!.isEmpty) {
           return _CenterMessage(
@@ -1381,8 +1408,7 @@ class _NovelReaderScreenState extends State<NovelReaderScreen>
           pageBuilder: (BuildContext ctx, int pageIndex) {
             final page = pages[pageIndex];
             return _NovelPageWidget(
-              paragraphs: _paragraphs,
-              paragraphIndices: page,
+              lines: page,
               prefs: _prefs,
               bg: bg,
               textColor: textColor,
@@ -2511,8 +2537,7 @@ class _DashedUnderlinePainter extends CustomPainter {
 
 /// 单页小说内容（含页眉页脚）。
 class _NovelPageWidget extends StatelessWidget {
-  final List<String> paragraphs;
-  final NovelPage paragraphIndices;
+  final List<NovelLine> lines;
   final NovelReaderPreferences prefs;
   final Color bg;
   final Color textColor;
@@ -2532,11 +2557,13 @@ class _NovelPageWidget extends StatelessWidget {
   /// TTS 是否处于激活状态（playing 或 paused）。
   final bool ttsActive;
   /// 点击段落回调：传入段落在 paragraphs 中的全局索引。
+  /// TTS 模式下点击某行时回调：返回该行所属段落下标。
+  /// （TextColumn 精确字符坐标保留在 NovelLine.charLefts 中，
+  /// 供未来长按选区等场景使用；tap 时默认命中段落首字符即可。）
   final void Function(int paragraphIndex)? onParagraphTap;
 
   const _NovelPageWidget({
-    required this.paragraphs,
-    required this.paragraphIndices,
+    required this.lines,
     required this.prefs,
     required this.bg,
     required this.textColor,
@@ -2599,6 +2626,7 @@ class _NovelPageWidget extends StatelessWidget {
           Expanded(
             child: SingleChildScrollView(
               physics: const NeverScrollableScrollPhysics(),
+              clipBehavior: Clip.hardEdge,
               padding: EdgeInsets.symmetric(horizontal: prefs.margin),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -2609,12 +2637,12 @@ class _NovelPageWidget extends StatelessWidget {
                     chapterTitle,
                     bookName,
                   ),
-                  for (final idx in paragraphIndices)
-                    Padding(
-                      padding:
-                          EdgeInsets.only(bottom: prefs.paragraphSpacing),
-                      child: _buildParagraph(context, idx, textStyle),
-                    ),
+                  for (final line in lines) ...<Widget>[
+                    _buildLine(context, line, textStyle),
+                    // 段落间距（仅段末行后加）
+                    if (line.isLastLine)
+                      SizedBox(height: prefs.paragraphSpacing),
+                  ],
                 ],
               ),
             ),
@@ -2639,13 +2667,16 @@ class _NovelPageWidget extends StatelessWidget {
     );
   }
 
-  /// 构建单个段落：TTS 高亮 + 点击跳转。
-  Widget _buildParagraph(BuildContext context, int idx, TextStyle textStyle) {
-    final isCurrent = ttsActive && idx == ttsCurrentIndex;
+  /// 构建单行文本（legado 式按行渲染）：TTS 高亮 + 点击跳转。
+  ///
+  /// 每行已是适配宽度的视觉行，首行自带 `　　` 缩进；段距由上层在
+  /// [isLastLine] 后统一添加，这里只负责单行的文字与高亮。
+  Widget _buildLine(BuildContext context, NovelLine line, TextStyle textStyle) {
+    final isCurrent = ttsActive && line.paragraphIndex == ttsCurrentIndex;
     // TTS 当前朗读段落：浅色高亮背景（类似电子书阅读器的跟读效果）。
     final Widget textWidget = prefs.fontUnderline && prefs.underlineDashed
         ? _DashedUnderlineText(
-            text: paragraphs[idx],
+            text: line.text,
             style: textStyle,
             dashLength: prefs.underlineDashLength,
             dashGap: prefs.underlineDashGap,
@@ -2653,8 +2684,13 @@ class _NovelPageWidget extends StatelessWidget {
             color: prefs.resolveUnderlineColor(textColor),
           )
         : Text(
-            paragraphs[idx],
+            line.text,
             style: textStyle,
+            // 每行已是按宽度精确测量出的单行文本，禁止再次折行/省略，
+            // 保证渲染与分页器测量一致（legado 式按行排版）。
+            softWrap: false,
+            maxLines: 1,
+            overflow: TextOverflow.clip,
           );
 
     final content = isCurrent
@@ -2669,12 +2705,24 @@ class _NovelPageWidget extends StatelessWidget {
           )
         : textWidget;
 
-    // TTS 激活时允许点击任意段落跳转朗读位置；否则不拦截点击（让外层
-    // GestureDetector 处理翻页/切换 UI）。
+    // TTS 激活时允许点按任意行跳转朗读位置（按所属段落）；否则不拦截点击
+    // （让外层 GestureDetector 处理翻页/切换 UI）。
+    //
+    // ⚠️ 内层段落交互必须用 onLongPress（长按），绝不能用 onTap/onTapUp。
+    // 原因：外层 _wrapGestures 用 onTapUp 接收翻页/切换 UI 指令，而 Flutter 中
+    // onTap 与 onTapUp 同属 TapGestureRecognizer（是同一类手势）。若内层用 onTap，
+    // 嵌套竞技场里内层会赢、外层 onTapUp 被吞→点文本时翻页指令丢失，页面变成「瞬跳
+    // 无动画」或「误触发 TTS 跳转」，即用户反馈的「翻页动画消失」。
+    //
+    // onLongPress 属于 LongPressGestureRecognizer（与 Tap 是不同的识别器家族），
+    // 不会抢占单击手势：轻点文本→外层 onTapUp 正常翻页并播放动画；长按文本→
+    // 内层跳转到该段落朗读。两种交互互不干扰，翻页动画始终可见。
+    // TextColumn 精确字符坐标（charLefts / hitTestCharOffset）保留在模型中，
+    // 供未来长按选区等需要精确坐标的场景使用。
     if (ttsActive && onParagraphTap != null) {
       return GestureDetector(
         behavior: HitTestBehavior.translucent,
-        onTap: () => onParagraphTap!.call(idx),
+        onLongPress: () => onParagraphTap!.call(line.paragraphIndex),
         child: content,
       );
     }

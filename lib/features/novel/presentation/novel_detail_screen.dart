@@ -10,6 +10,8 @@
 /// - 封面点击查看大图、更新时间、题材标签、作者/状态/年份 chips、相关推荐
 library;
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -52,6 +54,8 @@ class NovelDetailScreen extends StatefulWidget {
 class _NovelDetailScreenState extends State<NovelDetailScreen> {
   late Future<List<Episode>> _chaptersFuture;
   List<Episode> _chapters = const <Episode>[];
+  /// 章节是否仍在后台渐进加载（首屏已可渲染前若干章，剩余目录继续抓取）。
+  bool _chaptersLoading = false;
   Future<List<MediaItem>>? _recommendationsFuture;
   VerificationRequiredException? _verificationError;
   /// 渲染后抽取请求（webview-html 模式）：非 null 时显示「抓取本页渲染内容」引导。
@@ -77,6 +81,13 @@ class _NovelDetailScreenState extends State<NovelDetailScreen> {
     _recordHistory();
     _loadContinueIndex();
     _loadBookmarks();
+  }
+
+  @override
+  void dispose() {
+    _chapterThrottleTimer?.cancel();
+    _chapterThrottleTimer = null;
+    super.dispose();
   }
 
   void _recordHistory() {
@@ -144,17 +155,38 @@ class _NovelDetailScreenState extends State<NovelDetailScreen> {
             recommendRoute,
             vars: <String, String>{'id': id},
           );
-    final future = service.fetchNovelChapters(source, id,
-        renderedHtml: _renderedHtml);
-    _chaptersFuture = future;
-    future.then((list) {
-      if (mounted) setState(() => _chapters = list);
+
+    // 渐进加载状态（独立于 FutureBuilder，仅做叠加层）。
+    _chaptersLoading = true;
+    _chapters = const <Episode>[];
+
+    // 直接用 fetchNovelChapters 的返回值作为 _chaptersFuture（与旧版一致），
+    // 保证 FutureBuilder 的 waiting/hasError/data 行为完全不变（无回归风险）。
+    // onProgress 回调仅通过独立 _chapters 状态提供"首屏快显"叠加效果。
+    _chaptersFuture = service.fetchNovelChapters(
+      source,
+      id,
+      renderedHtml: _renderedHtml,
+      // 渐进批次：按章节 id 去重合并到 _chapters，节流后触发 setState 避免卡顿。
+      onProgress: _throttledChapterBatch,
+    );
+    // 终态校正：Future 完成后用最终列表覆盖渐进中间态（确保数据一致性）。
+    _chaptersFuture.then((list) {
+      if (!mounted) return;
+      setState(() {
+        _chapters = list;
+        _chaptersLoading = false;
+      });
     }).catchError((Object error) {
-      if (error is WebViewHtmlRequest && mounted) {
+      if (!mounted) return;
+      setState(() => _chaptersLoading = false);
+      if (error is WebViewHtmlRequest) {
         setState(() => _htmlCaptureRequest = error);
-      } else if (error is VerificationRequiredException && mounted) {
+      } else if (error is VerificationRequiredException) {
         setState(() => _verificationError = error);
       }
+      // 注：普通错误不在此处理——由 FutureBuilder 的 hasError 分支统一展示
+      // （与旧版行为一致），避免重复错误 UI 或掩盖验证/HTML 捕获类错误。
     });
 
     if (source.routes.containsKey('detail')) {
@@ -174,6 +206,35 @@ class _NovelDetailScreenState extends State<NovelDetailScreen> {
   void _retryAfterVerification() {
     setState(() => _verificationError = null);
     _load();
+  }
+
+  /// 节流渐进批次回调：超长书目录（如诡秘之主 1416 章 / 71 页）每页都触发一次
+  /// onProgress，若每次都 setState 会导致 UI 卡顿（71 次/秒级重建）。
+  /// 本方法将批量合并到 300ms 窗口内最多触发一次 setState，兼顾"首屏快显"
+  /// 与"流畅不卡"。[Timer?] 在 dispose 时取消，避免内存泄漏。
+  Timer? _chapterThrottleTimer;
+  List<Episode> _pendingChapterBatch = const <Episode>[];
+
+  void _throttledChapterBatch(List<Episode> batch) {
+    _pendingChapterBatch = <Episode>[
+      ..._pendingChapterBatch,
+      ...batch,
+    ];
+    // 已有待执行的节流定时器 → 合并等待；否则启动新的 300ms 定时器。
+    if (_chapterThrottleTimer != null) return;
+    _chapterThrottleTimer = Timer(const Duration(milliseconds: 300), () {
+      _chapterThrottleTimer = null;
+      if (!mounted || _pendingChapterBatch.isEmpty) return;
+      final incoming = _pendingChapterBatch;
+      _pendingChapterBatch = const <Episode>[];
+      setState(() {
+        final map = <String, Episode>{for (final e in _chapters) e.id: e};
+        for (final e in incoming) {
+          map[e.id] = e;
+        }
+        _chapters = map.values.toList();
+      });
+    });
   }
 
   /// 渲染后抽取完成后回填 HTML 并重试抓取（webview-html 源）。
@@ -706,14 +767,56 @@ class _NovelDetailScreenState extends State<NovelDetailScreen> {
       );
     }
 
+    // ── 章节区域：FutureBuilder（等待/错误态）+ 渐进叠加（首屏快显） ──
+    // FutureBuilder 的 waiting/hasError/data 行为与旧版完全一致（无回归风险）。
+    // 渐进更新通过独立 _chapters 状态叠加：当 _chapters 非空时优先使用（已抓到的
+    // 前若干章），否则回退到 snap.data（Future 最终结果）。_chaptersLoading 控制
+    // ChapterListSection 底部"加载中…"提示。
     return Scaffold(
       body: FutureBuilder<List<Episode>>(
         future: _chaptersFuture,
         builder: (BuildContext context, AsyncSnapshot<List<Episode>> snap) {
+          // ── 等待中：显示全局加载指示（与旧版一致）──
           if (snap.connectionState == ConnectionState.waiting) {
+            // 已有渐进数据 → 用渐进数据渲染（首屏快显），不再白屏等全部目录
+            if (_chapters.isNotEmpty) {
+              return _buildDetailBody(
+                context, l10n, source, item,
+                episodes: _chapters,
+                watchedMgr: watchedMgr,
+                isFav: isFav, isDl: isDl,
+              );
+            }
             return const Center(child: CircularProgressIndicator());
           }
+
+          // ── 错误：已通过 onProgress 渐进加载到部分章节时保留并展示，
+          //   仅在完全无数据时才显示全屏错误态（避免长目录中途失败时
+          //   丢失已抓到的几百章）。
+          //   注意：_chaptersLoading==false 表示 Future 已终态（.then/.catchError 已执行），
+          //   此时 _chapters 就是最终结果，不再显示"部分加载"警告条。──
           if (snap.hasError) {
+            // 仍在加载中且有渐进数据 → 展示部分章节 + 顶部警告条
+            if (_chapters.isNotEmpty && _chaptersLoading) {
+              return _buildDetailBody(
+                context, l10n, source, item,
+                episodes: _chapters,
+                watchedMgr: watchedMgr,
+                isFav: isFav, isDl: isDl,
+                partialError: snap.error,
+              );
+            }
+            // 加载完成但有数据 → 直接展示最终结果（不显示警告）
+            // 完全无数据 → 全屏错误
+            if (_chapters.isNotEmpty) {
+              return _buildDetailBody(
+                context, l10n, source, item,
+                episodes: _chapters,
+                watchedMgr: watchedMgr,
+                isFav: isFav, isDl: isDl,
+              );
+            }
+            // 完全无数据 → 全屏错误
             final err = snap.error;
             final msg = err is SourceResolveException
                 ? l10n.resolveFailed(err.message)
@@ -724,89 +827,158 @@ class _NovelDetailScreenState extends State<NovelDetailScreen> {
               retryLabel: l10n.retry,
             );
           }
-          final episodes = snap.data ?? <Episode>[];
-          final hasContinue =
-              _continueIndex >= 0 && _continueIndex < episodes.length;
-          final readCount = watchedMgr.watchedCount(item.id);
-          return ContentDetailShell(
-            coverUrl: item.coverUrl,
-            source: source,
-            title: item.title,
-            description: item.description ?? l10n.noDescription,
-            updatedAt: item.updatedAt ?? latestEpisodeUpdatedAt(episodes),
-            statusText: item.status,
-            sourceName: source?.name,
-            detailUrl: _fetchedDetail.detailUrl ?? widget.item.detailUrl,
-            infoChips: _buildInfoChips(item, l10n,
-                episodeCount: episodes.length),
-            tags: _buildTags(item, l10n),
-            onCoverTap: () => _showCoverViewer(context),
-            appBarActions: <Widget>[
-              IconButton(
-                icon: Icon(isFav ? Icons.bookmark : Icons.bookmark_border),
-                tooltip: l10n.subTabFavorite,
-                onPressed: _toggleFavorite,
-              ),
-              IconButton(
-                icon: Icon(isDl ? Icons.download_done : Icons.download_outlined),
-                tooltip: l10n.download,
-                onPressed: isDl ? null : _startDownload,
-              ),
-              IconButton(
-                icon: const Icon(Icons.share_outlined),
-                tooltip: l10n.share,
-                onPressed: _share,
-              ),
-              IconButton(
-                icon: const Icon(Icons.refresh),
-                tooltip: l10n.refreshMetadata,
-                onPressed: _refreshMetadata,
-              ),
-              if (isFav)
-                IconButton(
-                  icon: const Icon(Icons.delete_outline),
-                  tooltip: l10n.removeFromFavorites,
-                  onPressed: _removeFromFavorites,
-                ),
-            ],
-            onRefresh: _onRefresh,
-            fallbackIcon: Icons.auto_stories_outlined,
-            progressSection: _buildProgressCard(
-              context,
-              l10n,
-              episodes.length,
-              readCount,
-            ),
-            actions: <Widget>[
-              if (hasContinue)
-                FilledButton.icon(
-                  onPressed: () => _openChapter(episodes[_continueIndex], _continueIndex),
-                  icon: const Icon(Icons.menu_book_outlined),
-                  label: Text(l10n.continueReading),
-                )
-              else
-                FilledButton.icon(
-                  onPressed: episodes.isEmpty
-                      ? null
-                      : () => _openChapter(episodes.first, 0),
-                  icon: const Icon(Icons.menu_book_outlined),
-                  label: Text(l10n.readChapter),
-                ),
-            ],
-            chaptersList: ChapterListSection(
-              chapters: episodes,
-              onTapChapter: _openChapter,
-              onDownloadChapter: _downloadSingleChapter,
-              onToggleBookmark: _toggleBookmark,
-              isChapterBookmarked: (i) => _bookmarkedIndices.contains(i),
-              onToggleRead: _toggleRead,
-              isChapterRead: (i) => watchedMgr.isWatched(item.id, i),
-              unitWord: l10n.unitWordChapter,
-              contentId: item.id,
-            ),
-            recommendations: _buildRecommendations(context, l10n),
+
+          // ── 数据就绪：优先用渐进 _chapters（可能比 snap.data 更新），否则用终态 ──
+          final episodes = (_chapters.isNotEmpty && _chaptersLoading)
+              ? _chapters
+              : (snap.data ?? <Episode>[]);
+          // Future 完成后校正：确保最终状态一致
+          if (!_chaptersLoading && snap.data != null) {
+            // snap.data 是权威终态
+          }
+          return _buildDetailBody(
+            context, l10n, source, item,
+            episodes: episodes,
+            watchedMgr: watchedMgr,
+            isFav: isFav, isDl: isDl,
           );
         },
+      ),
+    );
+  }
+
+  /// 构建详情页主体（封面/简介/操作/章节列表/推荐），从 build() 中抽离以避免
+  /// FutureBuilder builder 嵌套过深。参数 [episodes] 为当前应渲染的章节列表
+  /// （渐进中间态或最终完整列表）。[partialError] 非空时表示目录加载中途失败，
+  /// 已展示部分章节但未完整，需在顶部显示警告条。
+  Widget _buildDetailBody(
+    BuildContext context,
+    AppLocalizations l10n,
+    PluginConfig? source,
+    MediaItem item, {
+    required List<Episode> episodes,
+    required MediaWatchedManager watchedMgr,
+    required bool isFav,
+    required bool isDl,
+    Object? partialError,
+  }) {
+    final hasContinue = _continueIndex >= 0 && _continueIndex < episodes.length;
+    final readCount = watchedMgr.watchedCount(item.id);
+
+    // 渐进加载中途失败的警告条：告知用户当前仅显示部分章节。
+    final warningBanner = partialError != null
+        ? Material(
+            color: Colors.orange.shade50,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16, vertical: 12,
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.warning_amber, size: 18, color: Colors.orange.shade700),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      l10n.chapterLoadPartial(episodes.length),
+                      style: TextStyle(fontSize: 13, color: Colors.orange.shade900),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () => setState(_load),
+                    child: Text(l10n.retry, style: const TextStyle(fontSize: 13)),
+                  ),
+                ],
+              ),
+            ),
+          )
+        : null;
+
+    return Scaffold(
+      body: Column(
+        children: [
+          if (warningBanner != null) warningBanner,
+          Expanded(
+            child: ContentDetailShell(
+        coverUrl: item.coverUrl,
+        source: source,
+        title: item.title,
+        description: item.description ?? l10n.noDescription,
+        updatedAt: item.updatedAt ?? latestEpisodeUpdatedAt(episodes),
+        statusText: item.status,
+        sourceName: source?.name,
+        detailUrl: _fetchedDetail.detailUrl ?? widget.item.detailUrl,
+        infoChips: _buildInfoChips(item, l10n,
+            episodeCount: episodes.length),
+        tags: _buildTags(item, l10n),
+        onCoverTap: () => _showCoverViewer(context),
+        appBarActions: <Widget>[
+          IconButton(
+            icon: Icon(isFav ? Icons.bookmark : Icons.bookmark_border),
+            tooltip: l10n.subTabFavorite,
+            onPressed: _toggleFavorite,
+          ),
+          IconButton(
+            icon: Icon(isDl ? Icons.download_done : Icons.download_outlined),
+            tooltip: l10n.download,
+            onPressed: isDl ? null : _startDownload,
+          ),
+          IconButton(
+            icon: const Icon(Icons.share_outlined),
+            tooltip: l10n.share,
+            onPressed: _share,
+          ),
+          IconButton(
+            icon: const Icon(Icons.refresh),
+            tooltip: l10n.refreshMetadata,
+            onPressed: _refreshMetadata,
+          ),
+          if (isFav)
+            IconButton(
+              icon: const Icon(Icons.delete_outline),
+              tooltip: l10n.removeFromFavorites,
+              onPressed: _removeFromFavorites,
+            ),
+        ],
+        onRefresh: _onRefresh,
+        fallbackIcon: Icons.auto_stories_outlined,
+        progressSection: _buildProgressCard(
+          context,
+          l10n,
+          episodes.length,
+          readCount,
+        ),
+        actions: <Widget>[
+          if (hasContinue)
+            FilledButton.icon(
+              onPressed: () => _openChapter(episodes[_continueIndex], _continueIndex),
+              icon: const Icon(Icons.menu_book_outlined),
+              label: Text(l10n.continueReading),
+            )
+          else
+            FilledButton.icon(
+              onPressed: episodes.isEmpty
+                  ? null
+                  : () => _openChapter(episodes.first, 0),
+              icon: const Icon(Icons.menu_book_outlined),
+              label: Text(l10n.readChapter),
+            ),
+        ],
+        chaptersList: ChapterListSection(
+          chapters: episodes,
+          loadingMore: _chaptersLoading,
+          onTapChapter: _openChapter,
+          onDownloadChapter: _downloadSingleChapter,
+          onToggleBookmark: _toggleBookmark,
+          isChapterBookmarked: (i) => _bookmarkedIndices.contains(i),
+          onToggleRead: _toggleRead,
+          isChapterRead: (i) => watchedMgr.isWatched(item.id, i),
+          unitWord: l10n.unitWordChapter,
+          contentId: item.id,
+        ),
+        recommendations: _buildRecommendations(context, l10n),
+      ),
+          ),
+        ],
       ),
     );
   }

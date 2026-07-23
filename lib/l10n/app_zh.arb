@@ -86,6 +86,7 @@
   "loading": "加载中…",
   "noResults": "暂无结果",
   "loadFailed": "加载失败",
+  "chapterLoadPartial": "目录加载未完成，当前显示 {count} 章（网络可能不稳定）",
   "noMoreResults": "没有更多了",
   "authorColon": "作者：",
   "tagColon": "标签：",
@@ -1397,6 +1398,14 @@
   "updatedAtLabel": "更新时间：",
   "searchChapter": "搜索章节",
   "noChaptersFound": "未找到匹配章节",
+  "expandRemainingChapters": "展开剩余 {count} 章",
+  "@expandRemainingChapters": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "sortAscending": "升序",
   "sortDescending": "降序",
   "downloadSingleChapter": "下载单章",

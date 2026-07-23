@@ -9,6 +9,7 @@ import 'dart:typed_data';
 import 'package:dio/dio.dart';
 import 'package:fast_gbk/fast_gbk.dart';
 import 'analyze_rule.dart';
+import '../../../core/scraper/verification_detector.dart';
 import '../model/xiaoshuo_book.dart';
 import '../model/xiaoshuo_book_chapter.dart';
 import '../model/book_source.dart';
@@ -110,13 +111,18 @@ class AnalyzeUrl {
           return page.toString();
         }
         if (expr == 'key') {
-          return key ?? '';
+          // 关键修复：搜索关键词必须 URL 编码，否则含中文等非 ASCII 字符的
+          // 搜索地址会被 HTTP 客户端拒绝（FormatException / 空结果），
+          // 导致搜索"无效果"。编码后服务端解码得到原词，行为等价且更兼容。
+          return key != null && key!.isNotEmpty ? Uri.encodeComponent(key!) : '';
         }
         final jsResult = _evalJs(expr, url);
         return jsResult;
       });
     }
 
+    // 兜底：确保任何残留的 {{key}}/{{page}} 被正确替换与编码（极少见，
+    // 仅当上面的正则未覆盖时触发，不会造成重复编码）。
     if (key != null && key!.isNotEmpty) {
       url = url.replaceAll('{{key}}', Uri.encodeComponent(key!));
     }
@@ -255,15 +261,26 @@ class AnalyzeUrl {
         );
       }
 
-      if (response.statusCode != null && response.statusCode! >= 400) {
-        throw Exception('请求失败：HTTP ${response.statusCode}，URL：$url');
-      }
-
       final bytes = Uint8List.fromList(response.data ?? <int>[]);
       final contentType = _extractHeaderValue(
         response.headers['content-type'],
       );
       body = _decodeBody(bytes, charset, contentType);
+
+      // 解码后统一检测 Cloudflare/WAF 挑战页（覆盖 HTTP 200 挑战壳与 403 挑战）。
+      // 命中则抛 [VerificationRequiredException]，交由既有 WebView 验证回灌流程过 CF，
+      // 而非静默返回空结果或抛普通异常被上层吞掉。
+      if (_looksLikeCloudflareChallenge(body)) {
+        throw VerificationRequiredException(
+          url: url,
+          body: body,
+          statusCode: response.statusCode,
+        );
+      }
+
+      if (response.statusCode != null && response.statusCode! >= 400) {
+        throw Exception('请求失败：HTTP ${response.statusCode}，URL：$url');
+      }
       if (response.redirects.isNotEmpty) {
         url = response.redirects.last.location.toString();
       }
@@ -369,5 +386,23 @@ class AnalyzeUrl {
       return null;
     }
     return values.first;
+  }
+
+  /// 识别 Cloudflare / WAF 挑战页（仅挑战页有、正常内容页绝不会出现的特征）。
+  ///
+  /// 与 [VerificationDetector] 区分：后者为兼容 goda 等「正常页也被 CF 注入
+  /// challenge-platform 被动标记」的站点，对被动标记加了 8KB 长度闸门，可能漏判
+  /// 体形偏大（>8KB）的 CF 5 秒盾壳。小说书源走直连 Dio（非浏览器），命中 CF 时
+  /// 必须明确识别并抛验证异常，故这里用更精确、不依赖长度的主动特征：
+  /// 「Just a moment...」「enable javascript and cookies to continue」「__cf_chl」
+  ///「cf-mitigated」均只出现在真正的 CF 挑战页，正常小说页不可能包含，不会误杀。
+  static bool _looksLikeCloudflareChallenge(String body) {
+    if (body.isEmpty) return false;
+    final lower = body.toLowerCase();
+    return lower.contains('just a moment') ||
+        lower.contains('enable javascript and cookies to continue') ||
+        lower.contains('cf-mitigated') ||
+        lower.contains('__cf_chl') ||
+        lower.contains('attention required! | cloudflare');
   }
 }

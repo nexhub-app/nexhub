@@ -15,6 +15,11 @@ class BookContent {
   static final _pOpenRegex = RegExp(r'<p[^>]*>');
   static final _pCloseRegex = RegExp(r'</p>');
   static final _htmlTagRegex = RegExp(r'<[^>]*>');
+  // CSS flex `order` 乱序反爬检测：匹配带 style="...order:N..." 的 <p> 段落。
+  static final _cssOrderPRegex = RegExp(
+    r'<p[^>]*\bstyle="[^"]*\border:\s*(\d+)[^"]*"[^>]*>([\s\S]*?)</p>',
+    caseSensitive: false,
+  );
   static final _crlfRegex = RegExp(r'\r\n');
   static final _crRegex = RegExp(r'\r');
   static final _whitespaceRegex = RegExp(r'[ \t]+');
@@ -150,6 +155,21 @@ class BookContent {
       content = _extractGenericContent(body);
     }
 
+    // 通用反爬：还原 CSS flex `order` 乱序段落（详见 _reorderCssOrderParagraphs）。
+    // 必须在 HTML 剥离(_formatContent)之前，此时 content 仍含 <p style="order:N"> 标签。
+    content = _reorderCssOrderParagraphs(content);
+
+    // 若抽取结果是 HTML（如 @html），在应用 replaceRegex 前先把 <br>/<p> 边界
+    // 规整为换行，使 line-anchored 的 replaceRegex 能按行匹配导航/广告文本，
+    // 表现与 @textNodes 抽取后的纯文本一致（笔趣阁多页一致性修复）。
+    // 必须在 _reorderCssOrderParagraphs 之后，避免破坏 order 乱序还原所需的 <p> 标签。
+    if (content.contains('<')) {
+      content = content
+          .replaceAll(RegExp(r'<br\s*/?>', caseSensitive: false), '\n')
+          .replaceAll(RegExp(r'</p>', caseSensitive: false), '\n')
+          .replaceAll(RegExp(r'<p[^>]*>', caseSensitive: false), '\n');
+    }
+
     if (contentRule.replaceRegex != null && contentRule.replaceRegex!.isNotEmpty) {
       // 参考 xiaoshuo 原版 BookContent.kt：先 trim 每行，再直接应用正则替换规则
       content = content.split('\n').map((line) => line.trim()).join('\n');
@@ -177,9 +197,15 @@ class BookContent {
     content = _formatContent(content);
     content = _cleanContentAds(content);
 
-    // 添加段落缩进（在 _formatContent 之后，避免被 trim 移除）
+    // 添加段落缩进（在 _formatContent 之后，避免被 trim 移除）。
+    // 幂等处理：先去掉行首可能存在的全角/半角缩进，再统一加一个全角空格，
+    // 避免源 HTML 已带首行缩进时与引擎缩进叠加，导致「同一章不同子页
+    // 缩进不一致 / 双倍缩进」的排版跳变（笔趣阁 #nr1@html 多页一致性修复）。
     if (contentRule.replaceRegex != null && contentRule.replaceRegex!.isNotEmpty && content.isNotEmpty) {
-      content = content.split('\n').map((line) => '　　$line').join('\n');
+      content = content.split('\n').map((line) {
+        final stripped = line.replaceFirst(RegExp(r'^[　\s]+'), '');
+        return '　　$stripped';
+      }).join('\n');
     }
 
     return content;
@@ -240,6 +266,33 @@ class BookContent {
       cleaned.add(trimmed);
     }
     return cleaned.join('\n');
+  }
+
+  /// 还原 CSS flex `order` 乱序反爬。
+  ///
+  /// 部分站点（如 PTCMS 系）把正文 `<p>` 在 HTML 源码中打乱顺序，再给每个
+  /// 段落设 `style="order:N"`，容器用 `display:flex;flex-direction:column`，
+  /// 让浏览器在**视觉上**按 order 升序重排。直接抽取文本会得到乱序正文。
+  ///
+  /// 本方法是**通用能力**：仅当检测到 3 个以上带 `order:N` 的 `<p>` 段落时
+  /// 才触发，按 order 升序重排后重新拼成 `<p>...</p>`，交给 [_formatContent]
+  /// 继续剥离标签。对不含该模式的普通站点零副作用（直接原样返回）。
+  /// 不依赖任何具体站点/域名，符合"源即插件、引擎只做通用处理"的架构。
+  static String _reorderCssOrderParagraphs(String htmlContent) {
+    if (htmlContent.isEmpty || !htmlContent.contains('order:')) {
+      return htmlContent;
+    }
+    final matches = _cssOrderPRegex.allMatches(htmlContent).toList();
+    if (matches.length < 3) return htmlContent; // 未命中乱序模式，原样返回
+    final items = <MapEntry<int, String>>[];
+    for (final m in matches) {
+      final order = int.tryParse(m.group(1) ?? '');
+      if (order == null) continue;
+      items.add(MapEntry(order, m.group(2) ?? ''));
+    }
+    if (items.length < 3) return htmlContent;
+    items.sort((a, b) => a.key.compareTo(b.key));
+    return items.map((e) => '<p>${e.value}</p>').join('\n');
   }
 
   static String _formatContent(String content) {

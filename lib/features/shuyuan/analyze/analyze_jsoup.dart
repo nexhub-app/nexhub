@@ -23,6 +23,61 @@ class AnalyzeByJsoup {
     return html_parser.parse('').documentElement!;
   }
 
+  /// jsoup 伪选择器 `:contains(text)` 匹配（`package:html` 的 querySelectorAll
+  /// 不支持该伪类，遇到会抛异常）。这里做通用降级：剥离所有 `:contains(...)`
+  /// 片段拿到基础 CSS 选择器，先 querySelectorAll，再按元素文本包含过滤。
+  /// 这是 Legado/阅读 书源里最常用的伪选择器（如 `p:contains(作者)`、
+  /// `a:contains(下一页)`），支持它可让大量社区书源开箱即用（源即插件）。
+  static final RegExp _containsRegex = RegExp(r':contains\(([^)]*)\)');
+
+  /// 安全查询：透明支持 `:contains(...)`，其余走标准 querySelectorAll。
+  /// 任何异常（不支持的伪类 / 非法选择器）都降级为空列表，避免整条规则失效。
+  static List<Element> _safeQuery(Element root, String selector) {
+    final s = selector.trim();
+    if (s.isEmpty) return const [];
+    if (s.contains(':contains(')) {
+      return _queryContains(root, s);
+    }
+    try {
+      return root.querySelectorAll(s);
+    } catch (_) {
+      return const [];
+    }
+  }
+
+  /// 处理含 `:contains(...)` 的选择器（支持逗号分组与多个 :contains 叠加）。
+  static List<Element> _queryContains(Element root, String selector) {
+    final result = <Element>[];
+    for (final group in selector.split(',')) {
+      var g = group.trim();
+      if (g.isEmpty) continue;
+      final texts = <String>[];
+      g = g.replaceAllMapped(_containsRegex, (m) {
+        final t = (m.group(1) ?? '').trim();
+        if (t.isNotEmpty) texts.add(t);
+        return '';
+      }).trim();
+
+      List<Element> base;
+      if (g.isEmpty) {
+        base = root.querySelectorAll('*');
+      } else {
+        try {
+          base = root.querySelectorAll(g);
+        } catch (_) {
+          base = const [];
+        }
+      }
+      for (final el in base) {
+        final text = el.text;
+        if (texts.every(text.contains) && !result.contains(el)) {
+          result.add(el);
+        }
+      }
+    }
+    return result;
+  }
+
   /// 主入口：获取字符串列表，支持 @ 链式选择器。
   List<String> getStringList(String ruleStr) {
     if (ruleStr.isEmpty) return [];
@@ -187,12 +242,8 @@ class AnalyzeByJsoup {
       }
     }
 
-    // 默认按 CSS 选择器处理
-    try {
-      return temp.querySelectorAll(trimmed);
-    } catch (_) {
-      return [];
-    }
+    // 默认按 CSS 选择器处理（透明支持 :contains(...) 伪选择器）
+    return _safeQuery(temp, trimmed);
   }
 
   /// 索引过滤：支持 .0、.-1、.0:5、.0:5:2、!0、[0,1,2]、[-1,0:2]
@@ -359,12 +410,12 @@ class AnalyzeByJsoup {
   List<String> _getResultLastCss(Element element, String ruleStr) {
     final lastAt = ruleStr.lastIndexOf('@');
     if (lastAt < 0) {
-      final elements = element.querySelectorAll(ruleStr);
+      final elements = _safeQuery(element, ruleStr);
       return elements.map((e) => e.text.trim()).where((s) => s.isNotEmpty).toList();
     }
     final selector = ruleStr.substring(0, lastAt).trim();
     final extractMethod = ruleStr.substring(lastAt + 1).trim();
-    final elements = element.querySelectorAll(selector);
+    final elements = _safeQuery(element, selector);
     return _getResultLast(elements, extractMethod);
   }
 
@@ -429,9 +480,9 @@ class AnalyzeByJsoup {
   List<Element> _getElementsCss(Element element, String ruleStr) {
     final lastAt = ruleStr.lastIndexOf('@');
     if (lastAt >= 0) {
-      return element.querySelectorAll(ruleStr.substring(0, lastAt).trim());
+      return _safeQuery(element, ruleStr.substring(0, lastAt).trim());
     }
-    return element.querySelectorAll(ruleStr);
+    return _safeQuery(element, ruleStr);
   }
 
   List<Element> _getElementsNonCss(String ruleStr) {
