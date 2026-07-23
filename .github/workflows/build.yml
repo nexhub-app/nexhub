@@ -1,15 +1,19 @@
 # =============================================================================
-# NexHub 自动打包 + 发布工作流（v3 — 修复 flutter-action@v3 不存在）
+# NexHub 自动打包 + 发布工作流（v4 — 修复 intl 回退 + 显式 gen-l10n）
 # -----------------------------------------------------------------------------
 # 触发：推送 v* 标签自动发布；也支持网页手动 Run workflow 试跑。
 #
 # 修复记录：
 #   v1: 初始版（全部失败：flutter pub get exit code 1）
 #   v2: 尝试 flutter-action@v3 → **v3 不存在**，4 个 job 全部 Unable to resolve action
-#   v3（当前）：
-#     - 改回 subosito/flutter-action@v2（该 Action 最新版即为 v2，无 v3）
-#     - 固定 Flutter 版本为 3.32.0（满足 sdk >=3.4.0 <4.0.0）
-#     - 所有步骤加 --verbose / 2>&1 输出
+#   v3: 改回 subosito/flutter-action@v2，固定 Flutter 3.32.0，加 --verbose；
+#       并修复 intl ^0.19.0→^0.20.2（匹配 flutter_localizations 要求）
+#   v4（当前）：
+#     - 修复 d0537c9 误把 intl 回退到 ^0.19.0（导致 flutter pub get 仍冲突）—
+#       重新锁定 intl: ^0.20.2
+#     - 每个编译 job 在 flutter build 之前显式执行 flutter gen-l10n，
+#       确保 AppLocalizations / flutter_gen 虚拟包映射在编译前就绪
+#       （避免 "AppLocalizations isn't a type" / FileSystemException）
 #     - upload-artifact 加 if-no-files-found: error
 # =============================================================================
 
@@ -41,6 +45,8 @@ jobs:
           cache: true
       - name: 获取依赖
         run: flutter pub get 2>&1
+      - name: 生成多语言文件 (gen-l10n)
+        run: flutter gen-l10n 2>&1
       - name: 编译 APK
         run: flutter build apk --release --verbose 2>&1
       - uses: actions/upload-artifact@v4
@@ -62,6 +68,8 @@ jobs:
           cache: true
       - name: 获取依赖
         run: flutter pub get 2>&1
+      - name: 生成多语言文件 (gen-l10n)
+        run: flutter gen-l10n 2>&1
       - name: 编译 Windows
         run: flutter build windows --release --verbose 2>&1
       - name: 打包 Windows 安装文件
@@ -88,6 +96,8 @@ jobs:
           cache: true
       - name: 获取依赖
         run: flutter pub get 2>&1
+      - name: 生成多语言文件 (gen-l10n)
+        run: flutter gen-l10n 2>&1
       - name: 编译 Linux
         run: flutter build linux --release --verbose 2>&1
       - name: 打包 Linux 安装文件
@@ -110,6 +120,8 @@ jobs:
           cache: true
       - name: 获取依赖
         run: flutter pub get 2>&1
+      - name: 生成多语言文件 (gen-l10n)
+        run: flutter gen-l10n 2>&1
       - name: 编译 macOS
         run: flutter build macos --release --verbose 2>&1
       - name: 打包 macOS 安装文件
