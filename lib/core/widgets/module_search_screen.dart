@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:nexhub/generated/app_localizations.dart';
 import '../models/plugin_config.dart';
 import '../search/search_history_store.dart';
 import '../theme/app_tokens.dart';

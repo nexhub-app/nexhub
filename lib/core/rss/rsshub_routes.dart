@@ -5,7 +5,7 @@
 /// 参考 https://docs.rsshub.app/zh/routes ）。
 library;
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:nexhub/generated/app_localizations.dart';
 
 import '../models/plugin_config.dart';
 

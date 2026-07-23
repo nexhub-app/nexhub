@@ -8,6 +8,8 @@
 .dart_tool/
 .packages
 build/
+# l10n 生成文件（由 flutter gen-l10n / flutter: generate 产出，非源码）
+lib/generated/
 # 注意：本仓库是一个 Flutter「应用」（而非库），为可复现构建，保留 pubspec.lock，故不忽略。
 
 # Directory created by dartdoc

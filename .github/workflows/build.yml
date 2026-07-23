@@ -1,5 +1,5 @@
 # =============================================================================
-# NexHub 自动打包 + 发布工作流（v9 — Windows 固定 windows-2022 镜像，修 VS2019 生成器误选）
+# NexHub 自动打包 + 发布工作流（v10 — Windows 固定 windows-2022；l10n 改用 output-dir 修 flutter_gen 虚拟包缺失）
 # -----------------------------------------------------------------------------
 # 触发：推送 v* 标签自动发布；也支持网页手动 Run workflow 试跑。
 #
@@ -17,15 +17,27 @@
 #   v7: Linux job 链接期缺原生库修复：扩充 apt（X11/GL/ALSA/Pulse 等）；
 #       加诊断(precache/doctor)与健壮性(clean 先于 pub get、pub get 重试、build tee)
 #   v8: Release 发布页正文为空修复：release job 加 actions/checkout + allowUpdates: true
-#   v9（当前）：
+#   v9：
 #     - **Windows CMake "Visual Studio 16 2019 could not find any instance of Visual Studio"
 #       根因定案**：Flutter 3.32.0 在 windows-latest 镜像上误选了残缺的 VS2019 生成器。
 #       ilammy 固定 VS2022（v6）未能覆盖 Flutter 自身 vswhere 的生成器选择，故无效。
 #     - **最终修复**：Windows runner 由 windows-latest 固定为 **windows-2022**
-#       （该镜像的 VS2022 + Windows SDK 与 Flutter 3.32 期望一致，生成器自动选对），
+#       （该镜像的 VS2022 + Windows SDK 与 Flutter [3.32] 期望一致，生成器自动选对），
 #       并移除 ilammy/msvc-dev-cmd@v1 步骤。其余桌面 job 桌面支持与 gen-l10n 保持不变。
-#     - 注：用户曾粘贴过 "AppLocalizations/flutter_gen 缺失" 的 Summary，与本次实际
-#       Windows VS2019 报错并非同一错误；gen-l10n 已在 v4 起每个编译 job 显式执行，可忽略。
+#   v10（当前）：
+#     - **gen-l10n 编译期失败（org-dartlang-untranslatable-uri:package:flutter_gen
+#       /gen_l10n/app_localizations.dart → "AppLocalizations isn't a type"）**：
+#       原 l10n.yaml 未设 output-dir，生成文件落在 .dart_tool/flutter_gen 并通过
+#       **flutter_gen 虚拟包** 导入；CI 内核快照阶段 package_config 未解析该虚拟包，
+#       导致 AppLocalizations 符号缺失，编译报 "isn't a type"。
+#     - **修复**：l10n.yaml 增加 `output-dir: lib/generated`，生成真实文件于包内；
+#       全量替换 92 处导入 `package:flutter_gen/gen_l10n/app_localizations.dart`
+#       → `package:nexhub/generated/app_localizations.dart`（lib+test，备份目录除外）；
+#       lib/generated 加入 .gitignore（由 flutter gen-l10n / generate:true 产出）。
+#       各 job 的 gen-l10n step 增加诊断（ls lib/generated + grep AppLocalizations）。
+#     - 备注：此前将用户粘贴的 AppLocalizations Summary 误判为"与 Windows 不同错误可忽略"，
+#       现确认该错误同样真实存在，故 v10 一并根治。pubspec 仍保留 flutter: generate: true
+#       作为兜底（flutter build 会自动重新生成到 lib/generated）。
 # =============================================================================
 
 name: Build & Release NexHub
@@ -57,7 +69,11 @@ jobs:
       - name: 获取依赖
         run: flutter pub get 2>&1
       - name: 生成多语言文件 (gen-l10n)
-        run: flutter gen-l10n 2>&1
+        run: |
+          flutter gen-l10n 2>&1
+          echo "== generated l10n files =="
+          ls -la lib/generated 2>&1 || true
+          grep -n "class AppLocalizations" lib/generated/app_localizations.dart 2>&1 || true
       - name: 编译 APK
         run: flutter build apk --release --verbose 2>&1
       - uses: actions/upload-artifact@v4
@@ -81,7 +97,11 @@ jobs:
       - name: 获取依赖
         run: flutter pub get 2>&1
       - name: 生成多语言文件 (gen-l10n)
-        run: flutter gen-l10n 2>&1
+        run: |
+          flutter gen-l10n 2>&1
+          echo "== generated l10n files =="
+          ls -la lib/generated 2>&1 || true
+          grep -n "class AppLocalizations" lib/generated/app_localizations.dart 2>&1 || true
       - name: 编译 Windows
         run: flutter build windows --release --verbose 2>&1
       - name: 打包 Windows 安装文件
@@ -137,7 +157,11 @@ jobs:
             exit 1
           fi
       - name: 生成多语言文件 (gen-l10n)
-        run: flutter gen-l10n 2>&1
+        run: |
+          flutter gen-l10n 2>&1
+          echo "== generated l10n files =="
+          ls -la lib/generated 2>&1 || true
+          grep -n "class AppLocalizations" lib/generated/app_localizations.dart 2>&1 || true
       - name: 编译 Linux (verbose + 日志)
         run: |
           set -o pipefail
@@ -165,7 +189,11 @@ jobs:
       - name: 获取依赖
         run: flutter pub get 2>&1
       - name: 生成多语言文件 (gen-l10n)
-        run: flutter gen-l10n 2>&1
+        run: |
+          flutter gen-l10n 2>&1
+          echo "== generated l10n files =="
+          ls -la lib/generated 2>&1 || true
+          grep -n "class AppLocalizations" lib/generated/app_localizations.dart 2>&1 || true
       - name: 编译 macOS
         run: flutter build macos --release --verbose 2>&1
       - name: 打包 macOS 安装文件

@@ -34,7 +34,7 @@ import '../../../core/settings/general_settings.dart';
 import './widgets/settings_widgets.dart';
 import '../../../core/services/source_repository.dart';
 import '../../../core/services/cloud_sync_service.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:nexhub/generated/app_localizations.dart';
 import 'package:intl/intl.dart';
 
 class SettingsScreen extends StatelessWidget {

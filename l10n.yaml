@@ -1,5 +1,9 @@
 arb-dir: lib/l10n
 template-arb-file: app_en.arb
+# 关键：把生成文件放到应用包内的真实目录（lib/generated），
+# 通过 package:nexhub/generated/... 导入，避免依赖 flutter_gen 虚拟包映射
+# （CI 中曾出现 org-dartlang-untranslatable-uri:package:flutter_gen 导致编译失败）。
+output-dir: lib/generated
 output-localization-file: app_localizations.dart
 output-class: AppLocalizations
 nullable-getter: false

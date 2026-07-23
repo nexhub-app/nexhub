@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:nexhub/generated/app_localizations.dart';
 
 import '../../../core/models/episode.dart';
 import '../../../core/scraper/media_api_service.dart';

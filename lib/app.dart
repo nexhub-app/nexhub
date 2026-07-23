@@ -4,7 +4,7 @@ import 'package:dynamic_color/dynamic_color.dart';
 import 'package:provider/provider.dart';
 import 'core/locale/locale_controller.dart';
 import 'core/theme/theme_controller.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:nexhub/generated/app_localizations.dart';
 import 'features/home/presentation/home_screen.dart';
 
 /// 应用根：Material 3 + 莫奈动态色 + Provider 主题状态 + 统一 l10n。

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:nexhub/generated/app_localizations.dart';
 
 import '../../../core/novel/novel_page_animation.dart';
 import '../../../core/novel/novel_reader_preferences.dart';

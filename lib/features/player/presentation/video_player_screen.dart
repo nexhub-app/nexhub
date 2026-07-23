@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:canvas_danmaku/canvas_danmaku.dart' as cd;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:nexhub/generated/app_localizations.dart';
 import 'package:hive/hive.dart';
 import 'package:media_kit_video/media_kit_video.dart';
 import 'package:provider/provider.dart';

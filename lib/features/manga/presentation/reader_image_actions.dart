@@ -9,7 +9,7 @@ import 'package:super_clipboard/super_clipboard.dart';
 // 其 DefaultCacheManager 以获取图片缓存文件，无需新增 pubspec 依赖。
 // ignore: depend_on_referenced_packages
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:nexhub/generated/app_localizations.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
