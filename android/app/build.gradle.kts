@@ -24,8 +24,8 @@ android {
         applicationId = "com.nexhub.app"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        // super_clipboard（复制图片）要求 minSdk >= 23。
-        minSdk = 23
+        // super_clipboard（复制图片）要求 minSdk >= 23；flutter_tts 要求 minSdk >= 24。
+        minSdk = 24
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
