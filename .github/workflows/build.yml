@@ -1,5 +1,5 @@
 # =============================================================================
-# NexHub 自动打包 + 发布工作流（v11 — 修 Windows PowerShell 不兼容 bash 语法 + 增强全平台编译错误日志）
+# NexHub 自动打包 + 发布工作流（v22 — APK 单架构分包; Windows 直装/安装包留待下版）
 # -----------------------------------------------------------------------------
 # 触发：推送 v* 标签自动发布；也支持网页手动 Run workflow 试跑。
 #
@@ -91,6 +91,14 @@
 #       **不会在 `flutter build` 时自动重跑**，故更换源图后 CI 打出的仍是旧 res/ 图标。
 #       **修复**：Android job 在 gen-l10n 后新增 `flutter pub run flutter_launcher_icons`，
 #       每次构建都基于源图重新生成（含自适应图标，Android 12+ 莫奈取色随之生效）。
+#   v22（当前）：
+#     - **APK 改为单架构分包（`--split-per-abi`）**：`flutter build apk` 增加
+#       `--split-per-abi`，为每个 ABI（arm64-v8a / armeabi-v7a / x86_64）各产出一个独立
+#       APK（不再有统一 fat APK）。artifact 上传与 release 文件清单改为通配
+#       `build/app/outputs/flutter-apk/*.apk`，避免旧路径 app-release.apk 缺失报错。
+#     - **Windows 直装包(zip/7z) + 安装包(exe) 留待下一版**：本版仅落地 APK 分包；
+#       Windows 的 zip/7z 便携包 + Inno Setup 生成的 exe 安装包已写入 build.yml 但
+#       单独提交、未重新打标签，故只会在用户下次打标签时（下一版）生效。
 # =============================================================================
 
 name: Build & Release NexHub
@@ -136,11 +144,11 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          flutter build apk --release --verbose 2>&1 | tee apk_build.log || { echo "=== ANDROID BUILD FAILED ===" && tail -n 500 apk_build.log; exit 1; }
+          flutter build apk --release --split-per-abi --verbose 2>&1 | tee apk_build.log || { echo "=== ANDROID BUILD FAILED ===" && tail -n 500 apk_build.log; exit 1; }
       - uses: actions/upload-artifact@v4
         with:
           name: android-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+          path: build/app/outputs/flutter-apk/*.apk
           if-no-files-found: error
 
   windows:
@@ -321,7 +329,7 @@ jobs:
           body_path: RELEASE_NOTES.md
           allowUpdates: true
           files: |
-            artifacts/android-apk/app-release.apk
+            artifacts/android-apk/*.apk
             artifacts/windows-build/NexHub-windows-x64.zip
             artifacts/linux-build/NexHub-linux-x64.tar.gz
             artifacts/macos-build/NexHub-macos.zip
