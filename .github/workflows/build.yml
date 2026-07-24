@@ -42,6 +42,21 @@
 #     - **修复**：所有 Windows 的 run 步骤加 `shell: bash`；同时所有平台的编译步骤统一用
 #       `set -o pipefail` + `tee` + 失败时 `tail -n 200~500` 输出关键日志，
 #       确保 Android/Linux/macOS 编译失败时能在 annotation 中看到具体错误原因。
+#   v12-v17：Android Kotlin 2.1.0 + namespace com.nexhub.app + local.properties 解跟踪；
+#       Linux 加 webkit2gtk 依赖；Dart CardTheme/DialogTheme→*Data(Flutter3.32)；
+#       macOS 部署目标 10.14→10.15 + 建 Podfile；Android minSdk 23→24；
+#       macOS Podfile post_install 强制 Pods 部署目标 10.15 + CI flutter clean。
+#       （详见 .workbuddy/memory/2026-07-24.md）
+#   v18（当前）：
+#     - **Linux job 仍失败（Run #17 暴露）**：AI 生成的失败"总结"反复把锅甩给
+#       l10n/flutter_gen，但本地核验 l10n 早已根治（output-dir 已设、gen-l10n step 自带
+#       ls+grep 验证、0 残留 flutter_gen 导入），故 l10n 不是本次原因。
+#     - **两处真实缺失**：(1) Linux apt 缺 libxkbcommon-dev / libegl1-mesa-dev 等标准原生
+#       依赖（GL/键盘链接常见失败源）；(2) flutter_build.log 只 tee 不上传，失败后拿不到
+#       真实报错，导致只能瞎猜。
+#     - **修复**：Linux apt 补 libxkbcommon-dev libegl1-mesa-dev libxtst-dev libatk1.0-dev
+#       libcups2-dev libx11-xcb-dev libxcb1-dev libxcomposite-dev libxdamage-dev；
+#       build 步骤后新增 upload-artifact(if:always()) 上传 flutter_build.log。
 # =============================================================================
 
 name: Build & Release NexHub
@@ -135,9 +150,11 @@ jobs:
           sudo apt-get install -y \
             build-essential clang cmake ninja-build pkg-config \
             libgtk-3-dev liblzma-dev libsecret-1-dev \
-            libx11-dev libxcursor-dev libxrandr-dev libxi-dev \
+            libx11-dev libx11-xcb-dev libxcb1-dev libxkbcommon-dev \
+            libxcursor-dev libxrandr-dev libxi-dev libxcomposite-dev libxdamage-dev libxtst-dev \
+            libatk1.0-dev libcups2-dev \
             libasound2-dev libxss1 libpulse-dev \
-            libglu1-mesa-dev libgl1-mesa-dev \
+            libglu1-mesa-dev libgl1-mesa-dev libegl1-mesa-dev \
             libwebkit2gtk-4.1-dev libjsoncpp-dev libmpv-dev
       - uses: subosito/flutter-action@v2
         with:
@@ -178,6 +195,13 @@ jobs:
         run: |
           set -o pipefail
           flutter build linux --release --verbose 2>&1 | tee flutter_build.log || { tail -n 500 flutter_build.log; exit 1; }
+      - name: 上传构建日志 (始终，便于失败排查)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-flutter-build-log
+          path: flutter_build.log
+          if-no-files-found: ignore
       - name: 打包 Linux 安装文件
         run: tar -czf NexHub-linux-x64.tar.gz -C build/linux/x64/release bundle
       - uses: actions/upload-artifact@v4
