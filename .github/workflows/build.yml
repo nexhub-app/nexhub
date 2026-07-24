@@ -198,6 +198,8 @@ jobs:
           cache: true
       - name: 启用 macOS 桌面支持
         run: flutter config --enable-macos-desktop
+      - name: 清理旧缓存（强制重建 Pods，确保部署目标 10.15 生效）
+        run: flutter clean || true
       - name: 获取依赖
         run: flutter pub get 2>&1
       - name: 生成多语言文件 (gen-l10n)

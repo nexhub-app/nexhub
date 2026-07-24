@@ -36,5 +36,11 @@ end
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_macos_build_settings(target)
+    # 强制所有 Pod 的部署目标为 10.15，覆盖 flutter_additional_macos_build_settings
+    # 可能设回的低版本（如 10.11），否则 flutter_inappwebview 等插件用到
+    # ASWebAuthenticationSession（需 10.15+）会编译失败。
+    target.build_configurations.each do |config|
+      config.build_settings['MACOSX_DEPLOYMENT_TARGET'] = '10.15'
+    end
   end
 end
