@@ -57,19 +57,26 @@
 #     - **修复**：Linux apt 补 libxkbcommon-dev libegl1-mesa-dev libxtst-dev libatk1.0-dev
 #       libcups2-dev libx11-xcb-dev libxcb1-dev libxcomposite-dev libxdamage-dev；
 #       build 步骤后新增 upload-artifact(if:always()) 上传 flutter_build.log。
-#   v19（当前）：
+#   v19：
 #     - **Run #18 仍失败，拿到真实堆栈**：`buildLinux (build_linux.dart:48)` →
 #       `throwToolExit`，即 cmake/ninja 原生构建子进程返回非 0。**这本身证明 Dart/l10n
 #       早已通过**（cmake 在 Dart 编译之后才运行），l10n 理论彻底证伪。
-#     - **真实报错在堆栈上方**（flutter_build.log 里 cmake/ninja 的 error: 行），堆栈只是
-#       Flutter 包装"子进程失败"。交叉插件清单推定的头号嫌疑：`flutter_tts` 在 Linux 需
-#       `libspeechd-dev`（speech-dispatcher 开发包，其 CMake 用 pkg_check_modules 找并链接
-#       SPEECHD，缺失则 configure/link 失败），与它在 Android(minSdk)/macOS(部署目标) 反复
-#       闯祸的模式一致。另补 `libportal-dev`/`libnotify-dev`（file_picker/dynamic_color/
-#       share_plus 等桌面 portal 插件常用）。
-#     - **修复**：Linux apt 加 libspeechd-dev libportal-dev libnotify-dev。
-#     - 若 Run #19 仍挂，下载 Run #18/19 的 artifact `linux-flutter-build-log`，搜 `error:`
-#       取首处附近贴出即可定位（沙箱无 token 不能直拉 GitHub 日志）。
+#     - 交叉插件清单推定头号嫌疑 `flutter_tts` 需 `libspeechd-dev`，已补
+#       libspeechd-dev libportal-dev libnotify-dev（cmake 真正跑起来后会用到）。
+#   v20（当前）：
+#     - **用户下载 Run #18 日志 artifact 贴出，真相大白**：实际报错是
+#       `No Linux desktop project configured.`（`build_linux.dart:48` 抛 ToolExit 的
+#       真正原因）。`linux/` 目录里**只有生成物**（`generated_plugin_registrant.*`、
+#       `icons.png`），**缺 CMakeLists.txt / main.cc / my_application.* **；`.metadata`
+#       的 migration.platforms 也只列 root/ios/macos，**Linux 平台从未被加入工程**。
+#       故 `flutter build linux` 在 cmake 还没跑时就直接报"未配置"——这解释了为何日志里
+#       连 cmake/ninja 字样都搜不到（之前的 libspeechd 猜测是错的，纯属项目结构缺失）。
+#     - **修复**：Linux job 新增"确保 Linux 桌面工程存在"步骤——若 `linux/CMakeLists.txt`
+#       缺失则 `rm -rf linux` 后 `flutter create --platforms=linux .` 重新生成（保留自定义
+#       `linux/flutter/icons.png` 图标），使 `.metadata` 补上 linux 且工程文件齐全。
+#       v19 补的 libspeechd-dev 等保留（cmake 真正链接 flutter_tts 时会用到）。
+#     - 若 Run #20 仍挂，下载 Run #20 的 artifact `linux-flutter-build-log` 搜 `error:`
+#       取首处附近贴出（沙箱无 token 不能直拉 GitHub 日志）。
 # =============================================================================
 
 name: Build & Release NexHub
@@ -176,6 +183,21 @@ jobs:
           cache: true
       - name: 启用 Linux 桌面支持
         run: flutter config --enable-linux-desktop
+      - name: 确保 Linux 桌面工程存在（缺失则生成）
+        run: |
+          set -e
+          if [ -f linux/CMakeLists.txt ]; then
+            echo "Linux 桌面工程已存在，跳过生成"
+          else
+            echo "缺失 linux/CMakeLists.txt，重新生成 Linux 桌面工程"
+            ICON=linux/flutter/icons.png
+            [ -f "$ICON" ] && cp "$ICON" /tmp/nexhub_icon.png || true
+            rm -rf linux
+            flutter create --platforms=linux .
+            [ -f /tmp/nexhub_icon.png ] && cp /tmp/nexhub_icon.png linux/flutter/icons.png || true
+          fi
+          echo "== linux/ 结构 =="
+          ls -la linux
       - name: Flutter 环境与诊断 (debug)
         run: |
           echo "FLUTTER_ROOT: ${FLUTTER_ROOT:-<unset>}"
