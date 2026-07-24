@@ -16,7 +16,7 @@
         <!-- super_clipboard：向系统剪贴板写入图片二进制所需的 ContentProvider -->
         <provider
             android:name="com.superlist.super_native_extensions.DataProvider"
-            android:authorities="com.example.nexhub.SuperClipboardDataProvider"
+            android:authorities="com.nexhub.app.SuperClipboardDataProvider"
             android:exported="true"
             android:grantUriPermissions="true" >
         </provider>
