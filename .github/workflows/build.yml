@@ -1,5 +1,5 @@
 # =============================================================================
-# NexHub 自动打包 + 发布工作流（v10 — Windows 固定 windows-2022；l10n 改用 output-dir 修 flutter_gen 虚拟包缺失）
+# NexHub 自动打包 + 发布工作流（v11 — 修 Windows PowerShell 不兼容 bash 语法 + 增强全平台编译错误日志）
 # -----------------------------------------------------------------------------
 # 触发：推送 v* 标签自动发布；也支持网页手动 Run workflow 试跑。
 #
@@ -35,9 +35,13 @@
 #       → `package:nexhub/generated/app_localizations.dart`（lib+test，备份目录除外）；
 #       lib/generated 加入 .gitignore（由 flutter gen-l10n / generate:true 产出）。
 #       各 job 的 gen-l10n step 增加诊断（ls lib/generated + grep AppLocalizations）。
-#     - 备注：此前将用户粘贴的 AppLocalizations Summary 误判为"与 Windows 不同错误可忽略"，
-#       现确认该错误同样真实存在，故 v10 一并根治。pubspec 仍保留 flutter: generate: true
-#       作为兜底（flutter build 会自动重新生成到 lib/generated）。
+#   v11（当前）：
+#     - **Windows gen-l10n 步骤失败（exit code 1, step:6）**：v10 给 gen-l10n 加的诊断命令
+#       使用了 bash 语法（ls -la / grep / || true），但 GitHub Actions Windows runner 默认
+#       shell 为 PowerShell，这些命令在 PS 中不可用导致整步失败（Flutter 甚至没开始编译）。
+#     - **修复**：所有 Windows 的 run 步骤加 `shell: bash`；同时所有平台的编译步骤统一用
+#       `set -o pipefail` + `tee` + 失败时 `tail -n 200~500` 输出关键日志，
+#       确保 Android/Linux/macOS 编译失败时能在 annotation 中看到具体错误原因。
 # =============================================================================
 
 name: Build & Release NexHub
@@ -75,7 +79,10 @@ jobs:
           ls -la lib/generated 2>&1 || true
           grep -n "class AppLocalizations" lib/generated/app_localizations.dart 2>&1 || true
       - name: 编译 APK
-        run: flutter build apk --release --verbose 2>&1
+        shell: bash
+        run: |
+          set -o pipefail
+          flutter build apk --release --verbose 2>&1 | tee apk_build.log || { echo "=== ANDROID BUILD FAILED ===" && tail -n 500 apk_build.log; exit 1; }
       - uses: actions/upload-artifact@v4
         with:
           name: android-apk
@@ -97,13 +104,17 @@ jobs:
       - name: 获取依赖
         run: flutter pub get 2>&1
       - name: 生成多语言文件 (gen-l10n)
+        shell: bash
         run: |
           flutter gen-l10n 2>&1
           echo "== generated l10n files =="
           ls -la lib/generated 2>&1 || true
           grep -n "class AppLocalizations" lib/generated/app_localizations.dart 2>&1 || true
       - name: 编译 Windows
-        run: flutter build windows --release --verbose 2>&1
+        shell: bash
+        run: |
+          set -o pipefail
+          flutter build windows --release --verbose 2>&1 | tee win_build.log || { echo "=== WINDOWS BUILD FAILED ===" && tail -n 200 win_build.log; exit 1; }
       - name: 打包 Windows 安装文件
         run: Compress-Archive -Path "build/windows/x64/runner/Release/*" -DestinationPath "NexHub-windows-x64.zip"
       - uses: actions/upload-artifact@v4
@@ -195,7 +206,10 @@ jobs:
           ls -la lib/generated 2>&1 || true
           grep -n "class AppLocalizations" lib/generated/app_localizations.dart 2>&1 || true
       - name: 编译 macOS
-        run: flutter build macos --release --verbose 2>&1
+        shell: bash
+        run: |
+          set -o pipefail
+          flutter build macos --release --verbose 2>&1 | tee macos_build.log || { echo "=== MACOS BUILD FAILED ===" && tail -n 500 macos_build.log; exit 1; }
       - name: 打包 macOS 安装文件
         run: |
           APP=$(find build/macos/Build/Products/Release -maxdepth 1 -name '*.app' | head -n1)
