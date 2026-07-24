@@ -47,7 +47,7 @@
 #       macOS 部署目标 10.14→10.15 + 建 Podfile；Android minSdk 23→24；
 #       macOS Podfile post_install 强制 Pods 部署目标 10.15 + CI flutter clean。
 #       （详见 .workbuddy/memory/2026-07-24.md）
-#   v18（当前）：
+#   v18：
 #     - **Linux job 仍失败（Run #17 暴露）**：AI 生成的失败"总结"反复把锅甩给
 #       l10n/flutter_gen，但本地核验 l10n 早已根治（output-dir 已设、gen-l10n step 自带
 #       ls+grep 验证、0 残留 flutter_gen 导入），故 l10n 不是本次原因。
@@ -57,6 +57,19 @@
 #     - **修复**：Linux apt 补 libxkbcommon-dev libegl1-mesa-dev libxtst-dev libatk1.0-dev
 #       libcups2-dev libx11-xcb-dev libxcb1-dev libxcomposite-dev libxdamage-dev；
 #       build 步骤后新增 upload-artifact(if:always()) 上传 flutter_build.log。
+#   v19（当前）：
+#     - **Run #18 仍失败，拿到真实堆栈**：`buildLinux (build_linux.dart:48)` →
+#       `throwToolExit`，即 cmake/ninja 原生构建子进程返回非 0。**这本身证明 Dart/l10n
+#       早已通过**（cmake 在 Dart 编译之后才运行），l10n 理论彻底证伪。
+#     - **真实报错在堆栈上方**（flutter_build.log 里 cmake/ninja 的 error: 行），堆栈只是
+#       Flutter 包装"子进程失败"。交叉插件清单推定的头号嫌疑：`flutter_tts` 在 Linux 需
+#       `libspeechd-dev`（speech-dispatcher 开发包，其 CMake 用 pkg_check_modules 找并链接
+#       SPEECHD，缺失则 configure/link 失败），与它在 Android(minSdk)/macOS(部署目标) 反复
+#       闯祸的模式一致。另补 `libportal-dev`/`libnotify-dev`（file_picker/dynamic_color/
+#       share_plus 等桌面 portal 插件常用）。
+#     - **修复**：Linux apt 加 libspeechd-dev libportal-dev libnotify-dev。
+#     - 若 Run #19 仍挂，下载 Run #18/19 的 artifact `linux-flutter-build-log`，搜 `error:`
+#       取首处附近贴出即可定位（沙箱无 token 不能直拉 GitHub 日志）。
 # =============================================================================
 
 name: Build & Release NexHub
@@ -149,11 +162,11 @@ jobs:
           sudo apt-get update -y
           sudo apt-get install -y \
             build-essential clang cmake ninja-build pkg-config \
-            libgtk-3-dev liblzma-dev libsecret-1-dev \
+            libgtk-3-dev liblzma-dev libsecret-1-dev libportal-dev libnotify-dev \
             libx11-dev libx11-xcb-dev libxcb1-dev libxkbcommon-dev \
             libxcursor-dev libxrandr-dev libxi-dev libxcomposite-dev libxdamage-dev libxtst-dev \
             libatk1.0-dev libcups2-dev \
-            libasound2-dev libxss1 libpulse-dev \
+            libasound2-dev libxss1 libpulse-dev libspeechd-dev \
             libglu1-mesa-dev libgl1-mesa-dev libegl1-mesa-dev \
             libwebkit2gtk-4.1-dev libjsoncpp-dev libmpv-dev
       - uses: subosito/flutter-action@v2
