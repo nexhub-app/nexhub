@@ -1,4 +1,4 @@
-package com.example.nexhub
+package com.nexhub.app
 
 import io.flutter.embedding.android.FlutterActivity
 

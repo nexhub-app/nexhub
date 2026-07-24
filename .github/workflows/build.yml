@@ -63,7 +63,7 @@
 #       早已通过**（cmake 在 Dart 编译之后才运行），l10n 理论彻底证伪。
 #     - 交叉插件清单推定头号嫌疑 `flutter_tts` 需 `libspeechd-dev`，已补
 #       libspeechd-dev libportal-dev libnotify-dev（cmake 真正跑起来后会用到）。
-#   v20（当前）：
+#   v20：
 #     - **用户下载 Run #18 日志 artifact 贴出，真相大白**：实际报错是
 #       `No Linux desktop project configured.`（`build_linux.dart:48` 抛 ToolExit 的
 #       真正原因）。`linux/` 目录里**只有生成物**（`generated_plugin_registrant.*`、
@@ -77,6 +77,20 @@
 #       v19 补的 libspeechd-dev 等保留（cmake 真正链接 flutter_tts 时会用到）。
 #     - 若 Run #20 仍挂，下载 Run #20 的 artifact `linux-flutter-build-log` 搜 `error:`
 #       取首处附近贴出（沙箱无 token 不能直拉 GitHub 日志）。
+#   v21（当前）：
+#     - **用户真机崩溃（Android）**：`java.lang.ClassNotFoundException:
+#       Didn't find class "com.nexhub.app.MainActivity"`。根因：v13 把
+#       `namespace`/`applicationId` 改成 `com.nexhub.app`，但唯一的 Kotlin 主类
+#       `MainActivity.kt` 仍在 `kotlin/com/example/nexhub/` 且 `package
+#       com.example.nexhub`；清单 `.MainActivity` 解析成 `com.nexhub.app.MainActivity`，
+#       而编译出的类路径是 `com.example.nexhub.MainActivity` → 对不上 → 启动即崩溃。
+#     - **修复**：`git mv` 将 `MainActivity.kt` 移到 `kotlin/com/nexhub/app/`，并把
+#       `package` 改为 `com.nexhub.app`（与 namespace 对齐）。清理空 `com/example` 目录。
+#     - **图标诉求（没更新 / 无莫奈取色）**：`pubspec` 已配 `flutter_launcher_icons`
+#       （源图 `assets/icon/icon.png`，adaptive 背景 #0EA5E9），但 `flutter_launcher_icons`
+#       **不会在 `flutter build` 时自动重跑**，故更换源图后 CI 打出的仍是旧 res/ 图标。
+#       **修复**：Android job 在 gen-l10n 后新增 `flutter pub run flutter_launcher_icons`，
+#       每次构建都基于源图重新生成（含自适应图标，Android 12+ 莫奈取色随之生效）。
 # =============================================================================
 
 name: Build & Release NexHub
@@ -113,6 +127,11 @@ jobs:
           echo "== generated l10n files =="
           ls -la lib/generated 2>&1 || true
           grep -n "class AppLocalizations" lib/generated/app_localizations.dart 2>&1 || true
+      - name: 重新生成启动图标 (flutter_launcher_icons)
+        # 源图：assets/icon/icon.png（含 adaptive_icon_background 蓝青主色 #0EA5E9）。
+        # flutter_launcher_icons 不会在 `flutter build` 时自动重跑，故这里显式生成，
+        # 保证每次构建都基于源图产出最新图标（含自适应图标，Android 12+ 莫奈取色生效）。
+        run: flutter pub run flutter_launcher_icons 2>&1 || dart run flutter_launcher_icons 2>&1
       - name: 编译 APK
         shell: bash
         run: |
