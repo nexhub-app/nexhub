@@ -177,44 +177,13 @@ jobs:
         run: |
           set -o pipefail
           flutter build windows --release --verbose 2>&1 | tee win_build.log || { echo "=== WINDOWS BUILD FAILED ===" && tail -n 200 win_build.log; exit 1; }
-      - name: 安装 Inno Setup（用于生成 exe 安装包，失败不阻断直装包）
-        continue-on-error: true
-        run: choco install innosetup -y
-      - name: 打包 Windows 直装包 (zip + 7z)
-        run: |
-          $src = "build/windows/x64/runner/Release"
-          Compress-Archive -Path "$src\*" -DestinationPath "NexHub-windows-x64.zip" -Force
-          Write-Host "已生成 NexHub-windows-x64.zip"
-          try {
-            if (Get-Command 7z -ErrorAction SilentlyContinue) {
-              7z a "NexHub-windows-x64.7z" "$src\*" | Out-Null
-            } else {
-              choco install 7zip -y 2>$null
-              if (Get-Command 7z -ErrorAction SilentlyContinue) { 7z a "NexHub-windows-x64.7z" "$src\*" | Out-Null }
-            }
-            Write-Host "已生成 NexHub-windows-x64.7z"
-          } catch {
-            Write-Host "7z 不可用，跳过 7z 直装包（zip 已生成）"
-          }
-      - name: 生成 Windows 安装包 (Inno Setup → exe)
-        shell: bash
-        continue-on-error: true
-        run: |
-          ISCC="/c/Program Files (x86)/Inno Setup 6/ISCC.exe"
-          if [ -f "$ISCC" ]; then
-            "$ISCC" "windows/installer.iss" /DMyAppVersion="${{ github.ref_name }}"
-            echo "安装包生成: $(ls -la NexHub-windows-setup.exe 2>/dev/null || echo '未找到')"
-          else
-            echo "Inno Setup 未安装，跳过 exe 安装包（不影响 zip/7z 直装包）"
-          fi
+      - name: 打包 Windows 安装文件
+        run: Compress-Archive -Path "build/windows/x64/runner/Release/*" -DestinationPath "NexHub-windows-x64.zip"
       - uses: actions/upload-artifact@v4
         with:
           name: windows-build
-          path: |
-            NexHub-windows-x64.zip
-            NexHub-windows-x64.7z
-            NexHub-windows-setup.exe
-          if-no-files-found: ignore
+          path: NexHub-windows-x64.zip
+          if-no-files-found: error
 
   linux:
     name: Linux
@@ -362,7 +331,5 @@ jobs:
           files: |
             artifacts/android-apk/*.apk
             artifacts/windows-build/NexHub-windows-x64.zip
-            artifacts/windows-build/NexHub-windows-x64.7z
-            artifacts/windows-build/NexHub-windows-setup.exe
             artifacts/linux-build/NexHub-linux-x64.tar.gz
             artifacts/macos-build/NexHub-macos.zip
